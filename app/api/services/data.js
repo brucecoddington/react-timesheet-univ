@@ -3,20 +3,6 @@ import db from './db';
 import Q from 'q';
 import bcrypt from 'bcrypt';
 
-export default {
-
-  init () {
-    db.findOne('users', {username: 'admin'})
-    .then(function (user) {
-      console.log("Found user. DB already seeded.");
-      if (user === null) seed();
-    })
-    .fail(function (err) {
-      console.log("Error : " + err);
-    });
-  }
-};
-
 ////////////  USERS //////////////////
 function seed() {
   console.log('Seeding Users into DB');
@@ -38,7 +24,17 @@ function seed() {
         });;
     });
   });
-})
-
-
 }
+
+export default {
+  init () {
+    db.findOne('users', {username: 'admin'})
+      .then(function (user) {
+        console.log("Found user. DB already seeded.");
+        if (user === null) seed();
+      })
+      .fail(function (err) {
+        console.log("Error : " + err);
+      });
+  }
+};

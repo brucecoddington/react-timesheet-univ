@@ -20,7 +20,7 @@ class TimesheetStore extends Store {
     this.register(events);
 
     this.setState({
-      timesheet: {}
+      timesheet: {},
       pageConfig: {
         data: [],
         totalItems: 0,
@@ -124,6 +124,6 @@ class TimesheetStore extends Store {
         SnackbarAction.error('There was an error creating timesheet.');
       });
   }
-});
+}
 
-export default const store = new TimesheetStore();
+export default new TimesheetStore();

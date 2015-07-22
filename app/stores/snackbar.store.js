@@ -86,4 +86,4 @@ class SnackbarStore extends Store {
   }
 }
 
-export default const store = new SnackbarStore();
+export default new SnackbarStore();

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router');
+import Router, {Navigation, State} from 'react-router';
 
 import TextInput from '../common/form/text.input';
 import SaveButton from '../common/buttons/save.button';

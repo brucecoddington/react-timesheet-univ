@@ -36,7 +36,6 @@ let TimesheetCreate = React.createClass({
       <TimesheetForm timesheet={this.state.timesheet}
         saveText={this.state.saveText}
         errors={this.state.errors}
-        validateAll={this.validateAll}
         hasErrors={this.hasErrors}
         onSave={this.saveTimesheet}
         validate={this.validate}

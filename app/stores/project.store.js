@@ -19,7 +19,7 @@ class ProjectStore extends Store {
     this.register(events);
 
     this.setState({
-      project: {}
+      project: {},
       pageConfig: {
         data: [],
         totalItems: 0,
@@ -134,6 +134,6 @@ class ProjectStore extends Store {
         SnackbarAction.error('There was an error creating project.');
       });
   }
-});
+}
 
-export default const store = new ProjectStore();
+export default new ProjectStore();

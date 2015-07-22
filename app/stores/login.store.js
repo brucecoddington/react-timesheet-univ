@@ -127,4 +127,4 @@ class LoginStore extends Store {
   }
 }
 
-export default const store = new LoginStore();
+export default new LoginStore();

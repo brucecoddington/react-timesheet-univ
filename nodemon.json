@@ -1,5 +1,5 @@
 {
-  "exec": "babel-node --use_strict --stage 2 --ignore '' -- ",
+  "exec": "babel-node --stage 2 -- ",
   "ignore": [
     "node_modules/**",
     "gulpfile.js",

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router from 'react-router';
+import Router, {Navigation, State} from 'react-router';
 import _ from 'lodash';
 
 import ProjectForm from './project.form';

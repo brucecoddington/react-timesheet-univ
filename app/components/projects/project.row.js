@@ -12,8 +12,7 @@ const ProjectRow = React.createClass({
   },
 
   mixins: [
-    Navigation,
-    classes
+    Navigation
   ],
 
   showDetail () {

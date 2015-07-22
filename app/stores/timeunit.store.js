@@ -20,7 +20,7 @@ class TimeunitStore extends Store {
     this.register(events);
 
     this.setState({
-      timeunit: {}
+      timeunit: {},
       timeunits: []
     });
 
@@ -128,6 +128,6 @@ class TimeunitStore extends Store {
         SnackbarAction.error('Error attempting to log your time.');
       });
   }
-});
+}
 
-export default const store = new TimeunitStore();
+export default new TimeunitStore();

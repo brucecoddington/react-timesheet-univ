@@ -21,4 +21,4 @@ class Dispatcher extends FluxDispatcher {
 
 }
 
-export default const dispatcher = new Dispatcher();
+export default new Dispatcher();

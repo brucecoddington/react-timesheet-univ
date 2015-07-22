@@ -19,7 +19,7 @@ class EmployeeStore extends Store {
     this.register(events);
 
     this.setState({
-      employee: {}
+      employee: {},
       pageConfig: {
         data: [],
         totalItems: 0,
@@ -123,6 +123,6 @@ class EmployeeStore extends Store {
         SnackbarAction.error('There was an error creating employee.');
       });
   }
-});
+}
 
-export default const store = new EmployeeStore();
+export default new EmployeeStore();

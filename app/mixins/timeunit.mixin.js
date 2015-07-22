@@ -1,8 +1,8 @@
-import Router = require('react-router';
-import TimeunitStore = require('../stores/timeunit.store';
-import TimesheetStore = require('../stores/timesheet.store';
-import ProjectStore = require('../stores/project.store';
-import _ = require('lodash';
+import Router from 'react-router';
+import TimeunitStore from '../stores/timeunit.store';
+import TimesheetStore from '../stores/timesheet.store';
+import ProjectStore from '../stores/project.store';
+import _ from 'lodash';
 
 export default {
 

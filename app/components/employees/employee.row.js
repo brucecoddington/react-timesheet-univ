@@ -14,8 +14,7 @@ const EmployeeRow = React.createClass({
 
   mixins: [
     Navigation,
-    State,
-    classes
+    State
   ],
 
   showDetail () {

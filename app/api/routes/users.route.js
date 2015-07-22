@@ -1,6 +1,6 @@
-import usersController from '../controllers/users.controller';
-import timesheetsController from '../controllers/timesheets.controller';
-import timeunitsController from '../controllers/timeunits.controller';
+import usersController from '../handlers/users';
+import timesheetsController from '../handlers/timesheets';
+import timeunitsController from '../handlers/timeunits';
 
 exports.register = function (server, options, next) {
 

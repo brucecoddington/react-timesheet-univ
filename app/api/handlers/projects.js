@@ -1,4 +1,4 @@
-import db from '../services/db');
+import db from '../services/db';
 import Boom from 'boom';
 
 export default {

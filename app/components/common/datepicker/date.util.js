@@ -2,19 +2,19 @@ class DateUtil {
 
   constructor (date) {
     this._date = date;
-  },
+  }
 
   sameDay (other) {
     return this._date.isSame(other._date, 'day');
-  },
+  }
 
   sameMonth (other) {
     return this._date.isSame(other._date, 'month');
-  },
+  }
 
   day () {
     return this._date.date();
-  },
+  }
 
   mapDaysInWeek (callback) {
     let week = [];
@@ -27,7 +27,7 @@ class DateUtil {
     }
 
     return week;
-  },
+  }
 
   mapWeeksInMonth (callback) {
     let month = [];
@@ -40,7 +40,7 @@ class DateUtil {
     }
 
     return month;
-  },
+  }
 
   weekInMonth (other) {
     let firstDayInWeek = this._date.clone();
@@ -48,23 +48,23 @@ class DateUtil {
 
     return firstDayInWeek.isSame(other._date, 'month') ||
       lastDayInWeek.isSame(other._date, 'month');
-  },
+  }
 
   format () {
     return this._date.format.apply(this._date, arguments);
-  },
+  }
 
   addMonth () {
     return new DateUtil(this._date.clone().add(1, 'month'));
-  },
+  }
 
   subtractMonth () {
     return new DateUtil(this._date.clone().subtract(1, 'month'));
-  },
+  }
 
   clone () {
     return new DateUtil(this._date.clone());
-  },
+  }
 
   moment () {
     return this._date;

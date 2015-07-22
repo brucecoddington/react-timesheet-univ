@@ -1,4 +1,4 @@
-import projectsController from '../controllers/projects.controller';
+import projectsController from '../handlers/projects';
 
 exports.register = function (server, options, next) {
 

@@ -130,10 +130,10 @@ gulp.task('clean:css', function (cb) {
 });
 
 gulp.task('less', ['clean:css'], function () {
-  return gulp.src(client('/less/style.less'))
+  return gulp.src('./assets/less/style.less')
     .pipe(plumber())
-    .pipe(less({paths: [client('/less')]}))
-    .pipe(gulp.dest(dist('/css')))
+    .pipe(less({paths: ['./assets/less']}))
+    .pipe(gulp.dest('./dist/assets/css'))
     .on('error', gutil.log.bind(gutil, 'Error compiling Less'));
 });
 
@@ -143,13 +143,13 @@ gulp.task('concat:css', ['less'], function () {
   return gulp.src([
       './node_modules/nprogress/nprogress.css',
       './semantic/dist/semantic.css',
-      dist('/css/style.css')
+      './dist/assets/css/style.css'
     ])
     .pipe(concat('style.css'))
-    .pipe(gulp.dest(dist('/css')))
+    .pipe(gulp.dest('./dist/assets/css'))
     .pipe(cssmin())
     .pipe(rename({extname: '.min.css'}))
-    .pipe(gulp.dest(dist('/css')))
+    .pipe(gulp.dest('./dist/assets/css'))
     .pipe(livereload())
     .on('error', gutil.log.bind(gutil, 'Error concatenating CSS'));
 });
@@ -174,5 +174,5 @@ gulp.task('uglify', ['webpack'], function () {
     .on('error', gutil.log.bind(gutil, 'Error during minification.'));
 });
 
-gulp.task('semantic:build', require('./semantic/tasks/build'));
-gulp.task('semantic:watch', require('./semantic/tasks/watch'));
+// gulp.task('semantic:build', require('./semantic/tasks/build'));
+// gulp.task('semantic:watch', require('./semantic/tasks/watch'));

@@ -13,6 +13,13 @@ server.connection({
   host: 'localhost'
 });
 
+// establish a session cache
+var cache = server.cache({
+  segment: 'sessions',
+  expiresIn: props.session.expires
+});
+server.app.cache = cache;
+
 // set up the view rendering
 server.views({
   engines: {
@@ -54,7 +61,7 @@ server.register(cookie, (err) => {
 });
 
 // seed the database
-require('../data').init();
+require('./api/services/data').init();
 
 // start em up
 server.start();
