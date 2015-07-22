@@ -1,13 +1,12 @@
 import React, {PropTypes} from 'react/addons';
-let Router from 'react-router');
-let _ from 'lodash');
+import Router, {Navigation, State} from 'react-router';
+import _ from 'lodash';
 
-let TimeunitTable from './timeunit.table');
-
-let TimeunitActions from '../../actions/timeunit.actions');
-let TimeunitStore from '../../stores/timeunit.store');
-let TimesheetStore from '../../stores/timesheet.store');
-let LoginStore from '../../stores/login.store');
+import TimeunitTable from './timeunit.table';
+import TimeunitActions from '../../actions/timeunit.actions';
+import TimeunitStore from '../../stores/timeunit.store';
+import TimesheetStore from '../../stores/timesheet.store';
+import LoginStore from '../../stores/login.store';
 
 let Timeunits = React.createClass({
 

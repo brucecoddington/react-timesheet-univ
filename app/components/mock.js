@@ -1,12 +1,12 @@
-let React from 'react/addons');
+import React from 'react/addons';
 
-export default function (componentName, mockTagName) {
+export default (componentName, mockTagName) => {
   return React.createClass({
     displayName: componentName || 'MockComponent',
 
-    render: () => {
+    render () {
       let mockTagName = mockTagName || "div";
-      
+
       return React.DOM[mockTagName]({
         className: this.props.className
       },

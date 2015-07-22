@@ -1,10 +1,10 @@
-var EmployeeStore = require('../stores/employee.store');
+import EmployeeStore from '../stores/employee.store';
 
-module.exports = {
+export default {
 
   store: EmployeeStore,
 
-  validate: function (event) {
+  validate (event) {
     var field = event.target.name;
     var value = event.target.value;
 
@@ -13,7 +13,7 @@ module.exports = {
     return this.setState({employee: this.state.employee, errors: this.state.errors});
   },
 
-  validateAll: function () {
+  validateAll () {
     this.state.errors.username = this.validator.username.call(this, this.state.employee.username);
     this.state.errors.email = this.validator.email.call(this, this.state.employee.email);
     this.state.errors.firstName = this.validator.firstName.call(this, this.state.employee.firstName);
@@ -21,14 +21,14 @@ module.exports = {
     this.setState({errors: this.state.errors});
   },
 
-  hasErrors: function () {
+  hasErrors () {
     var errors = this.state.errors;
     return !!(errors.username || errors.email || errors.firstName || errors.lastName);
   },
 
   validator : {
     // username min 1 max 40
-    username: function (value) {
+    username (value) {
       // min length 1
       if (!value || value.length < 1) {
         return 'You must provide a username.';
@@ -40,7 +40,7 @@ module.exports = {
       return null;
     },
 
-    email: function (value) {
+    email (value) {
       var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!re.test(value)) {
         return 'Email must be valid';
@@ -49,7 +49,7 @@ module.exports = {
       return null;
     },
 
-    firstName: function (value) {
+    firstName (value) {
       if (!value || value.length < 1) {
         return 'You must provide a first name.';
       }
@@ -57,7 +57,7 @@ module.exports = {
       return null;
     },
 
-    lastName: function (value) {
+    lastName (value) {
       if (!value || value.length < 1) {
         return 'You must provide a last name.';
       }
@@ -65,12 +65,12 @@ module.exports = {
       return null;
     },
 
-    admin: function (value) {
+    admin (value) {
       return null;
     }
   },
 
-  toggleAdmin: function () {
+  toggleAdmin () {
     var employee = this.state.employee;
     employee.admin = !employee.admin;
     this.setState({employee: employee});

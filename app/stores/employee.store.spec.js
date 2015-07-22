@@ -1,6 +1,6 @@
 describe('Employee Store: ', function () {
 
-  var EmployeeStore;
+  let EmployeeStore;
 
   beforeEach(function () {
     EmployeeStore = require('./employee.store');

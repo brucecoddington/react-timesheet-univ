@@ -1,6 +1,6 @@
 describe('Timeunit Store: ', function () {
 
-  var TimeunitStore;
+  let TimeunitStore;
 
   beforeEach(function () {
     TimeunitStore = require('./timeunit.store');

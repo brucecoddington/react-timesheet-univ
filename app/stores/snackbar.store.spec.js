@@ -1,6 +1,6 @@
 describe('Notifications Store: ', function () {
 
-  var SnackbarStore;
+  let SnackbarStore;
 
   beforeEach(function () {
     SnackbarStore = require('./snackbar.store');

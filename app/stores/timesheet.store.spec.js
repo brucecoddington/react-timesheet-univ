@@ -1,6 +1,6 @@
 describe('Timesheet Store: ', function () {
 
-  var TimesheetStore;
+  let TimesheetStore;
 
   beforeEach(function () {
     TimesheetStore = require('./timesheet.store');

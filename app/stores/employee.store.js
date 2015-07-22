@@ -1,14 +1,15 @@
-var Store = require('../flux/flux.store');
-var actions = require('../actions/employee.actions');
-var SnackbarAction = require('../actions/snackbar.actions');
-var axios = require('axios');
-var assign = require('object-assign');
-var _ = require('lodash');
+import Store from '../flux/flux.store';
+import actions from '../actions/employee.actions';
+import SnackbarAction from '../actions/snackbar.actions';
+import axios from 'axios';
+import _ from 'lodash';
 
-var EmployeeStore = assign({}, Store, {
+class EmployeeStore extends Store {
 
-  initialize: function () {
-    var events = {};
+  constructor () {
+    super();
+
+    let events = {};
     events[actions.LIST]    = this.list;
     events[actions.GET]     = this.get;
     events[actions.UPDATE]  = this.update;
@@ -18,7 +19,7 @@ var EmployeeStore = assign({}, Store, {
     this.register(events);
 
     this.setState({
-      employee: {},
+      employee: {}
       pageConfig: {
         data: [],
         totalItems: 0,
@@ -28,19 +29,19 @@ var EmployeeStore = assign({}, Store, {
     });
 
     return this;
-  },
+  }
 
-  url: function (employeeId) {
-    var url = '/users';
+  url (employeeId) {
+    let url = '/users';
     if (employeeId) {
       url += '/' + employeeId;
     }
 
     return url;
-  },
+  }
 
-  list: function (payload) {
-    var self = this;
+  list (payload) {
+    let self = this;
 
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
@@ -49,10 +50,10 @@ var EmployeeStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve employees.');
       });
-  },
+  }
 
-  get: function (payload) {
-    var self = this;
+  get (payload) {
+    let self = this;
 
     return axios.get(this.url(payload.action.employee._id))
       .then(function (res) {
@@ -62,11 +63,11 @@ var EmployeeStore = assign({}, Store, {
       .catch(function (data) {
         SnackbarAction.error('There was an error getting the employee');
       });
-  },
+  }
 
-  update: function (payload) {
-    var self = this;
-    var employee = payload.action.employee;
+  update (payload) {
+    let self = this;
+    let employee = payload.action.employee;
 
     return axios.put(this.url(employee._id), employee)
       .then(function (res) {
@@ -76,11 +77,11 @@ var EmployeeStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('There was an error updating employee.');
       });
-  },
+  }
 
-  remove: function (payload) {
-    var self = this;
-    var employee = payload.action.employee;
+  remove (payload) {
+    let self = this;
+    let employee = payload.action.employee;
     employee.deleted = true;
 
     return axios.put(this.url(employee._id), employee)
@@ -92,11 +93,11 @@ var EmployeeStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to delete employee.');
       });
-  },
+  }
 
-  restore: function (payload) {
-    var self = this;
-    var employee = payload.action.employee;
+  restore (payload) {
+    let self = this;
+    let employee = payload.action.employee;
     employee.deleted = false;
 
     return axios.put(this.url(employee._id), employee)
@@ -108,10 +109,10 @@ var EmployeeStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to restore employee.');
       });
-  },
+  }
 
-  create: function (payload) {
-    var self = this;
+  create (payload) {
+    let self = this;
 
     return axios.post(this.url(), payload.action.employee)
       .then(function (res) {
@@ -124,4 +125,4 @@ var EmployeeStore = assign({}, Store, {
   }
 });
 
-module.exports = EmployeeStore.initialize();
+export default const store = new EmployeeStore();

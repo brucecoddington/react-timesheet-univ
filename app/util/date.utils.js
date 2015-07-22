@@ -1,19 +1,19 @@
-var _ = require('lodash');
-var moment = require('moment');
+import _ from 'lodash';
+import moment from 'moment';
 
-module.exports = {
+export default {
 
   // Nov 18, 2013
-  momentShortDate: function (dateString) {
+  momentShortDate (dateString) {
     return this.nullOrUndefined(dateString) || moment(dateString).format("MMM D, YYYY");
   },
 
   // November 18th, 2013
-  momentLongDate :function (dateString) {
+  momentLongDate (dateString) {
     return this.nullOrUndefined(dateString) || moment(dateString).format("MMMM Do, YYYY");
   },
 
-  nullOrUndefined : function nullOrUndefined(dateString) {
+  nullOrUndefined (dateString) {
     return (_.isUndefined(dateString) || dateString === null ? 'None' : false);
   }
 };

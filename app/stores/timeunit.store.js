@@ -1,15 +1,16 @@
-var _ = require('lodash');
-var Store = require('../flux/flux.store');
-var actions = require('../actions/timeunit.actions');
-var SnackbarAction = require('../actions/snackbar.actions');
-var axios = require('axios');
-var assign = require('object-assign');
-var LoginStore = require('./login.store');
+import _ from 'lodash';
+import Store from '../flux/flux.store';
+import actions from '../actions/timeunit.actions';
+import SnackbarAction from '../actions/snackbar.actions';
+import axios from 'axios';
+import LoginStore from './login.store';
 
-var TimeunitStore = assign({}, Store, {
+class TimeunitStore extends Store {
 
-  initialize: function () {
-    var events = {};
+  constructor () {
+    super();
+
+    let events = {};
     events[actions.LIST]    = this.list;
     events[actions.GET]     = this.get;
     events[actions.UPDATE]  = this.update;
@@ -19,25 +20,25 @@ var TimeunitStore = assign({}, Store, {
     this.register(events);
 
     this.setState({
-      timeunit: {},
+      timeunit: {}
       timeunits: []
     });
 
     return this;
-  },
+  }
 
-  url: function (timesheetId, timeunitId) {
-    var userId = LoginStore.getState().user._id || 'all';
-    var url = '/users/' + userId + '/timesheets/' + timesheetId + '/timeunits';
+  url (timesheetId, timeunitId) {
+    let userId = LoginStore.getState().user._id || 'all';
+    let url = '/users/' + userId + '/timesheets/' + timesheetId + '/timeunits';
     if (timeunitId) {
       url += '/' + timeunitId;
     }
     return url;
-  },
+  }
 
-  list: function (payload) {
-    var self = this;
-    var timesheet = payload.action.timesheet;
+  list (payload) {
+    let self = this;
+    let timesheet = payload.action.timesheet;
 
     return axios.get(this.url(timesheet._id))
       .then(function (res) {
@@ -46,12 +47,12 @@ var TimeunitStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve logged hours.');
       });
-  },
+  }
 
-  get: function (payload) {
-    var self = this;
-    var timesheet = payload.action.timesheet;
-    var timeunit = payload.action.timeunit;
+  get (payload) {
+    let self = this;
+    let timesheet = payload.action.timesheet;
+    let timeunit = payload.action.timeunit;
 
     return axios.get(this.url(timesheet._id, timeunit._id))
       .then(function (res) {
@@ -61,12 +62,12 @@ var TimeunitStore = assign({}, Store, {
       .catch(function (data) {
         SnackbarAction.error('There was an error getting the time.');
       });
-  },
+  }
 
-  update: function (payload) {
-    var self = this;
-    var timesheet = payload.action.timesheet;
-    var timeunit = payload.action.timeunit;
+  update (payload) {
+    let self = this;
+    let timesheet = payload.action.timesheet;
+    let timeunit = payload.action.timeunit;
 
     return axios.put(this.url(timesheet._id, timeunit._id), timeunit)
       .then(function (res) {
@@ -76,12 +77,12 @@ var TimeunitStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('There was an error updating time.');
       });
-  },
+  }
 
-  remove: function (payload) {
-    var self = this;
-    var timesheet = payload.action.timesheet;
-    var timeunit = payload.action.timeunit;
+  remove (payload) {
+    let self = this;
+    let timesheet = payload.action.timesheet;
+    let timeunit = payload.action.timeunit;
     timeunit.deleted = true;
 
     return axios.put(this.url(timesheet._id, timeunit._id), timeunit)
@@ -93,15 +94,15 @@ var TimeunitStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to delete time.');
       });
-  },
+  }
 
-  restore: function (payload) {
-    var self = this;
-    var timesheet = payload.action.timesheet;
-    var timeunit = payload.action.timeunit;
+  restore (payload) {
+    let self = this;
+    let timesheet = payload.action.timesheet;
+    let timeunit = payload.action.timeunit;
     timeunit.deleted = false;
 
-    var prom = axios.put(this.url(timesheet._id, timeunit._id), timeunit)
+    let prom = axios.put(this.url(timesheet._id, timeunit._id), timeunit)
       .then(function (res) {
         self.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was restored.');
@@ -112,11 +113,11 @@ var TimeunitStore = assign({}, Store, {
       });
 
     return prom;
-  },
+  }
 
-  create: function (payload) {
-    var self = this;
-    var timesheet = payload.action.timesheet;
+  create (payload) {
+    let self = this;
+    let timesheet = payload.action.timesheet;
 
     return axios.post(this.url(timesheet._id), payload.action.timeunit)
       .then(function (res) {
@@ -129,4 +130,4 @@ var TimeunitStore = assign({}, Store, {
   }
 });
 
-module.exports = TimeunitStore.initialize();
+export default const store = new TimeunitStore();

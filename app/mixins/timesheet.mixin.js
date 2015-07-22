@@ -1,11 +1,11 @@
-var Router = require('react-router');
-var TimesheetStore = require('../stores/timesheet.store');
+import Router from 'react-router';
+import TimesheetStore from '../stores/timesheet.store';
 
-module.exports = {
+export default {
 
   store: TimesheetStore,
 
-  validate: function (event) {
+  validate (event) {
     var field = event.target.name;
     var value = event.target.value;
 
@@ -14,7 +14,7 @@ module.exports = {
     return this.setState({timesheet: this.state.timesheet, errors: this.state.errors});
   },
 
-  validateAll: function () {
+  validateAll () {
     this.state.errors.name = this.validator.name.call(this, this.state.timesheet.name);
     this.state.errors.description = this.validator.description.call(this, this.state.timesheet.description);
     this.state.errors.beginDate = this.validator.beginDate.call(this, this.state.timesheet.beginDate);
@@ -22,23 +22,23 @@ module.exports = {
     this.setState({errors: this.state.errors});
   },
 
-  hasErrors: function () {
+  hasErrors () {
     var errors = this.state.errors;
     return !!(errors.name || errors.description || errors.beginDate || errors.endDate);
   },
 
-  validateEndDate: function (date) {
+  validateEndDate (date) {
     this.validate({target:{name: 'endDate', value: date}});
     this.validate({target:{name: 'beginDate', value: this.state.timesheet.beginDate}});
   },
 
-  validateBeginDate: function (date) {
+  validateBeginDate (date) {
     this.validate({target:{name: 'beginDate', value: date}});
     this.validate({target: {name: 'endDate', value: this.state.timesheet.endDate}});
   },
 
   validator: {
-    name: function (value) {
+    name (value) {
       // min length 1
       if (!value || value.length < 1) {
         return 'You must provide a name.';
@@ -50,7 +50,7 @@ module.exports = {
       return null;
     },
 
-    description: function (value) {
+    description (value) {
       // minlength 1
       if (!value || value.length < 1) {
         return 'You must provide a description.';
@@ -62,7 +62,7 @@ module.exports = {
       return null;
     },
 
-    beginDate: function (value) {
+    beginDate (value) {
       var endDate = this.state.timesheet.endDate;
 
       if (value > endDate) {
@@ -71,7 +71,7 @@ module.exports = {
       return null;
     },
 
-    endDate: function (value) {
+    endDate (value) {
       var beginDate = this.state.timesheet.beginDate;
 
       if (value < beginDate) {

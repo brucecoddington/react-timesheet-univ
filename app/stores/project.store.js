@@ -1,14 +1,15 @@
-var _ = require('lodash');
-var Store = require('../flux/flux.store');
-var actions = require('../actions/project.actions');
-var SnackbarAction = require('../actions/snackbar.actions');
-var axios = require('axios');
-var assign = require('object-assign');
+import _ from 'lodash';
+import Store from '../flux/flux.store';
+import actions from '../actions/project.actions';
+import SnackbarAction from '../actions/snackbar.actions';
+import axios from 'axios';
 
-var ProjectStore = assign({}, Store, {
+class ProjectStore extends Store {
 
-  initialize: function () {
-    var events = {};
+  constructor () {
+    super();
+
+    let events = {};
     events[actions.LIST]    = this.list;
     events[actions.GET]     = this.get;
     events[actions.UPDATE]  = this.update;
@@ -18,7 +19,7 @@ var ProjectStore = assign({}, Store, {
     this.register(events);
 
     this.setState({
-      project: {},
+      project: {}
       pageConfig: {
         data: [],
         totalItems: 0,
@@ -28,22 +29,22 @@ var ProjectStore = assign({}, Store, {
     });
 
     return this;
-  },
+  }
 
-  url: function (projectId) {
-    var url = '/projects';
+  url (projectId) {
+    let url = '/projects';
     if (projectId) {
       url += '/' + projectId;
     }
 
     return url;
-  },
+  }
 
   // page = page number
   // sort = property to sort on
   // returns totalItems
-  list: function (payload) {
-    var self = this;
+  list (payload) {
+    let self = this;
 
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
@@ -58,10 +59,10 @@ var ProjectStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve projects.');
       });
-  },
+  }
 
-  get: function (payload) {
-    var self = this;
+  get (payload) {
+    let self = this;
 
     return axios.get(this.url(payload.action.project._id))
       .then(function (res) {
@@ -71,11 +72,11 @@ var ProjectStore = assign({}, Store, {
       .catch(function (data) {
         SnackbarAction.error('There was an error getting the project');
       });
-  },
+  }
 
-  update: function (payload) {
-    var self = this;
-    var project = payload.action.project;
+  update (payload) {
+    let self = this;
+    let project = payload.action.project;
 
     return axios.put(this.url(project._id), project)
       .then(function (res) {
@@ -85,11 +86,11 @@ var ProjectStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('There was an error updating project.');
       });
-  },
+  }
 
-  remove: function (payload) {
-    var self = this;
-    var project = payload.action.project;
+  remove (payload) {
+    let self = this;
+    let project = payload.action.project;
     project.deleted = true;
 
     return axios.put(this.url(project._id), project)
@@ -101,14 +102,14 @@ var ProjectStore = assign({}, Store, {
       .catch(function (x) {
         SnackbarAction.error('Error attempting to delete project.');
       });
-  },
+  }
 
-  restore: function (payload) {
-    var self = this;
-    var project = payload.action.project;
+  restore (payload) {
+    let self = this;
+    let project = payload.action.project;
     project.deleted = false;
 
-    var prom = axios.put(this.url(project._id), project)
+    let prom = axios.put(this.url(project._id), project)
       .then(function (res) {
         self.setState({project: res.data});
         SnackbarAction.success('Project : ' + res.data.name + ', was restored.');
@@ -119,10 +120,10 @@ var ProjectStore = assign({}, Store, {
       });
 
     return prom;
-  },
+  }
 
-  create: function (payload) {
-    var self = this;
+  create (payload) {
+    let self = this;
 
     return axios.post(this.url(), payload.action.project)
       .then(function (res) {
@@ -135,4 +136,4 @@ var ProjectStore = assign({}, Store, {
   }
 });
 
-module.exports = ProjectStore.initialize();
+export default const store = new ProjectStore();

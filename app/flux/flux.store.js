@@ -3,7 +3,7 @@ import _ from 'lodash';
 import assign from 'object-assign';
 import dispatcher from './flux.dispatcher';
 
-let CHANGE_EVENT = 'CHANGE_EVENT';
+const CHANGE_EVENT = 'CHANGE_EVENT';
 
 export default class Store extends EventEmitter {
 

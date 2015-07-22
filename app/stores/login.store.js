@@ -2,7 +2,6 @@ import _ from 'lodash';
 import Router from 'react-router';
 import {Promise} from 'es6-promise';
 import axios from 'axios';
-import assign from 'object-assign';
 
 import Store from '../flux/flux.store';
 import actions from '../actions/login.actions';

@@ -1,6 +1,6 @@
 describe('Login Store: ', function () {
 
-  var LoginStore;
+  let LoginStore;
 
   beforeEach(function () {
     LoginStore = require('./login.store');

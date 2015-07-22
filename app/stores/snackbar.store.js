@@ -2,7 +2,6 @@ import _ from 'lodash';
 import Store from '../flux/flux.store';
 import actions from '../actions/snackbar.actions';
 import {Promise} from 'es6-promise';
-import assign from 'object-assign';
 
 class SnackbarStore extends Store {
 

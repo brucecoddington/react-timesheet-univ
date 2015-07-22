@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react/addons';
-let TimeunitRow from './timeunit.row');
+import TimeunitRow from './timeunit.row';
 
-let TimeunitTable = React.createClass({
+const TimeunitTable = React.createClass({
 
   propTypes: {
     timeunits: PropTypes.arrayOf(PropTypes.object).isRequired,

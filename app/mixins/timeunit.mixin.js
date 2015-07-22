@@ -1,15 +1,15 @@
-var Router = require('react-router');
-var TimeunitStore = require('../stores/timeunit.store');
-var TimesheetStore = require('../stores/timesheet.store');
-var ProjectStore = require('../stores/project.store');
-var _ = require('lodash');
+import Router = require('react-router';
+import TimeunitStore = require('../stores/timeunit.store';
+import TimesheetStore = require('../stores/timesheet.store';
+import ProjectStore = require('../stores/project.store';
+import _ = require('lodash';
 
-module.exports = {
+export default {
 
   store: TimeunitStore,
   timesheetStore: TimesheetStore,
 
-  validate: function (event) {
+  validate (event) {
     var field = event.target.name;
     var value = event.target.value;
 
@@ -18,28 +18,28 @@ module.exports = {
     return this.setState({timeunit: this.state.timeunit, errors: this.state.errors});
   },
 
-  validateAll: function () {
+  validateAll () {
     this.state.errors.project = this.validator.project.call(this, this.state.timeunit.project);
     this.state.errors.dateWorked = this.validator.dateWorked.call(this, this.state.timeunit.dateWorked);
     this.state.errors.hoursWorked = this.validator.hoursWorked.call(this, this.state.timeunit.hoursWorked);
     this.setState({errors: this.state.errors});
   },
 
-  validateProject: function (value) {
+  validateProject (value) {
     this.validate.call(this, {target: {name: 'project', value: value}});
   },
 
-  validateDateWorked: function (value) {
+  validateDateWorked (value) {
     this.validate.call(this, {target: {name: 'dateWorked', value: value}});
   },
 
-  hasErrors: function () {
+  hasErrors () {
     var errors = this.state.errors;
     return !!(errors.project || errors.dateWorked || errors.hoursWorked);
   },
 
   validator: {
-    project: function (value) {
+    project (value) {
       // min length 1
       if (!value) {
         return 'You must select a project.';
@@ -51,7 +51,7 @@ module.exports = {
       return null;
     },
 
-    dateWorked: function (value) {
+    dateWorked (value) {
       var timesheet = this.state.timesheet;
 
       if (!value) {
@@ -66,7 +66,7 @@ module.exports = {
       return null;
     },
 
-    hoursWorked: function (value) {
+    hoursWorked (value) {
       if (value < 0) {
         return 'Negative numbers are not valid.';
       }

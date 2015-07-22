@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react/addons';
-let Router from 'react-router');
+import Router, {Navigation} from 'react-router';
 import classNames from 'classnames';
 
-let TimeunitActions from '../../actions/timeunit.actions');
-let DateUtils from '../../util/date.utils');
-let SnackbarActions from '../../actions/snackbar.actions');
+import TimeunitActions from '../../actions/timeunit.actions';
+import DateUtils from '../../util/date.utils';
+import SnackbarActions from '../../actions/snackbar.actions';
 
-let TimeunitRow = React.createClass({
+const TimeunitRow = React.createClass({
 
   propTypes: {
     timeunit: PropTypes.object.isRequired,
@@ -15,11 +15,10 @@ let TimeunitRow = React.createClass({
   },
 
   mixins: [
-    Navigation,
-    classes
+    Navigation
   ],
 
-  showDetail showDetail () {
+  showDetail () {
     let timeunit = this.props.timeunit;
     let timesheet = this.props.timesheet;
 
@@ -32,13 +31,13 @@ let TimeunitRow = React.createClass({
       {user_id: timesheet.user_id, _id: timesheet._id, timeunit_id: timeunit._id});
   },
 
-  remove remove (e) {
+  remove (e) {
     e.stopPropagation();
     this.props.timeunit.deleted = true;
     TimeunitActions.remove(this.props.timesheet, this.props.timeunit);
   },
 
-  restore restore (e) {
+  restore (e) {
    e.stopPropagation();
    this.props.timeunit.deleted = false;
    TimeunitActions.restore(this.props.timesheet, this.props.timeunit);

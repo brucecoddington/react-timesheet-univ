@@ -1,7 +1,7 @@
 import {Dispatcher as FluxDispatcher} from 'flux';
 import _ from 'lodash';
 
-export default class Dispatcher extends FluxDispatcher {
+class Dispatcher extends FluxDispatcher {
 
   constructor () {
     super();
@@ -20,3 +20,5 @@ export default class Dispatcher extends FluxDispatcher {
   }
 
 }
+
+export default const dispatcher = new Dispatcher();

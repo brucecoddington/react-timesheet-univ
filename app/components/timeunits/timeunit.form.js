@@ -1,18 +1,18 @@
-let moment from 'moment');
+import moment from 'moment';
 import React, {PropTypes} from 'react/addons';
-let Router from 'react-router');
+import Router, {Navigation, State} from 'react-router';
 
-let ProjectActions from '../../actions/project.actions');
-let ProjectStore from '../../stores/project.store');
+import ProjectActions from '../../actions/project.actions';
+import ProjectStore from '../../stores/project.store';
 
-let DatePicker from '../common/datepicker/datepicker');
-let Select from '../common/form/select');
-let TextInput from '../common/form/text.input');
-let NumberInput from '../common/form/number.input');
-let SaveButton from '../common/buttons/save.button');
-let CancelButton from '../common/buttons/cancel.button');
+import DatePicker from '../common/datepicker/datepicker';
+import Select from '../common/form/select';
+import TextInput from '../common/form/text.input';
+import NumberInput from '../common/form/number.input';
+import SaveButton from '../common/buttons/save.button';
+import CancelButton from '../common/buttons/cancel.button';
 
-let TimeunitForm = React.createClass({
+const TimeunitForm = React.createClass({
 
   propTypes: {
     timeunit:           PropTypes.object.isRequired,

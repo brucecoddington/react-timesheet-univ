@@ -1,6 +1,6 @@
 describe('Project Store: ', function () {
 
-  var ProjectStore;
+  let ProjectStore;
 
   beforeEach(function () {
     ProjectStore = require('./project.store');

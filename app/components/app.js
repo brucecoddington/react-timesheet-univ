@@ -1,15 +1,13 @@
 import React, {PropTypes} from 'react/addons';
-let Router from 'react-router');
-let RouteHandler = RouteHandler;
+import Router, {RouteHandler} from 'react-router';
 
-let NavBar from './common/navigation/navbar');
-let SectionHeader from './common/section');
-let LoginStore from '../stores/login.store');
+import NavBar from './common/navigation/navbar';
+import SectionHeader from './common/section';
+import LoginStore from '../stores/login.store';
+import Snackbar from './common/snackbar';
+import SnackbarStore from '../stores/snackbar.store';
 
-let Snackbar from './common/snackbar');
-let SnackbarStore from '../stores/snackbar.store');
-
-let App = React.createClass({
+const App = React.createClass({
 
   statics: {
     willTransitionTo (transition, params) {
