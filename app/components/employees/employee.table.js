@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react/addons';
-var EmployeeRow = require('./employee.row');
+import EmployeeRow from './employee.row';
 
-var EmployeeTable = React.createClass({
+const EmployeeTable = React.createClass({
 
   propTypes: {
     employees: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -9,9 +9,9 @@ var EmployeeTable = React.createClass({
   },
 
   render () {
-    var store = this.props.store;
+    let store = this.props.store;
 
-    var employeeRows = this.props.employees.map(function (employee) {
+    let employeeRows = this.props.employees.map(function (employee) {
       return (
         <EmployeeRow employee={employee} key={employee._id} store={store}/>
       );

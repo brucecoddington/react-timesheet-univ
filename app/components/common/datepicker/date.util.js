@@ -17,11 +17,11 @@ class DateUtil {
   },
 
   mapDaysInWeek (callback) {
-    var week = [];
-    var firstDay = this._date.clone().startOf('isoWeek');
+    let week = [];
+    let firstDay = this._date.clone().startOf('isoWeek');
 
-    for(var i = 0; i < 7; i++) {
-      var day = new DateUtil(firstDay.clone().add(i, 'days'));
+    for(let i = 0; i < 7; i++) {
+      let day = new DateUtil(firstDay.clone().add(i, 'days'));
 
       week[i] = callback(day, i);
     }
@@ -30,11 +30,11 @@ class DateUtil {
   },
 
   mapWeeksInMonth (callback) {
-    var month = [];
-    var firstDay = this._date.clone().startOf('month').startOf('isoWeek');
+    let month = [];
+    let firstDay = this._date.clone().startOf('month').startOf('isoWeek');
 
-    for(var i = 0; i < 6; i++) {
-      var weekStart = new DateUtil(firstDay.clone().add(i, 'weeks'));
+    for(let i = 0; i < 6; i++) {
+      let weekStart = new DateUtil(firstDay.clone().add(i, 'weeks'));
 
       month[i] = callback(weekStart, i);
     }
@@ -43,8 +43,8 @@ class DateUtil {
   },
 
   weekInMonth (other) {
-    var firstDayInWeek = this._date.clone();
-    var lastDayInWeek = this._date.clone().isoWeekday(7);
+    let firstDayInWeek = this._date.clone();
+    let lastDayInWeek = this._date.clone().isoWeekday(7);
 
     return firstDayInWeek.isSame(other._date, 'month') ||
       lastDayInWeek.isSame(other._date, 'month');

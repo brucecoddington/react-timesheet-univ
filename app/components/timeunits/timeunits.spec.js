@@ -1,22 +1,22 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Timeunits Component: ', function () {
 
-  var Timeunits,
+  let Timeunits,
     timesheet,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    Timeunits = require('./timeunits');
+    Timeunits from './timeunits');
 
     timesheet = {_id: 'timesheetId'};
 
@@ -37,7 +37,7 @@ describe('Timeunits Component: ', function () {
 
   describe('clicking the new employee button', function () {
     it('should transition to the create employee route', function () {
-      var button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
+      let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
       
       expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.create', {

@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var classes = require('react-classes');
+import Router, {Navigation} from 'react-router';
+import classNames from 'classnames';
 
-var TimesheetActions = require('../../actions/timesheet.actions');
-var LoginStore = require('../../stores/login.store');
+import TimesheetActions from '../../actions/timesheet.actions';
+import LoginStore from '../../stores/login.store';
 
-var SnackbarAction = require('../../actions/snackbar.actions');
-var DateUtils = require('../../util/date.utils');
+import SnackbarAction from '../../actions/snackbar.actions';
+import DateUtils from '../../util/date.utils';
 
-var TimesheetRow = React.createClass({
+const TimesheetRow = React.createClass({
 
   propTypes: {
     timesheet: PropTypes.object,
@@ -16,12 +16,11 @@ var TimesheetRow = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
-    classes
+    Navigation
   ],
 
-  showDetail: function showDetail () {
-    var timesheet = this.props.timesheet;
+  showDetail () {
+    let timesheet = this.props.timesheet;
     if (timesheet.deleted) {
       SnackbarAction.error('You cannot edit a deleted timesheet.');
       return;
@@ -31,26 +30,26 @@ var TimesheetRow = React.createClass({
       {user_id: timesheet.user_id, _id: timesheet._id});
   },
 
-  remove: function remove (e) {
+  remove (e) {
     e.stopPropagation();
     this.props.timesheet.deleted = true;
     TimesheetActions.remove(this.props.timesheet);
   },
 
-  restore: function restore (e) {
+  restore (e) {
    e.stopPropagation();
    this.props.timesheet.deleted = false;
    TimesheetActions.restore(this.props.timesheet);
   },
 
   render () {
-    var timesheet = this.props.timesheet;
+    let timesheet = this.props.timesheet;
 
-    var rowClasses = this.getClass('repeated-item fadeable-row', {
+    let rowClasses = classNames('repeated-item fadeable-row', {
       'faded': timesheet.deleted
     });
 
-    var buttonClasses = this.getClass('ui primary button small', {
+    let buttonClasses = classNames('ui primary button small', {
       'positive': timesheet.deleted,
       'negative': !timesheet.deleted
     });

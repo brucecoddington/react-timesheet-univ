@@ -1,20 +1,20 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var _ = require('lodash');
+import Router, {Navigation, State} from 'react-router';
+import _ from 'lodash';
 
-var EmployeeForm = require('./employee.form');
-var EmployeeActions = require('../../actions/employee.actions');
-var EmployeeMixin = require('../../mixins/employee.mixin');
+import EmployeeForm from './employee.form';
+import EmployeeActions from '../../actions/employee.actions';
+import EmployeeMixin from '../../mixins/employee.mixin';
 
-var EmployeeDetail = React.createClass({
+const EmployeeDetail = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     EmployeeMixin
   ],
 
-  saveEmployee: function (event) {
+  saveEmployee (event) {
     event.preventDefault();
     this.validateAll();
 
@@ -24,10 +24,10 @@ var EmployeeDetail = React.createClass({
     }
   },
 
-  get: function () {
-    var employee = this.store.getState().employee;
+  get () {
+    let employee = this.store.getState().employee;
     if (_.isEmpty(employee)) {
-      var employeeId = this.getParams()._id;
+      let employeeId = this.getParams()._id;
       EmployeeActions.get(employeeId);
     }
     else {
@@ -35,7 +35,7 @@ var EmployeeDetail = React.createClass({
     }
   },
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Update',
       employee: {},
@@ -43,23 +43,23 @@ var EmployeeDetail = React.createClass({
     };
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  componentDidMount: function () {
+  componentDidMount () {
     this.get();
   },
 
-  render : function () {
+  render () {
     return (
       <EmployeeForm employee={this.state.employee}
         errors={this.state.errors}

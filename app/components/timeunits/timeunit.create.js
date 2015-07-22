@@ -1,20 +1,20 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+let Router from 'react-router');
 
-var TimeunitForm = require('./timeunit.form');
-var TimeunitMixin = require('../../mixins/timeunit.mixin');
-var TimeunitActions = require('../../actions/timeunit.actions');
-var TimesheetActions = require('../../actions/timesheet.actions');
+let TimeunitForm from './timeunit.form');
+let TimeunitMixin from '../../mixins/timeunit.mixin');
+let TimeunitActions from '../../actions/timeunit.actions');
+let TimesheetActions from '../../actions/timesheet.actions');
 
-var TimeunitCreate = React.createClass({
+let TimeunitCreate = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     TimeunitMixin
   ],
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Save',
       timeunit: {},
@@ -22,7 +22,7 @@ var TimeunitCreate = React.createClass({
     };
   },
 
-  saveTimeunit: function (e) {
+  saveTimeunit (e) {
     e.preventDefault();
     this.validateAll();
 
@@ -35,8 +35,8 @@ var TimeunitCreate = React.createClass({
     }
   },
 
-  getTimesheet: function (timesheetId) {
-    var timesheet = this.timesheetStore.getState().timesheet;
+  getTimesheet (timesheetId) {
+    let timesheet = this.timesheetStore.getState().timesheet;
     if (!timesheet._id) {
       TimesheetActions.get(timesheetId);
     }
@@ -45,19 +45,19 @@ var TimeunitCreate = React.createClass({
     }
   },
 
-  onTimesheetChange: function () {
+  onTimesheetChange () {
     this.setState({timesheet: this.timesheetStore.getState().timesheet});
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.timesheetStore.addChangeListener(this.onTimesheetChange);
   },
 
-  componentDidMount: function () {
+  componentDidMount () {
     this.getTimesheet(this.getParams()._id);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onTimesheetChange);
   },
 

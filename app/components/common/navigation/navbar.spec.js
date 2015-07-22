@@ -1,17 +1,17 @@
-var _ = require('lodash');
-var proxyquire = require('proxyquireify')(require);
-var mockComponent = require('../../mock');
+let _ from 'lodash');
+let proxyquire from 'proxyquireify')(require);
+let mockComponent from '../../mock');
 
 describe('Navbar Component: ', function () {
 
-  var Navbar,
+  let Navbar,
     element,
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
@@ -45,8 +45,8 @@ describe('Navbar Component: ', function () {
 
   describe('when navigating between routes', function () {
     it('should set the appropriate active class', function () {
-      var Links = TestUtils.scryRenderedComponentsWithType(element, proxies['react-router'].Link);
-      var projectLink = TestUtils.findRenderedDOMComponentWithClass(element, 'active');
+      let Links = TestUtils.scryRenderedComponentsWithType(element, proxies['react-router'].Link);
+      let projectLink = TestUtils.findRenderedDOMComponentWithClass(element, 'active');
       expect(projectLink.getDOMNode().innerText).to.equal('Projects');
     });
   });

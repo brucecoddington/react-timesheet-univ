@@ -1,22 +1,22 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Project Create Component: ', function () {
 
-  var ProjectCreate,
+  let ProjectCreate,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    ProjectCreate = require('./project.create');
-    ProjectActions = require('../../actions/project.actions');
+    ProjectCreate from './project.create');
+    ProjectActions from '../../actions/project.actions');
 
     element = TestUtils.renderIntoDocument(<ProjectCreate />);
 

@@ -1,18 +1,18 @@
-var _ = require('lodash');
-var proxyquire = require('proxyquireify')(require);
-var mockComponent = require('../mock');
+let _ from 'lodash');
+let proxyquire from 'proxyquireify')(require);
+let mockComponent from '../mock');
 
 describe('Timeunit Detail Component: ', function () {
 
-  var TimeunitDetail,
+  let TimeunitDetail,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 

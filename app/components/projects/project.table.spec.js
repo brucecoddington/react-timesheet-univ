@@ -1,26 +1,26 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Project Table Component: ', function () {
 
-  var ProjectTable,
+  let ProjectTable,
     ProjectStore,
     projects,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
-    ProjectStore = require('../../stores/project.store');
+    ProjectStore from '../../stores/project.store');
   });
 
   beforeEach(function () {
     projects = [{}, {}];
 
-    ProjectTable = require('./project.table');
+    ProjectTable from './project.table');
     element = TestUtils.renderIntoDocument(
       <ProjectTable projects={projects} store={ProjectStore} />
     );

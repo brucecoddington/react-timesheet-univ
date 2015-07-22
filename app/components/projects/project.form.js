@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation, State} from 'react-router');
 
-var TextInput = require('../common/form/text.input');
-var SaveButton = require('../common/buttons/save.button');
-var CancelButton = require('../common/buttons/cancel.button');
+import TextInput from '../common/form/text.input';
+import SaveButton from '../common/buttons/save.button';
+import CancelButton from '../common/buttons/cancel.button';
 
-var ProjectForm = React.createClass({
+const ProjectForm = React.createClass({
 
   propTypes: {
     project: PropTypes.object,
@@ -16,16 +16,16 @@ var ProjectForm = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
-    Router.State
+    Navigation,
+    State
   ],
 
-  onCancel: function (event) {
+  onCancel (event) {
     event.preventDefault();
     this.transitionTo('projects');
   },
 
-  render : function () {
+  render  () {
     return (
       <div className="ui ten column centered grid">
         <div className="ten wide column">

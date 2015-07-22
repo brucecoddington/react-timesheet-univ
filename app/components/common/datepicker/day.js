@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, {PropTypes} from 'react/addons';
+import classNames from 'classnames';
 
 const Day = React.createClass({
 

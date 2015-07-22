@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react/addons';
 
-var Input = React.createClass({
+const Input = React.createClass({
 
   propTypes: {
     name:         PropTypes.string.isRequired,

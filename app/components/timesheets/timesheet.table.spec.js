@@ -1,26 +1,26 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Timesheet Table Component: ', function () {
 
-  var TimesheetTable,
+  let TimesheetTable,
     TimesheetStore,
     timesheets,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
-    TimesheetStore = require('../../stores/timesheet.store');
+    TimesheetStore from '../../stores/timesheet.store');
   });
 
   beforeEach(function () {
     timesheets = [{}, {}];
 
-    TimesheetTable = require('./timesheet.table');
+    TimesheetTable from './timesheet.table');
     element = TestUtils.renderIntoDocument(
       <TimesheetTable timesheets={timesheets} store={TimesheetStore} />
     );

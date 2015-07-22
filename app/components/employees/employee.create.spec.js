@@ -1,22 +1,22 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Employee Create Component: ', function () {
 
-  var EmployeeCreate,
+  let EmployeeCreate,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    EmployeeCreate = require('./employee.create');
-    EmployeeActions = require('../../actions/employee.actions');
+    EmployeeCreate from './employee.create');
+    EmployeeActions from '../../actions/employee.actions');
 
     element = TestUtils.renderIntoDocument(<EmployeeCreate />);
 

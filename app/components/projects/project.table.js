@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react/addons';
-var ProjectRow = require('./project.row');
+import ProjectRow from './project.row';
 
-var ProjectTable = React.createClass({
+const ProjectTable = React.createClass({
 
   propTypes: {
     projects: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -9,9 +9,9 @@ var ProjectTable = React.createClass({
   },
 
   render () {
-    var store = this.props.store;
+    let store = this.props.store;
 
-    var projectRows = this.props.projects.map(function (project) {
+    let projectRows = this.props.projects.map(function (project) {
       return (
         <ProjectRow project={project} key={project._id} store={store} />
       );

@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation} from 'react-router';
 
-var TextInput = require('../common/form/text.input');
-var Checkbox = require('../common/form/checkbox');
-var SaveButton = require('../common/buttons/save.button');
-var CancelButton = require('../common/buttons/cancel.button');
+import TextInput from '../common/form/text.input';
+import Checkbox from '../common/form/checkbox';
+import SaveButton from '../common/buttons/save.button';
+import CancelButton from '../common/buttons/cancel.button';
 
-var EmployeeForm = React.createClass({
+const EmployeeForm = React.createClass({
 
   propTypes: {
     employee:   PropTypes.object,
@@ -18,15 +18,15 @@ var EmployeeForm = React.createClass({
   },
 
   mixins: [
-    Router.Navigation
+    Navigation
   ],
 
-  onCancel: function (event) {
+  onCancel (event) {
     event.preventDefault();
     this.transitionTo('employees');
   },
 
-  render : function () {
+  render () {
     return (
       <div className="ui ten column centered grid">
         <div className="ten wide column">

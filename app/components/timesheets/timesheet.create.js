@@ -1,19 +1,19 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation, State} from 'react-router';
 
-var TimesheetActions = require('../../actions/timesheet.actions');
-var TimesheetForm = require('./timesheet.form');
-var TimesheetMixin = require('../../mixins/timesheet.mixin');
+import TimesheetActions from '../../actions/timesheet.actions';
+import TimesheetForm from './timesheet.form';
+import TimesheetMixin from '../../mixins/timesheet.mixin';
 
-var TimesheetCreate = React.createClass({
+let TimesheetCreate = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     TimesheetMixin
   ],
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Create',
       timesheet: {},
@@ -21,7 +21,7 @@ var TimesheetCreate = React.createClass({
     };
   },
 
-  saveTimesheet: function (event) {
+  saveTimesheet (event) {
     event.preventDefault();
     this.validateAll();
 

@@ -1,17 +1,17 @@
-var _ = require('lodash');
+import _ from 'lodash';
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {State, Navigation} from 'react-router';
 
-var SectionHeader = React.createClass({
+const SectionHeader = React.createClass({
 
   mixins: [
-    Router.State,
-    Router.Navigation
+    State,
+    Navigation
   ],
 
-  getSectionName: function () {
-    var activeRoute = _.last(this.getRoutes()).name;
-    var sectionNames = {
+  getSectionName () {
+    let activeRoute = _.last(this.getRoutes()).name;
+    let sectionNames = {
       'employees': 'Employees',
       'employees.create': 'Create Employee',
       'employees.detail': 'Edit Employee',
@@ -29,7 +29,7 @@ var SectionHeader = React.createClass({
     return sectionNames[activeRoute] || '';
   },
 
-  render : function () {
+  render  () {
 
     return (
       <div className="row">

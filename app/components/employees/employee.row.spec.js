@@ -1,6 +1,6 @@
 describe('Employee Row Component: ', function () {
 
-  var EmployeeRow,
+  let EmployeeRow,
     SnackbarActions,
     EmployeeActions,
     EmployeeStore,
@@ -9,18 +9,18 @@ describe('Employee Row Component: ', function () {
     spies = {},
     button;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    EmployeeStore = require('../../stores/employee.store');
-    EmployeeRow = require('./employee.row');
-    SnackbarActions = require('../../actions/snackbar.actions');
-    EmployeeActions = require('../../actions/employee.actions');
+    EmployeeStore from '../../stores/employee.store');
+    EmployeeRow from './employee.row');
+    SnackbarActions from '../../actions/snackbar.actions');
+    EmployeeActions from '../../actions/employee.actions');
   });
 
   it('should instantiate the EmployeeRow', function () {

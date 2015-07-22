@@ -3,7 +3,7 @@ import DateUtil  from './date.util';
 import Calendar  from './calendar';
 import DateInput from './date_input';
 import React, {PropTypes} from 'react/addons';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 const DatePicker = React.createClass({
 
@@ -99,7 +99,7 @@ const DatePicker = React.createClass({
   },
 
   render () {
-    var wrapperClasses = this.getClass('inline field', {
+    let wrapperClasses = classNames('inline field', {
       'error': !!this.props.error
     });
 

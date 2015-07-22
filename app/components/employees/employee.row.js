@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var classes = require('react-classes');
+import Router, {Navigation, State} from 'react-router';
+import classNames from 'classnames';
 
-var EmployeeActions = require('../../actions/employee.actions');
-var SnackbarActions = require('../../actions/snackbar.actions');
+import EmployeeActions from '../../actions/employee.actions';
+import SnackbarActions from '../../actions/snackbar.actions';
 
-var EmployeeRow = React.createClass({
+const EmployeeRow = React.createClass({
 
   propTypes: {
     employee: PropTypes.object,
@@ -13,13 +13,13 @@ var EmployeeRow = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     classes
   ],
 
-  showDetail: function showDetail () {
-    var employee = this.props.employee;
+  showDetail () {
+    let employee = this.props.employee;
     if (employee.deleted) {
       SnackbarActions.error('You cannot edit a deleted employee.');
       return;
@@ -28,26 +28,26 @@ var EmployeeRow = React.createClass({
     this.transitionTo('employees.detail', {_id: employee._id});
   },
 
-  remove: function remove (e) {
+  remove (e) {
     e.stopPropagation();
     this.props.employee.deleted = true;
     EmployeeActions.remove(this.props.employee);
   },
 
-  restore: function restore (e) {
+  restore (e) {
     e.stopPropagation();
     this.props.employee.deleted = false;
     EmployeeActions.restore(this.props.employee);
   },
 
   render () {
-    var employee = this.props.employee;
+    let employee = this.props.employee;
 
-    var classNames = this.getClass('repeated-item fadeable-row', {
+    let classNames = classNames('repeated-item fadeable-row', {
       'faded': employee.deleted
     });
 
-    var buttonClasses = this.getClass('ui primary button small', {
+    let buttonClasses = classNames('ui primary button small', {
       'positive': employee.deleted,
       'negative': !employee.deleted
     });

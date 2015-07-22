@@ -1,22 +1,22 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Save Button: ', function () {
 
-  var SaveButton,
+  let SaveButton,
     element,
     button,
     testCtrl,
     spies = {};
     
-  var React, TestUtils
+  let React, TestUtils
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    SaveButton = require('./save.button');
+    SaveButton from './save.button');
     testCtrl = { onSave: _.noop };
     spies.save = sinon.spy(testCtrl, 'onSave');
 

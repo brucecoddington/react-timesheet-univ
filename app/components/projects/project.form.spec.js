@@ -1,8 +1,8 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Project Form Component: ', function () {
 
-  var ProjectForm,
+  let ProjectForm,
     CancleButton,
     project,
     errors, 
@@ -10,12 +10,12 @@ describe('Project Form Component: ', function () {
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
-    CancelButton = require('../common/buttons/cancel.button');
+    CancelButton from '../common/buttons/cancel.button');
   });
 
   beforeEach(function () {
@@ -27,7 +27,7 @@ describe('Project Form Component: ', function () {
     spies.toggleAdmin = sinon.stub();
     spies.onSave = sinon.stub();
 
-    ProjectForm = require('./project.form');
+    ProjectForm from './project.form');
     element = TestUtils.renderIntoDocument(
       <ProjectForm project={project}
         errors={errors}
@@ -50,8 +50,8 @@ describe('Project Form Component: ', function () {
 
   describe('clicking the cancel button', function () {
     it('should go back to the projects home', function () {
-      var cancel = TestUtils.findRenderedComponentWithType(element, CancelButton);
-      var button = TestUtils.findRenderedDOMComponentWithTag(cancel, 'button');
+      let cancel = TestUtils.findRenderedComponentWithType(element, CancelButton);
+      let button = TestUtils.findRenderedDOMComponentWithTag(cancel, 'button');
       TestUtils.Simulate.click(button);
 
       expect(spies.transitionTo).to.have.been.calledWith('projects');

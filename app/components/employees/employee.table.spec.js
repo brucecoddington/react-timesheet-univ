@@ -1,26 +1,26 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Employee Table Component: ', function () {
 
-  var EmployeeTable,
+  let EmployeeTable,
     EmployeeStore,
     employees,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
-    EmployeeStore = require('../../stores/employee.store');
+    EmployeeStore from '../../stores/employee.store');
   });
 
   beforeEach(function () {
     employees = [{}, {}];
 
-    EmployeeTable = require('./employee.table');
+    EmployeeTable from './employee.table');
     element = TestUtils.renderIntoDocument(
       <EmployeeTable employees={employees} store={EmployeeStore} />
     );

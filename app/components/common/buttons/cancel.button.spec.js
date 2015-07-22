@@ -1,21 +1,21 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Cancel Button: ', function () {
 
-  var CancelButton,
+  let CancelButton,
     element,
     testCtrl,
     spies = {};
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    CancelButton = require('./cancel.button');
+    CancelButton from './cancel.button');
     testCtrl = { onCancel: _.noop };
     spies.cancel = sinon.spy(testCtrl, 'onCancel');
 
@@ -34,7 +34,7 @@ describe('Cancel Button: ', function () {
 
   describe('clicking the button', function () {
     it('should call the callback', function () {
-      var button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
+      let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
       expect(spies.cancel).to.have.been.called;
     });

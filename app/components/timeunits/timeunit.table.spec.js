@@ -1,26 +1,26 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Timeunit Table Component: ', function () {
 
-  var TimeunitTable,
+  let TimeunitTable,
     TimeunitStore,
     timeunits,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
-    TimeunitStore = require('../../stores/timeunit.store');
+    TimeunitStore from '../../stores/timeunit.store');
   });
 
   beforeEach(function () {
     timeunits = [{}, {}];
 
-    TimeunitTable = require('./timeunit.table');
+    TimeunitTable from './timeunit.table');
     element = TestUtils.renderIntoDocument(
       <TimeunitTable timeunits={timeunits} store={TimeunitStore} />
     );

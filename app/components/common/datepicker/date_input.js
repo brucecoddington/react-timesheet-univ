@@ -1,7 +1,7 @@
 import moment from 'moment';
 import DateUtil from './date.util';
 import React, {PropTypes} from 'react/addons';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 const DateInput = React.createClass({
 
@@ -141,11 +141,11 @@ const DateInput = React.createClass({
   },
 
   render () {
-    let containerClasses = classnames('ui inline field', {
+    let containerClasses = classNames('ui inline field', {
       'error': !!this.props.error
     });
 
-    let errorMessageClasses = classnames('input', {
+    let errorMessageClasses = classNames('input', {
       'error': !!this.props.error
     });
 

@@ -1,51 +1,51 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation} from 'react-router';
 
-var TimesheetTable = require('./timesheet.table');
-var TimesheetActions = require('../../actions/timesheet.actions');
-var TimesheetStore = require('../../stores/timesheet.store');
+import TimesheetTable from './timesheet.table';
+import TimesheetActions from '../../actions/timesheet.actions';
+import TimesheetStore from '../../stores/timesheet.store';
 
-var Paginator = require('../common/navigation/paginator');
+import Paginator from '../common/navigation/paginator';
 
-var Timesheets = React.createClass({
+let Timesheets = React.createClass({
 
   mixins: [
-    Router.Navigation
+    Navigation
   ],
 
   store: TimesheetStore,
 
   requestTimesheets: TimesheetActions.list,
 
-  getInitialState: function () {
+  getInitialState () {
     return this.store.getState();
   },
 
-  createNew: function () {
+  createNew () {
     return this.transitionTo('timesheets.create', {user_id: '123'});
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.requestTimesheets({page: 1});
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  onPageChange: function (page) {
+  onPageChange (page) {
     this.requestTimesheets({page: page});
   },
 
   render () {
 
-    var numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
-    var pagesShown = Math.min(numPages, 5);
+    let numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
+    let pagesShown = Math.min(numPages, 5);
 
     return (
       <div>

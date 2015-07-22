@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react/addons';
-var TimesheetRow = require('./timesheet.row');
+import TimesheetRow from './timesheet.row';
 
-var TimesheetTable = React.createClass({
+const TimesheetTable = React.createClass({
 
   propTypes: {
     timesheets: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -9,9 +9,9 @@ var TimesheetTable = React.createClass({
   },
 
   render () {
-    var store = this.props.store;
+    let store = this.props.store;
 
-    var timesheetRows = this.props.timesheets.map(function (timesheet) {
+    let timesheetRows = this.props.timesheets.map(function (timesheet) {
       return (
         <TimesheetRow timesheet={timesheet} key={timesheet._id} store={store} />
       );

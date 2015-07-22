@@ -1,18 +1,18 @@
-var moment = require('moment');
+let moment from 'moment');
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+let Router from 'react-router');
 
-var ProjectActions = require('../../actions/project.actions');
-var ProjectStore = require('../../stores/project.store');
+let ProjectActions from '../../actions/project.actions');
+let ProjectStore from '../../stores/project.store');
 
-var DatePicker = require('../common/datepicker/datepicker');
-var Select = require('../common/form/select');
-var TextInput = require('../common/form/text.input');
-var NumberInput = require('../common/form/number.input');
-var SaveButton = require('../common/buttons/save.button');
-var CancelButton = require('../common/buttons/cancel.button');
+let DatePicker from '../common/datepicker/datepicker');
+let Select from '../common/form/select');
+let TextInput from '../common/form/text.input');
+let NumberInput from '../common/form/number.input');
+let SaveButton from '../common/buttons/save.button');
+let CancelButton from '../common/buttons/cancel.button');
 
-var TimeunitForm = React.createClass({
+let TimeunitForm = React.createClass({
 
   propTypes: {
     timeunit:           PropTypes.object.isRequired,
@@ -26,24 +26,24 @@ var TimeunitForm = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
-    Router.State
+    Navigation,
+    State
   ],
 
   projectStore: ProjectStore,
 
   requestProjects: ProjectActions.list,
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       options: [],
       projects: []
     };
   },
 
-  onProjectsChange: function () {
-    var projects = this.projectStore.getState().projects;
-    var options = [];
+  onProjectsChange () {
+    let projects = this.projectStore.getState().projects;
+    let options = [];
 
     projects.forEach(function (project) {
       options.push({value: project.name, label: project.name});
@@ -52,16 +52,16 @@ var TimeunitForm = React.createClass({
     this.setState({options: options, projects: projects});
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.projectStore.addChangeListener(this.onProjectsChange);
     this.requestProjects();
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.projectStore.removeChangeListener(this.onProjectsChange);
   },
 
-  onCancel: function (event) {
+  onCancel (event) {
     event.preventDefault();
     this.transitionTo('timesheets.detail', {
       user_id: this.getParams().user_id,
@@ -69,7 +69,7 @@ var TimeunitForm = React.createClass({
     });
   },
 
-  render : function () {
+  render  () {
 
     return (
       <div className="ui ten column centered grid">

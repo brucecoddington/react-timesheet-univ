@@ -1,19 +1,19 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation, State} from 'react-router';
 
-var ProjectForm = require('./project.form');
-var ProjectActions = require('../../actions/project.actions');
-var ProjectMixin = require('../../mixins/project.mixin');
+import ProjectForm from './project.form';
+import ProjectActions from '../../actions/project.actions';
+import ProjectMixin from '../../mixins/project.mixin';
 
-var ProjectCreate = React.createClass({
+const ProjectCreate = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     ProjectMixin
   ],
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Create',
       project: {},
@@ -21,19 +21,19 @@ var ProjectCreate = React.createClass({
     };
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  saveProject: function (event) {
+  saveProject (event) {
     event.preventDefault();
     this.validateAll();
 
@@ -43,7 +43,7 @@ var ProjectCreate = React.createClass({
     }
   },
 
-  render : function () {
+  render () {
     return (
       <ProjectForm project={this.state.project}
         errors={this.state.errors}

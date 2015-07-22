@@ -1,23 +1,23 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var _ = require('lodash');
+let Router from 'react-router');
+let _ from 'lodash');
 
-var TimeunitTable = require('./timeunit.table');
+let TimeunitTable from './timeunit.table');
 
-var TimeunitActions = require('../../actions/timeunit.actions');
-var TimeunitStore = require('../../stores/timeunit.store');
-var TimesheetStore = require('../../stores/timesheet.store');
-var LoginStore = require('../../stores/login.store');
+let TimeunitActions from '../../actions/timeunit.actions');
+let TimeunitStore from '../../stores/timeunit.store');
+let TimesheetStore from '../../stores/timesheet.store');
+let LoginStore from '../../stores/login.store');
 
-var Timeunits = React.createClass({
+let Timeunits = React.createClass({
 
   propTypes: {
     timesheet: PropTypes.object.isRequired
   },
 
   mixins: [
-    Router.Navigation,
-    Router.State
+    Navigation,
+    State
   ],
 
   store: TimeunitStore,
@@ -25,11 +25,11 @@ var Timeunits = React.createClass({
 
   requestTimeunits: TimeunitActions.list,
 
-  getInitialState: function () {
+  getInitialState () {
     return this.store.getState();
   },
 
-  logTime: function () {
+  logTime () {
     this.transitionTo('timesheets.detail.timeunits.create', {
       user_id: this.getParams().user_id,
       _id: this.getParams()._id,
@@ -37,21 +37,21 @@ var Timeunits = React.createClass({
     });
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  onTimesheetChange: function () {
+  onTimesheetChange () {
     this.requestTimeunits(this.props.timesheet);
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.requestTimeunits(this.props.timesheet);
     this.store.addChangeListener(this.onChange);
     this.timesheetStore.addChangeListener(this.onTimesheetChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
     this.timesheetStore.removeChangeListener(this.onTimesheetChange);
   },

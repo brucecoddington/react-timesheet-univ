@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react/addons';
-var classes = require('react-classes');
+import classNames from 'classnames';
 
-var Input = React.createClass({
+const Input = React.createClass({
 
   propTypes: {
     name:         PropTypes.string.isRequired,
@@ -12,14 +12,12 @@ var Input = React.createClass({
     onChange:     PropTypes.func.isRequired
   },
 
-  mixins: [classes],
-
   render () {
-    var wrapperClasses = this.getClass('inline field', {
+    let wrapperClasses = classNames('inline field', {
       'error': this.props.error
     });
 
-    var errorMessageClasses = this.getClass('input', {
+    let errorMessageClasses = classNames('input', {
       'error': this.props.error
     });
 

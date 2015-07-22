@@ -1,52 +1,52 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation} from 'react-router';
 
-var ProjectTable = require('./project.table');
-var ProjectActions = require('../../actions/project.actions');
-var ProjectStore = require('../../stores/project.store');
+import ProjectTable from './project.table';
+import ProjectActions from '../../actions/project.actions';
+import ProjectStore from '../../stores/project.store';
 
-var Paginator = require('../common/navigation/paginator');
-var SnackbarAction = require('../../actions/snackbar.actions');
+import Paginator from '../common/navigation/paginator';
+import SnackbarAction from '../../actions/snackbar.actions';
 
-var Projects = React.createClass({
+const Projects = React.createClass({
 
   mixins: [
-    Router.Navigation
+    Navigation
   ],
 
   store: ProjectStore,
 
   requestProjects: ProjectActions.list,
 
-  getInitialState: function () {
+  getInitialState () {
     return this.store.getState();
   },
 
-  createNew: function () {
+  createNew () {
     this.transitionTo('projects.create');
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.requestProjects({page: 1});
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  onPageChange: function (page) {
+  onPageChange (page) {
     this.requestProjects({page: page});
   },
 
   render () {
 
-    var numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
-    var pagesShown = Math.min(numPages, 5);
+    let numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
+    let pagesShown = Math.min(numPages, 5);
 
     return (
       <div>

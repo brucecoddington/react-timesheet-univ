@@ -1,7 +1,7 @@
 import Tether from 'tether';
 import React, {PropTypes} from 'react/addons';
 
-var Popover = React.createClass({
+const Popover = React.createClass({
 
   displayName: 'Popover',
 
@@ -28,7 +28,7 @@ var Popover = React.createClass({
   },
 
   _popoverComponent () {
-    var className = this.props.className;
+    let className = this.props.className;
     return (
       <div className={className}>
         <div className="datepicker-calendar-popover-content">

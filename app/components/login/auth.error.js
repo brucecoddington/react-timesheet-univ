@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react/addons';
 
-var AuthError = React.createClass({
+const AuthError = React.createClass({
 
   propTypes: {
     authError: PropTypes.string

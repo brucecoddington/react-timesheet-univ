@@ -1,46 +1,39 @@
 import React, {PropTypes} from 'react/addons';
-var classes = require('react-classes');
+import classNames from 'classnames';
 
-var SnackbarStore = require('../../stores/snackbar.store');
-var SnackbarActions = require('../../actions/snackbar.actions');
+import SnackbarStore from '../../stores/snackbar.store';
+import SnackbarActions from '../../actions/snackbar.actions';
 
-var classes = require('react-classes');
-
-var SnackbarStore = require('../../stores/snackbar.store');
-var SnackbarActions = require('../../actions/snackbar.actions');
-
-var Snackbar = React.createClass({
+const Snackbar = React.createClass({
 
   store: SnackbarStore,
 
-  mixins: [classes],
-
-  getInitialState: function () {
+  getInitialState () {
     return {
       message: '',
       messageType: ''
     };
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.store.addChangeListener(this.notify);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.notify);
   },
 
-  notify: function () {
+  notify () {
     this.setState(this.store.getState());
   },
 
-  hide: function () {
+  hide () {
     SnackbarActions.hide();
   },
 
   render () {
 
-    var classes = this.getClass('ui inline snackbar top right', {
+    let classes = classNames('ui inline snackbar top right', {
       'hide':     !this.state.message.length,
       'success':  this.state.messageType === 'success',
       'info':     this.state.messageType === 'info',

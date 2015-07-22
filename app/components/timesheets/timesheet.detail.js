@@ -1,21 +1,21 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var _ = require('lodash');
+import Router, {Navigation, State} from 'react-router';
+import _ from 'lodash';
 
-var TimesheetForm = require('./timesheet.form');
-var Timeunits = require('../timeunits/timeunits');
-var TimesheetActions = require('../../actions/timesheet.actions');
-var TimesheetMixin = require('../../mixins/timesheet.mixin');
+import TimesheetForm from './timesheet.form';
+import Timeunits from '../timeunits/timeunits';
+import TimesheetActions from '../../actions/timesheet.actions';
+import TimesheetMixin from '../../mixins/timesheet.mixin';
 
-var TimesheetDetail = React.createClass({
+const TimesheetDetail = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     TimesheetMixin
   ],
 
-  saveTimesheet: function (event) {
+  saveTimesheet (event) {
     event.preventDefault();
     this.validateAll();
 
@@ -25,8 +25,8 @@ var TimesheetDetail = React.createClass({
     }
   },
 
-  get: function (timesheetId) {
-    var timesheet = this.store.getState().timesheet;
+  get (timesheetId) {
+    let timesheet = this.store.getState().timesheet;
     if (_.isEmpty(timesheet)) {
       TimesheetActions.get(timesheetId);
     }
@@ -35,7 +35,7 @@ var TimesheetDetail = React.createClass({
     }
   },
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Update',
       timesheet: {},
@@ -43,16 +43,16 @@ var TimesheetDetail = React.createClass({
     };
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.get(this.getParams()._id);
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 

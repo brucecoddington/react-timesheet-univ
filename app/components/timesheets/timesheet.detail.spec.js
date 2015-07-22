@@ -1,18 +1,18 @@
-var _ = require('lodash');
-var proxyquire = require('proxyquireify')(require);
-var mockComponent = require('../mock');
+let _ from 'lodash');
+let proxyquire from 'proxyquireify')(require);
+let mockComponent from '../mock');
 
 describe('Timesheet Detail Component: ', function () {
 
-  var TimesheetDetail,
+  let TimesheetDetail,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
@@ -27,7 +27,7 @@ describe('Timesheet Detail Component: ', function () {
         RouteHandler: mockComponent('RouteHandler'),
         Link: mockComponent('Link'),
         State: {
-          getParams: function () {return {_id: 'abc123'}}
+          getParams () {return {_id: 'abc123'}}
         }
       }
     };

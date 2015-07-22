@@ -1,12 +1,10 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var classes = require('react-classes');
+import Router, {Navigation} from 'react-router';
+import classNames from 'classnames';
+import ProjectActions from '../../actions/project.actions';
+import SnackbarAction from '../../actions/snackbar.actions';
 
-var ProjectActions = require('../../actions/project.actions');
-
-var SnackbarAction = require('../../actions/snackbar.actions');
-
-var ProjectRow = React.createClass({
+const ProjectRow = React.createClass({
 
   propTypes: {
     project: PropTypes.object,
@@ -14,11 +12,11 @@ var ProjectRow = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
+    Navigation,
     classes
   ],
 
-  showDetail: function showDetail () {
+  showDetail () {
     if (this.props.project.deleted) {
       SnackbarAction.error('You cannot edit a deleted project.');
       return;
@@ -27,26 +25,26 @@ var ProjectRow = React.createClass({
     this.transitionTo('projects.detail', {_id: this.props.project._id});
   },
 
-  remove: function remove (e) {
+  remove (e) {
     e.stopPropagation();
     this.props.project.deleted = true;
     ProjectActions.remove(this.props.project);
   },
 
-  restore: function restore (e) {
+  restore (e) {
     e.stopPropagation();
     this.props.project.deleted = false;
     ProjectActions.restore(this.props.project);
   },
 
   render () {
-    var project = this.props.project;
+    let project = this.props.project;
 
-    var rowClasses = this.getClass('repeated-item fadeable-row', {
+    let rowClasses = classNames('repeated-item fadeable-row', {
       'faded': project.deleted
     });
 
-    var buttonClasses = this.getClass('ui primary button small', {
+    let buttonClasses = classNames('ui primary button small', {
       'positive': project.deleted,
       'negative': !project.deleted
     });

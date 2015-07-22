@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react/addons';
-var classes = require('react-classes');
-// var ReactSelect = require('react-select');
+import classNames from 'classnames';
+// let ReactSelect from 'react-select');
 
-var Select = React.createClass({
+const Select = React.createClass({
 
   propTypes: {
     name:         PropTypes.string.isRequired,
@@ -14,14 +14,12 @@ var Select = React.createClass({
     options:      PropTypes.arrayOf(PropTypes.object)
   },
 
-  mixins: [classes],
-
   render () {
-    var wrapperClasses = this.getClass('inline field', {
+    let wrapperClasses = classNames('inline field', {
       'error': !!this.props.error
     });
 
-    var containerClasses = this.getClass('field', {
+    let containerClasses = classNames('field', {
       'error': !!this.props.error
     });
 
@@ -29,7 +27,6 @@ var Select = React.createClass({
       <div className={wrapperClasses}>
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <div className={containerClasses}>
-
 
           <div className="input">{this.props.error}</div>
         </div>

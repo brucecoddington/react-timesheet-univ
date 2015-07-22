@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var classes = require('react-classes');
+let Router from 'react-router');
+import classNames from 'classnames';
 
-var TimeunitActions = require('../../actions/timeunit.actions');
-var DateUtils = require('../../util/date.utils');
-var SnackbarActions = require('../../actions/snackbar.actions');
+let TimeunitActions from '../../actions/timeunit.actions');
+let DateUtils from '../../util/date.utils');
+let SnackbarActions from '../../actions/snackbar.actions');
 
-var TimeunitRow = React.createClass({
+let TimeunitRow = React.createClass({
 
   propTypes: {
     timeunit: PropTypes.object.isRequired,
@@ -15,13 +15,13 @@ var TimeunitRow = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
+    Navigation,
     classes
   ],
 
-  showDetail: function showDetail () {
-    var timeunit = this.props.timeunit;
-    var timesheet = this.props.timesheet;
+  showDetail showDetail () {
+    let timeunit = this.props.timeunit;
+    let timesheet = this.props.timesheet;
 
     if (timeunit.deleted) {
       SnackbarActions.error('You cannot edit a deleted timeunit.');
@@ -32,26 +32,26 @@ var TimeunitRow = React.createClass({
       {user_id: timesheet.user_id, _id: timesheet._id, timeunit_id: timeunit._id});
   },
 
-  remove: function remove (e) {
+  remove remove (e) {
     e.stopPropagation();
     this.props.timeunit.deleted = true;
     TimeunitActions.remove(this.props.timesheet, this.props.timeunit);
   },
 
-  restore: function restore (e) {
+  restore restore (e) {
    e.stopPropagation();
    this.props.timeunit.deleted = false;
    TimeunitActions.restore(this.props.timesheet, this.props.timeunit);
   },
 
   render () {
-    var timeunit = this.props.timeunit;
+    let timeunit = this.props.timeunit;
 
-    var rowClasses = this.getClass('repeated-item fadeable-row', {
+    let rowClasses = classNames('repeated-item fadeable-row', {
       'faded': timeunit.deleted
     });
 
-    var buttonClasses = this.getClass('ui primary button small', {
+    let buttonClasses = classNames('ui primary button small', {
       'positive': timeunit.deleted,
       'negative': !timeunit.deleted
     });

@@ -1,6 +1,6 @@
 describe('Timeunit Row Component: ', function () {
 
-  var TimeunitRow,
+  let TimeunitRow,
     SnackbarActions,
     TimeunitActions,
     TimeunitStore,
@@ -10,18 +10,18 @@ describe('Timeunit Row Component: ', function () {
     spies = {},
     button;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    TimeunitStore = require('../../stores/timeunit.store');
-    TimeunitRow = require('./timeunit.row');
-    SnackbarActions = require('../../actions/snackbar.actions');
-    TimeunitActions = require('../../actions/timeunit.actions');
+    TimeunitStore from '../../stores/timeunit.store');
+    TimeunitRow from './timeunit.row');
+    SnackbarActions from '../../actions/snackbar.actions');
+    TimeunitActions from '../../actions/timeunit.actions');
   });
 
   it('should instantiate the TimeunitRow', function () {

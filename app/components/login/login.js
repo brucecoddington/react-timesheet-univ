@@ -1,36 +1,35 @@
 import React, {PropTypes} from 'react/addons';
 
-var LoginActions = require('../../actions/login.actions');
-var LoginStore = require('../../stores/login.store');
+import LoginActions from '../../actions/login.actions';
+import LoginStore from '../../stores/login.store';
+import AuthError from './auth.error';
 
-var AuthError = require('./auth.error');
-
-var LoginForm = React.createClass({
+const LoginForm = React.createClass({
 
   store: LoginStore,
 
-  getInitialState: function () {
+  getInitialState () {
     return this.store.getState();
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  validate: function (event) {
+  validate (event) {
     this.state.credentials[event.target.name] = event.target.value;
     this.setState(this.state.credentials);
   },
 
-  handleSubmit: function (event) {
+  handleSubmit (event) {
     event.preventDefault();
     LoginActions.login(this.state.credentials);
   },

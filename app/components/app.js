@@ -1,23 +1,23 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
+let Router from 'react-router');
+let RouteHandler = RouteHandler;
 
-var NavBar = require('./common/navigation/navbar');
-var SectionHeader = require('./common/section');
-var LoginStore = require('../stores/login.store');
+let NavBar from './common/navigation/navbar');
+let SectionHeader from './common/section');
+let LoginStore from '../stores/login.store');
 
-var Snackbar = require('./common/snackbar');
-var SnackbarStore = require('../stores/snackbar.store');
+let Snackbar from './common/snackbar');
+let SnackbarStore from '../stores/snackbar.store');
 
-var App = React.createClass({
+let App = React.createClass({
 
   statics: {
-    willTransitionTo: function (transition, params) {
+    willTransitionTo (transition, params) {
       return LoginStore.requireAuthenticatedUser(transition);
     }
   },
 
-  render : function () {
+  render  () {
 
     return (
       <div>

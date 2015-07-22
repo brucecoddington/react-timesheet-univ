@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react/addons';
-var TimeunitRow = require('./timeunit.row');
+let TimeunitRow from './timeunit.row');
 
-var TimeunitTable = React.createClass({
+let TimeunitTable = React.createClass({
 
   propTypes: {
     timeunits: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -9,9 +9,9 @@ var TimeunitTable = React.createClass({
   },
 
   render () {
-    var self = this;
+    let self = this;
 
-    var timeunitRows = this.props.timeunits.map(function (timeunit) {
+    let timeunitRows = this.props.timeunits.map(function (timeunit) {
       return (
         <TimeunitRow timeunit={timeunit}
           key={timeunit._id}

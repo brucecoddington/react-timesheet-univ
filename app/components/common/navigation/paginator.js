@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react/addons';
 
-var Paginator = React.createClass({
+const Paginator = React.createClass({
 
   propTypes: {
     max:        PropTypes.number.isRequired,
@@ -8,45 +8,45 @@ var Paginator = React.createClass({
     onChange:   PropTypes.func.isRequired
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.currentPage !== this.state.currentPage) {
       this.props.onChange(this.state.currentPage);
     }
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       maxVisible: 5
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       currentPage: 1,
       items: []
     };
   },
 
-  goTo: function(page) {
+  goTo(page) {
     this.setState({currentPage: page});
   },
 
-  onClickNext: function() {
-    var page = this.state.currentPage;
+  onClickNext() {
+    let page = this.state.currentPage;
 
     if (page < this.props.max) {
       this.goTo(page + 1);
     }
   },
 
-  onClickPrev: function() {
+  onClickPrev() {
     if (this.state.currentPage > 1) {
       this.goTo(this.state.currentPage - 1);
     }
   },
 
-  render: function() {
-    var className = this.props.className || '',
+  render() {
+    let className = this.props.className || '',
       p = this.props,
       s = this.state,
       skip = 0;
@@ -63,7 +63,7 @@ var Paginator = React.createClass({
       skip = s.currentPage - p.maxVisible;
     }
 
-    var iterator = Array.apply(null, Array(p.maxVisible))
+    let iterator = Array.apply(null, Array(p.maxVisible))
       .map(function(v, i) {
         return skip + i + 1;
       });

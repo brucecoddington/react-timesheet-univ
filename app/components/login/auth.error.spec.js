@@ -1,22 +1,22 @@
-var proxyquire = require('proxyquireify')(require);
-var mockComponent = require('../mock');var _ = require('lodash');
+let proxyquire from 'proxyquireify')(require);
+let mockComponent from '../mock');let _ from 'lodash');
 
 describe('Auth Error Component: ', function () {
 
-  var AuthError,
+  let AuthError,
     element,
     spies,
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    AuthError = require('./auth.error');
+    AuthError from './auth.error');
     element = TestUtils.renderIntoDocument(<AuthError authError="none" />);
   });
 

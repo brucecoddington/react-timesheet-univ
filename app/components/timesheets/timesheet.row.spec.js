@@ -1,6 +1,6 @@
 describe('Timesheet Row Component: ', function () {
 
-  var TimesheetRow,
+  let TimesheetRow,
     SnackbarActions,
     TimesheetActions,
     TimesheetStore,
@@ -9,18 +9,18 @@ describe('Timesheet Row Component: ', function () {
     spies = {},
     button;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    TimesheetStore = require('../../stores/timesheet.store');
-    TimesheetRow = require('./timesheet.row');
-    SnackbarActions = require('../../actions/snackbar.actions');
-    TimesheetActions = require('../../actions/timesheet.actions');
+    TimesheetStore from '../../stores/timesheet.store');
+    TimesheetRow from './timesheet.row');
+    SnackbarActions from '../../actions/snackbar.actions');
+    TimesheetActions from '../../actions/timesheet.actions');
   });
 
   it('should instantiate the TimesheetRow', function () {

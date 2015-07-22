@@ -1,51 +1,51 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation, State} from 'react-router';
 
-var EmployeeTable = require('./employee.table');
-var EmployeeActions = require('../../actions/employee.actions');
-var EmployeeStore = require('../../stores/employee.store');
-var Paginator = require('../common/navigation/paginator');
+import EmployeeTable from './employee.table';
+import EmployeeActions from '../../actions/employee.actions';
+import EmployeeStore from '../../stores/employee.store';
+import Paginator from '../common/navigation/paginator';
 
-var Employees = React.createClass({
+const Employees = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State
+    Navigation,
+    State
   ],
 
   store: EmployeeStore,
 
   requestEmployees: EmployeeActions.list,
 
-  getInitialState: function () {
+  getInitialState () {
     return this.store.getState();
   },
 
-  createNew: function createNew () {
+  createNew () {
     this.transitionTo('employees.create');
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.requestEmployees({page: 1});
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  onPageChange: function (page) {
+  onPageChange (page) {
     this.requestEmployees({page: page});
   },
 
   render () {
 
-    var numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
-    var pagesShown = Math.min(numPages, 5);
+    let numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
+    let pagesShown = Math.min(numPages, 5);
 
     return (
       <div>

@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var moment = require('moment');
+import Router, {Navigation, State} from 'react-router';
+import moment from 'moment';
 
-var DatePicker = require('../common/datepicker/datepicker');
-var TextInput = require('../common/form/text.input');
-var SaveButton = require('../common/buttons/save.button');
-var CancelButton = require('../common/buttons/cancel.button');
+import DatePicker from '../common/datepicker/datepicker';
+import TextInput from '../common/form/text.input';
+import SaveButton from '../common/buttons/save.button';
+import CancelButton from '../common/buttons/cancel.button';
 
-var TimesheetForm = React.createClass({
+let TimesheetForm = React.createClass({
 
   propTypes: {
     timesheet:          PropTypes.object,
@@ -20,18 +20,18 @@ var TimesheetForm = React.createClass({
   },
 
   mixins: [
-    Router.Navigation,
-    Router.State
+    Navigation,
+    State
   ],
 
-  onCancel: function (event) {
+  onCancel (event) {
     event.preventDefault();
     this.transitionTo('timesheets', {
       user_id: this.getParams().user_id
     });
   },
 
-  render : function () {
+  render () {
     return (
       <div className="ui centered grid">
         <div className="fourteen wide column">

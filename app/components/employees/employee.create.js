@@ -1,31 +1,31 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+import Router, {Navigation, State} from 'react-router';
 
-var EmployeeForm = require('./employee.form');
-var EmployeeActions = require('../../actions/employee.actions');
-var EmployeeMixin = require('../../mixins/employee.mixin');
+import EmployeeForm from './employee.form';
+import EmployeeActions from '../../actions/employee.actions';
+import EmployeeMixin from '../../mixins/employee.mixin';
 
-var EmployeeCreate = React.createClass({
+const EmployeeCreate = React.createClass({
 
   mixins : [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     EmployeeMixin
   ],
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Create',
       employee: {
@@ -35,7 +35,7 @@ var EmployeeCreate = React.createClass({
     };
   },
 
-  saveEmployee: function (event) {
+  saveEmployee (event) {
     event.preventDefault();
     this.validateAll();
 
@@ -45,7 +45,7 @@ var EmployeeCreate = React.createClass({
     }
   },
 
-  render : function () {
+  render  () {
     return (
       <EmployeeForm employee={this.state.employee}
         errors={this.state.errors}

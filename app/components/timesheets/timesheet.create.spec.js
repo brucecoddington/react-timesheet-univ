@@ -1,22 +1,22 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Timesheet Create Component: ', function () {
 
-  var TimesheetCreate,
+  let TimesheetCreate,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    TimesheetCreate = require('./timesheet.create');
-    TimesheetActions = require('../../actions/timesheet.actions');
+    TimesheetCreate from './timesheet.create');
+    TimesheetActions from '../../actions/timesheet.actions');
 
     element = TestUtils.renderIntoDocument(<TimesheetCreate />);
 

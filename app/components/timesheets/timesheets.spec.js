@@ -1,21 +1,21 @@
-var _ = require('lodash');
+let _ from 'lodash');
 
 describe('Timesheets Component: ', function () {
 
-  var Timesheets,
+  let Timesheets,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    Timesheets = require('./timesheets');
+    Timesheets from './timesheets');
     element = TestUtils.renderIntoDocument(<Timesheets />);
     spies.transitionTo = sinon.stub(element, 'transitionTo');
   });
@@ -30,7 +30,7 @@ describe('Timesheets Component: ', function () {
 
   describe('clicking the new employee button', function () {
     it('should transition to the create employee route', function () {
-      var button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
+      let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
       expect(spies.transitionTo).to.have.been.calledWith('timesheets.create');
     });

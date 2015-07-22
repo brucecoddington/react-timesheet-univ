@@ -1,20 +1,20 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
-var _ = require('lodash');
+import Router from 'react-router';
+import _ from 'lodash';
 
-var ProjectForm = require('./project.form');
-var ProjectActions = require('../../actions/project.actions');
-var ProjectMixin = require('../../mixins/project.mixin');
+import ProjectForm from './project.form';
+import ProjectActions from '../../actions/project.actions';
+import ProjectMixin from '../../mixins/project.mixin';
 
-var ProjectDetail = React.createClass({
+let ProjectDetail = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     ProjectMixin
   ],
 
-  saveProject: function (event) {
+  saveProject (event) {
     event.preventDefault();
     this.validateAll();
 
@@ -24,8 +24,8 @@ var ProjectDetail = React.createClass({
     }
   },
 
-  get: function (projectId) {
-    var project = this.store.getState().project;
+  get (projectId) {
+    let project = this.store.getState().project;
     if (_.isEmpty(project)) {
       ProjectActions.get(projectId);
     }
@@ -34,7 +34,7 @@ var ProjectDetail = React.createClass({
     }
   },
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Update',
       project: {},
@@ -42,20 +42,20 @@ var ProjectDetail = React.createClass({
     };
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.get(this.getParams()._id);
     this.store.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
   },
 
-  render : function () {
+  render  () {
     return (
       <ProjectForm project={this.state.project}
         errors={this.state.errors}

@@ -1,20 +1,20 @@
 import React, {PropTypes} from 'react/addons';
-var Router = require('react-router');
+let Router from 'react-router');
 
-var TimeunitForm = require('./timeunit.form');
-var TimeunitActions = require('../../actions/timeunit.actions');
-var TimeunitMixin = require('../../mixins/timeunit.mixin');
-var TimesheetActions = require('../../actions/timesheet.actions');
+let TimeunitForm from './timeunit.form');
+let TimeunitActions from '../../actions/timeunit.actions');
+let TimeunitMixin from '../../mixins/timeunit.mixin');
+let TimesheetActions from '../../actions/timesheet.actions');
 
-var TimeunitEdit = React.createClass({
+let TimeunitEdit = React.createClass({
 
   mixins: [
-    Router.Navigation,
-    Router.State,
+    Navigation,
+    State,
     TimeunitMixin
   ],
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       saveText: 'Update',
       timeunit: {},
@@ -22,31 +22,31 @@ var TimeunitEdit = React.createClass({
     };
   },
 
-  onChange: function () {
+  onChange () {
     this.setState(this.store.getState());
   },
 
-  onTimesheetChange: function () {
+  onTimesheetChange () {
     this.setState({timesheet: this.timesheetStore.getState().timesheet});
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     this.store.addChangeListener(this.onChange);
     this.timesheetStore.addChangeListener(this.onTimesheetChange);
   },
 
-  componentDidMount: function () {
+  componentDidMount () {
     this.getTimesheet(this.getParams()._id);
     this.get(this.getParams()._id, this.getParams().timeunit_id);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
     this.timesheetStore.removeChangeListener(this.onTimesheetChange);
   },
 
-  get: function (timesheetId, timeunitId) {
-    var timeunit = this.store.getState().timeunit;
+  get (timesheetId, timeunitId) {
+    let timeunit = this.store.getState().timeunit;
     if (!timeunit._id) {
       TimeunitActions.get({_id: timesheetId}, timeunitId);
     }
@@ -55,8 +55,8 @@ var TimeunitEdit = React.createClass({
     }
   },
 
-  getTimesheet: function (timesheetId) {
-    var timesheet = this.timesheetStore.getState().timesheet;
+  getTimesheet (timesheetId) {
+    let timesheet = this.timesheetStore.getState().timesheet;
     if (!timesheet._id) {
       TimesheetActions.get(timesheetId);
     }
@@ -65,7 +65,7 @@ var TimeunitEdit = React.createClass({
     }
   },
 
-  saveTimeunit: function (e) {
+  saveTimeunit (e) {
     e.preventDefault();
     this.validateAll();
 

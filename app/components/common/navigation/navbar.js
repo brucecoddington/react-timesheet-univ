@@ -1,24 +1,21 @@
 import React, {PropTypes} from 'react/addons';
-var classes = require('react-classes');
-var _ = require('lodash');
-var Router = require('react-router');
-var Link = Router.Link;
-var ActiveState = Router.State;
+import classNames from 'classnames';
+import _ from 'lodash';
+import Router, {Link, State, Navigation} from 'react-router';
 
-var LoginStore = require('../../../stores/login.store');
-var LoginActions = require('../../../actions/login.actions');
+import LoginStore from '../../../stores/login.store';
+import LoginActions from '../../../actions/login.actions';
 
-var NavBar = React.createClass({
+const NavBar = React.createClass({
 
   mixins: [
-    Router.State,
-    Router.Navigation,
-    classes
+    State,
+    Navigation
   ],
 
-  getInitialState: function () {
-    var loggedInUser = LoginStore.getState().user;
-    var userId = (loggedInUser !== null && loggedInUser._id) ? loggedInUser._id : 'all';
+  getInitialState () {
+    let loggedInUser = LoginStore.getState().user;
+    let userId = (loggedInUser !== null && loggedInUser._id) ? loggedInUser._id : 'all';
 
     return {
       title: 'Timesheetz',
@@ -28,38 +25,38 @@ var NavBar = React.createClass({
     };
   },
 
-  logout: function () {
+  logout () {
     LoginActions.logout();
   },
 
-  onLoginChange: function () {
-    var loginState = LoginStore.getState();
+  onLoginChange () {
+    let loginState = LoginStore.getState();
 
     this.setState({
       user: loginState.user
     });
   },
 
-  componentWillMount: function () {
+  componentWillMount () {
     LoginStore.addChangeListener(this.onLoginChange);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     LoginStore.removeChangeListener(this.onLoginChange);
   },
 
-  render : function () {
-    var activeRoutes = _.pluck(this.getRoutes(), 'name').join('.').split('.');
+  render  () {
+    let activeRoutes = _.pluck(this.getRoutes(), 'name').join('.').split('.');
 
-    var projectsClasses = this.getClass('item', {
+    let projectsClasses = classNames('item', {
       active: _.contains(activeRoutes, 'projects')
     });
 
-    var employeesClasses = this.getClass('item', {
+    let employeesClasses = classNames('item', {
       active: _.contains(activeRoutes, 'employees')
     });
 
-    var timesheetsClasses = this.getClass('item', {
+    let timesheetsClasses = classNames('item', {
       active: _.contains(activeRoutes, 'timesheets')
     });
 

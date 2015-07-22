@@ -1,6 +1,6 @@
 describe('Project Row Component: ', function () {
 
-  var ProjectRow,
+  let ProjectRow,
     SnackbarActions,
     ProjectActions,
     ProjectStore,
@@ -9,18 +9,18 @@ describe('Project Row Component: ', function () {
     spies = {},
     button;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(function () {
-    ProjectStore = require('../../stores/project.store');
-    ProjectRow = require('./project.row');
-    SnackbarActions = require('../../actions/snackbar.actions');
-    ProjectActions = require('../../actions/project.actions');
+    ProjectStore from '../../stores/project.store');
+    ProjectRow from './project.row');
+    SnackbarActions from '../../actions/snackbar.actions');
+    ProjectActions from '../../actions/project.actions');
   });
 
   it('should instantiate the ProjectRow', function () {

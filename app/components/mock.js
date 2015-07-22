@@ -1,4 +1,4 @@
-let React = require('react/addons');
+let React from 'react/addons');
 
 export default function (componentName, mockTagName) {
   return React.createClass({

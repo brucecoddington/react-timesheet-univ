@@ -1,17 +1,17 @@
-var proxyquire = require('proxyquireify')(require);
-var mockComponent  = require('./mock');
+let proxyquire from 'proxyquireify')(require);
+let mockComponent  from './mock');
 
 describe('App: ', function () {
 
-  var App,
+  let App,
     element,
     spies = {},
     proxies;
 
-  var React, TestUtils;
+  let React, TestUtils;
 
   beforeEach(function () {
-    React = require('react/addons');
+    React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
