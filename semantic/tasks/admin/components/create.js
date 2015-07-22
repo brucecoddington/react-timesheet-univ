@@ -111,8 +111,8 @@ module.exports = function(callback) {
             unrelatedNotes    : '',
             whitespace        : '\n\n',
             // npm
-            export            :  'module.exports = function(parameters) {\n  var _module = module;\n',
-            formExport        :  'module.exports = function(fields, parameters) {\n  var _module = module;\n',
+            export            :  'var _module = module;\nmodule.exports = function(parameters) {',
+            formExport        :  'var _module = module;\nmodule.exports = function(fields, parameters) {',
             settingsExport    :  'module.exports.settings =',
             settingsReference :  '_module.exports.settings',
             jQuery            :  'require("jquery")'
@@ -212,24 +212,24 @@ module.exports = function(callback) {
         return gulp.src(release.templates.package)
           .pipe(plumber())
           .pipe(flatten())
-          .pipe(jsonEditor(function(package) {
+          .pipe(jsonEditor(function(npm) {
             if(isJavascript) {
-              package.dependencies = {
+              npm.dependencies = {
                 jquery: 'x.x.x'
               };
-              package.main = 'index.js';
+              npm.main = 'index.js';
             }
-            package.name = packageName;
+            npm.name = packageName;
             if(version) {
-              package.version = version;
+              npm.version = version;
             }
-            package.title       = 'Semantic UI - ' + capitalizedComponent;
-            package.description = 'Single component release of ' + component;
-            package.repository  = {
+            npm.title       = 'Semantic UI - ' + capitalizedComponent;
+            npm.description = 'Single component release of ' + component;
+            npm.repository  = {
               type : 'git',
               url  : gitURL
             };
-            return package;
+            return npm;
           }))
           .pipe(gulp.dest(outputDirectory))
         ;

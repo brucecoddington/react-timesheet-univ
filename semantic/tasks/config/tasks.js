@@ -1,6 +1,7 @@
 var
-  config  = require('../user'),
-  release = require('./release')
+  console = require('better-console'),
+  config  = require('./user'),
+  release = require('./project/release')
 ;
 
 
@@ -76,14 +77,46 @@ module.exports = {
       url        : release.url
     },
 
+    plumber: {
+      less: {
+        errorHandler: function(error) {
+          var
+            regExp = {
+              variable : /@(\S.*?)\s/,
+              theme    : /themes[\/\\]+(.*?)[\/\\].*/,
+              element  : /[\/\\]([^\/\\*]*)\.overrides/
+            },
+            theme,
+            element
+          ;
+          if(error.filename.match(/theme.less/)) {
+            if(error.line == 5) {
+              element  = regExp.variable.exec(error.message)[1];
+              if(element) {
+                console.error('Missing theme.config value for ', element);
+              }
+              console.error('Most likely new UI was added in an update. You will need to add missing elements from theme.config.example');
+            }
+            if(error.line == 46) {
+              element = regExp.element.exec(error.message)[1];
+              theme   = regExp.theme.exec(error.message)[1];
+              console.error(theme + ' is not an available theme for ' + element);
+            }
+          }
+          else {
+            console.log(error);
+          }
+          this.emit('end');
+        }
+      }
+    },
+
     /* What Browsers to Prefix */
     prefix: {
       browsers: [
         'last 2 version',
         '> 1%',
         'opera 12.1',
-        'safari 6',
-        'ie 9',
         'bb 10',
         'android 4'
       ]
@@ -100,6 +133,7 @@ module.exports = {
     /* Minified CSS Concat */
     minify: {
       processImport       : false,
+      restructuring       : false,
       keepSpecialComments : 1
     },
 
@@ -112,6 +146,7 @@ module.exports = {
     /* Minified Concat CSS Settings */
     concatMinify: {
       processImport       : false,
+      restructuring       : false,
       keepSpecialComments : false
     },
 
