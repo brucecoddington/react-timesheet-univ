@@ -8,7 +8,7 @@ var
   gulpif =      require('gulp-if'),
   jade =        require('gulp-jade'),
   jshint =      require('gulp-jshint'),
-  sass =        require('gulp-sass'),
+  less =        require('gulp-less'),
   livereload =  require('gulp-livereload'),
   cssmin =      require('gulp-minify-css'),
   nodemon =     require('gulp-nodemon'),
@@ -54,14 +54,16 @@ gulp.task('debug', shell.task([pkg.scripts.debug]));
 
 // setup the global watches
 gulp.task('watch:dev', function () {
-  gulp.watch(['./assets/scss/**/*.scss', './app/**/*.scss'], ['concat:css']);
+  gulp.watch(['./assets/less/**/*.scss', './app/**/*.less'], ['concat:css']);
+  gulp.watch(['./semantic/src/**/*'], ['build:css']);
   gulp.watch(['./app/index.jade'], ['jade:dev']);
   gulp.start('dev');
 });
 
 gulp.task('watch:prod', function () {
-  gulp.watch(['./assets/scss/**/*.scss', './app/**/*.scss'], ['concat:css']);
+  gulp.watch(['./assets/less/**/*.less', './app/**/*.less'], ['concat:css']);
   gulp.watch(['./dist/assets/js/app.js'], ['uglify']);
+  gulp.watch(['./semantic/src/**/*'], ['build:css']);
   gulp.watch(['./app/index.jade'], ['jade:prod']);
   gulp.start('prod');
 });
@@ -116,9 +118,6 @@ gulp.task('copy:assets', ['clean:assets'], function () {
   var fa = gulp.src('./node_modules/font-awesome/fonts/**')
     .pipe(gulp.dest('./dist/assets/font/font-awesome'));
 
-  var slick = gulp.src('./node_modules/slick-carousel/slick/fonts/**')
-    .pipe(gulp.dest('./dist/assets/font/slick'));
-
   var img = gulp.src('./assets/img/**')
     .pipe(gulp.dest('./dist/assets/img'));
 
@@ -130,39 +129,32 @@ gulp.task('clean:css', function (cb) {
   return del(['./dist/assets/css'], cb);
 });
 
-// Creates the file that includes the import for components styles
-gulp.task('scss_imports', function (cb) {
-  return gulp.src('./app/**/*.scss')
-    .pipe(createVars(__dirname + '/assets/scss'))
-    .pipe(gulp.dest('./assets/scss'))
-    .on('error', gutil.log.bind(gutil, 'Error creating components.scss'));
-});
-
-gulp.task('scss', ['clean:css', 'scss_imports'], function () {
-  return gulp.src('./assets/scss/style.scss')
+gulp.task('less', ['clean:css'], function () {
+  return gulp.src(client('/less/style.less'))
     .pipe(plumber())
-    .pipe(sass())
-    .pipe(gulp.dest('./dist/assets/css'))
+    .pipe(less({paths: [client('/less')]}))
+    .pipe(gulp.dest(dist('/css')))
     .on('error', gutil.log.bind(gutil, 'Error compiling Less'));
 });
 
-// Compile and concatenate scss into css
-gulp.task('concat:css', ['scss'], function () {
+
+// Compile and concatenate less into css
+gulp.task('concat:css', ['less'], function () {
   return gulp.src([
-      './node_modules/react-grid-layout/css/styles.css',
-      './dist/assets/css/style.css'
+      './node_modules/nprogress/nprogress.css',
+      './semantic/dist/semantic.css',
+      dist('/css/style.css')
     ])
-    .pipe(plumber())
     .pipe(concat('style.css'))
-    .pipe(gulp.dest('./dist/assets/css'))
+    .pipe(gulp.dest(dist('/css')))
     .pipe(cssmin())
     .pipe(rename({extname: '.min.css'}))
-    .pipe(gulp.dest('./dist/assets/css'))
+    .pipe(gulp.dest(dist('/css')))
     .pipe(livereload())
     .on('error', gutil.log.bind(gutil, 'Error concatenating CSS'));
 });
 
-gulp.task('build:css', ['scss'], function () {
+gulp.task('build:css', ['semantic:build', 'less'], function () {
   return gulp.start('concat:css');
 });
 
@@ -181,3 +173,6 @@ gulp.task('uglify', ['webpack'], function () {
     .pipe(livereload())
     .on('error', gutil.log.bind(gutil, 'Error during minification.'));
 });
+
+gulp.task('semantic:build', require('./semantic/tasks/build'));
+gulp.task('semantic:watch', require('./semantic/tasks/watch'));

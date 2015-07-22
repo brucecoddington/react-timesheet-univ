@@ -7,12 +7,13 @@
 * [Hapi](/http://hapijs.com/)
 * [React](http://facebook.github.io/react/)
 * [Flux](http://facebook.github.io/flux/)
+* [Babel](http://)
 * [Webpack](http://webpack.github.io/)
 * [Mocha](http://mochajs.org/)
 * [karma](http://karma-runner.github.io/0.8/index.html)
 * [chai](http://chaijs.com/)
 * [sinon](http://sinonjs.org/)
-* [Foundation](http://foundation.zurb.com/)
+* [SemanticUI](http://semantic-ui.com/)
 * [Less](http://lesscss.org/)
 * [Jade](http://jade-lang.com/)
 
@@ -29,6 +30,8 @@
 
 ## Gulp Tasks ##
 ### These are the Gulp.js tasks for your dev process: ###
+
+* `gulp init` - Runs the Semantic UI build.
 
 * `gulp watch:dev` - Watches development files and runs builds when needed.
 
