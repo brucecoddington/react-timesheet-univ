@@ -1,0 +1,19 @@
+@mixin scroll-fade-in($time: 1s, $ease: .25s) {
+  opacity: 0;
+  transition: opacity $time ease $ease;
+}
+
+@mixin scroll-fade-in-active {
+  opacity: 100;
+}
+
+@mixin scroll-fade-in-offset($direction: left, $offset: -10px, $time: 1s, $ease: .25s) {
+  margin-#{$direction}: $offset;
+  opacity: 0;
+  transition: all $time ease $ease;
+}
+
+@mixin scroll-fade-in-offset-active($direction: left, $offset: 0) {
+  margin-#{$direction}: $offset;
+  opacity: 100;
+}

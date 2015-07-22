@@ -1,0 +1,95 @@
+$padding-base: 1em;
+$padding-soft: 2em;
+$padding-hard: .5em;
+
+$mobileBreakpoint            : 320px;
+$tabletBreakpoint            : 768px;
+$computerBreakpoint          : 992px;
+$largeMonitorBreakpoint      : 1400px;
+$widescreenMonitorBreakpoint : 1920px;
+
+
+// navbar
+$navbar-body-bg: $body-bg;
+$navbar-body-bg-inverse: darken($body-font-color, 10%);
+$navbar-text-color: $body-font-color;
+$navbar-text-color-inverse: $body-bg;
+$affix-body-bg: $navbar-body-bg-inverse;
+
+// about
+$about-body-bg: $body-bg;
+$about-body-bg-inverse: $body-font-color;
+$about-text-color: $body-font-color;
+$about-text-color-inverse: $body-bg;
+
+// clients
+$clients-body-bg: $body-bg;
+$clients-body-bg-inverse: $warning-color;
+$clients-text-color: $body-font-color;
+$clients-text-color-inverse: $body-bg;
+
+// contact
+$contact-body-bg: $body-bg;
+$contact-body-bg-inverse: $body-font-color;
+$contact-text-color: $body-font-color;
+$contact-text-color-inverse: $body-bg;
+
+// intro
+$intro-body-bg: $body-bg;
+$intro-body-bg-inverse: $body-font-color;
+$intro-text-color: $body-font-color;
+$intro-text-color-inverse: $body-bg;
+
+// portfolio
+$portfolio-body-bg: $body-bg;
+$portfolio-body-bg-inverse: $body-font-color;
+$portfolio-text-color: $body-font-color;
+$portfolio-text-color-inverse: $body-bg;
+
+// pricing
+$pricing-body-bg: $body-bg;
+$pricing-body-bg-inverse: $body-font-color;
+$pricing-text-color: $body-font-color;
+$pricing-text-color-inverse: $body-bg;
+
+// services
+$services-body-bg: $body-bg;
+$services-body-bg-inverse: $body-font-color;
+$services-text-color: $body-font-color;
+$services-text-color-inverse: $body-bg;
+
+// team
+$team-body-bg: $body-bg;
+$team-body-bg-inverse: $body-font-color;
+$team-text-color: $body-font-color;
+$team-text-color-inverse: $body-bg;
+
+// testimonials
+$testimonials-body-bg: $body-bg;
+$testimonials-body-bg-inverse: darken($body-font-color, 10%);
+$testimonials-text-color: $body-font-color;
+$testimonials-text-color-inverse: $body-bg;
+
+// timers
+$timers-body-bg: $body-bg;
+$timers-body-bg-inverse: $body-font-color;
+$timers-text-color: $body-font-color;
+$timers-text-color-inverse: $body-bg;
+
+// welcome
+$welcome-body-bg: #fff;
+$welcome-body-bg-inverse: $body-font-color;
+$welcome-text-color: $body-font-color;
+$welcome-text-color-inverse: $body-bg;
+
+// navbar
+$separator-body-bg: $body-bg;
+$separator-body-bg-inverse: $body-font-color;
+$separator-text-color: $body-font-color;
+$separator-text-color-inverse: $body-bg;
+
+// footer
+$footer-top-bg: $alert-color;
+$footer-bottom-bg: darken($body-font-color, 10%);
+$footer-text-color: $body-font-color;
+$footer-text-color-inverse: $body-bg;

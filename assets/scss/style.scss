@@ -1,0 +1,29 @@
+// import site variables
+@import "foundation.scss";
+
+// FontAwesome
+@import "font-awesome.scss";
+
+// Libs and their overrides
+// --------------------------------------------------
+
+// scroll watch transition mixins
+@import "scroll-watch.scss";
+
+// Slick Carousel
+@import "slick.scss";
+
+// NProgress
+@import "nprogress.scss";
+
+// Application
+// --------------------------------------------------
+@import "app.scss";
+@import "buttons.scss";
+@import "responsive.scss";
+
+// util
+@import "util.scss";
+
+// component scss imports compiled by task
+@import "components.scss";

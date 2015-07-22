@@ -1,0 +1,90 @@
+.button {
+  background:transparent;
+  border-radius:0;
+  border:0;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+  line-height: 40px;
+  padding: 0 40px;
+  font-size: 12px;
+  letter-spacing: .2em;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  outline: 1px solid transparent;
+  -webkit-transition: all .5s ease .25s;
+  transition: all .5s ease .25s;
+  display: inline-block;
+  color: $body-font-color-inverse;
+
+  &:hover {
+    border-color: $body-font-color-inverse;
+  }
+
+  &:after,
+  &:before {
+    -webkit-transition: all .2s ease 0s;
+    transition: all .2s ease 0s;
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    top: 0;
+    background: $body-bg;
+  }
+
+  &:before {
+    left: -8px;
+  }
+
+  &:hover:before {
+    left: 0;
+  }
+
+  &:after {
+    right: -8px;
+  }
+
+  &:hover:after {
+    right: 0;
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle.btn-default {
+    color: #333;
+    background-color: $body-bg;
+    border-color: lighten($body-bg, 20%);
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  &:focus,
+  &:active:focus,
+  &.active:focus {
+    outline: 0;
+  }
+
+  .button.black{
+    color: $body-font-color;
+  }
+
+  .button.black:after, .button.black:before {
+    background: $body-font-color;
+  }
+
+  .button.black:hover {
+    color: $body-font-color-inverse;
+    background-color: $body-font-color;
+    border-color: $body-font-color;
+  }
+}

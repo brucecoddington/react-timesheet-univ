@@ -1,0 +1,9 @@
+{
+  "exec": "babel-node --use_strict --stage 2 --ignore '' -- ",
+  "ignore": [
+    "node_modules/**",
+    "gulpfile.js",
+    "karma.config.js",
+    "api/data/**"
+  ]
+}
