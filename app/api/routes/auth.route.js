@@ -1,12 +1,10 @@
-'use strict';
-
-let loginHandler = require('../handlers/login'),
-  logoutHandler = require('../handlers/logout');
+import loginHandler from '../handlers/login';
+import logoutHandler from '../handlers/logout';
 
 exports.register = function (server, options, next) {
 
-  let login = '/api/login';
-  let logout = '/api/logout';
+  const login = '/api/login';
+  const logout = '/api/logout';
 
   server.route([
     {method: 'POST', path: login, config: {handler: loginHandler.login, auth: false}},

@@ -1,7 +1,11 @@
 import React, {Component} from 'react/addons';
-import {RouteHandler} from 'react-router';
+import {RouteHandler, State, Navigation} from 'react-router';
 
 const Index = React.createClass({
+	mixins: [
+    State,
+    Navigation
+  ],
 
 	render () {
 		return <RouteHandler />;

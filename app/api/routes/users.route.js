@@ -1,17 +1,15 @@
-'use strict';
-
-var usersController = require('../controllers/users.controller'),
-  timesheetsController = require('../controllers/timesheets.controller'),
-  timeunitsController = require('../controllers/timeunits.controller');
+import usersController from '../controllers/users.controller';
+import timesheetsController from '../controllers/timesheets.controller';
+import timeunitsController from '../controllers/timeunits.controller';
 
 exports.register = function (server, options, next) {
 
-  var users =         '/users';
-  var userId =        '/users/{userId}';
-  var timesheets =    '/users/{userId}/timesheets';
-  var timesheetId =   '/users/{userId}/timesheets/{timesheetId}';
-  var timeunits =     '/users/{userId}/timesheets/{timesheetId}/timeunits';
-  var timeunitId =    '/users/{userId}/timesheets/{timesheetId}/timeunits/{timeunitId}';
+  const users =         '/users';
+  const userId =        '/users/{userId}';
+  const timesheets =    '/users/{userId}/timesheets';
+  const timesheetId =   '/users/{userId}/timesheets/{timesheetId}';
+  const timeunits =     '/users/{userId}/timesheets/{timesheetId}/timeunits';
+  const timeunitId =    '/users/{userId}/timesheets/{timesheetId}/timeunits/{timeunitId}';
 
   server.route([
     {method: 'GET',     path: users, handler: usersController.index},

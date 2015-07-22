@@ -1,6 +1,4 @@
-'use strict';
-
-let Path = require('path');
+import Path from 'path';
 
 exports.register = function (server, options, next) {
 

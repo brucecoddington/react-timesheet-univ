@@ -1,11 +1,9 @@
-'use strict';
-
-var projectsController = require('../controllers/projects.controller');
+import projectsController from '../controllers/projects.controller';
 
 exports.register = function (server, options, next) {
 
-  var projects =  '/projects';
-  var projectId = '/projects/{projectId}';
+  const projects =  '/projects';
+  const projectId = '/projects/{projectId}';
 
   server.route([
     {method: 'GET',     path: projects, handler: projectsController.index},

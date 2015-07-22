@@ -54,7 +54,7 @@ server.register(cookie, (err) => {
 });
 
 // seed the database
-// require('../data').init();
+require('../data').init();
 
 // start em up
 server.start();

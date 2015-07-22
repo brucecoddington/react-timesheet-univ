@@ -1,6 +1,6 @@
 let React = require('react/addons');
 
-module.exports = function (componentName, mockTagName) {
+export default function (componentName, mockTagName) {
   return React.createClass({
     displayName: componentName || 'MockComponent',
 

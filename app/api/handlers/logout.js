@@ -1,7 +1,5 @@
-'use strict';
-
-module.exports = {
-  logout: function (request, reply) {
+export default {
+  logout (request, reply) {
     request.auth.session.clear();
     return reply();
   }

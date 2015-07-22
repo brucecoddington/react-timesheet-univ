@@ -1,16 +1,16 @@
-let Q = require('q');
-let Boom = require('boom');
-let Bcrypt = require('bcrypt');
-let db = require('../services/db');
-let props = require('../../properties');
+import Q from 'q';
+import Boom from 'boom';
+import Bcrypt from 'bcrypt';
+import db from '../services/db';
+import props from '../../properties';
 
-module.exports = {
+export default {
   index: sendCurrentUser,
   login: login
 };
 
 function sendCurrentUser (request, reply) {
-  request.server.app.cache.get(props.session.secret, function (err, auth) {
+  request.server.app.cache.get(props.session.secret, (err, auth) => {
     let currentUser = auth ? auth.user : null;
     reply(sanitize(currentUser));
   });
@@ -25,11 +25,11 @@ function login (request, reply) {
   }
 
   db.findOne('users', {username: request.payload.username})
-    .then(function (user) {
+    .then((user) => {
       authenticatedUser = user;
       return validate(request.payload.password, user.password);
     })
-    .then(function (isValid) {
+    .then((isValid) => {
 
       if (!isValid) {
         Q.reject(Boom.unauthorized('Invalid username or password'));
@@ -41,7 +41,7 @@ function login (request, reply) {
       request.auth.session.set({ sid: props.session.secret });
       return reply(sanitize(authenticatedUser));
     })
-    .fail(function (err) {
+    .fail((err) => {
       reply(Boom.unauthorized(err.message)).code(401);
     });
 }

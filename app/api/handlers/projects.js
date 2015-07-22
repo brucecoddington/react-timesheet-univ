@@ -1,8 +1,8 @@
-let db = require('../services/db'),
-  Boom = require('boom');
+import db from '../services/db');
+import Boom from 'boom';
 
-module.exports = {
-  index: function (request, reply) {
+export default {
+  index (request, reply) {
 
     let query = request.query;
 
@@ -10,64 +10,64 @@ module.exports = {
 
       db.page('projects', query)
         .then(reply)
-        .fail(function (err) {
+        .fail((err) => {
           reply(Boom.badImplementation(err));
         });
     } else {
 
       db.find('projects', query)
-        .then(function (projects) {
+        .then((projects) => {
           reply(projects);
         })
-        .fail(function (err) {
+        .fail((err) => {
           reply(Boom.badImplementation(err));
         });
     }
   },
 
-  create: function (request, reply) {
+  create (request, reply) {
 
     db.insert('projects', request.payload)
-      .then(function (project) {
+      .then((project) => {
         reply(project);
       })
-      .fail(function (err) {
+      .fail((err) => {
         reply(Boom.badImplementation(err));
       });
   },
 
-  show: function (request, reply) {
+  show (request, reply) {
     let id = request.params.projectId;
 
     db.findOne('projects', {_id: id})
-      .then(function (project) {
+      .then((project) => {
         reply(project);
       })
-      .fail(function (err) {
+      .fail((err) => {
         reply(Boom.badImplementation(err));
       });
   },
 
-  update: function (request, reply) {
+  update (request, reply) {
     let id = request.params.projectId;
 
     db.update('projects', {_id: id}, request.payload)
-      .then(function (project) {
+      .then((project) => {
         reply(project);
       })
-      .fail(function (err) {
+      .fail((err) => {
         reply(Boom.badImplementation(err));
       });
   },
 
-  destroy: function (request, reply) {
+  destroy (request, reply) {
     let id = request.params.projectId;
 
     db.remove('projects', {_id: id})
       .then(() => {
         reply().code(200);
       })
-      .fail(function (err) {
+      .fail((err) => {
         reply(Boom.badImplementation(err));
       });
   }

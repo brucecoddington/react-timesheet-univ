@@ -1,6 +1,6 @@
-var dispatcher = require('../flux/flux.dispatcher');
+import dispatcher from '../flux/flux.dispatcher';
 
-var TimesheetActions = {
+const TimesheetActions = {
 
   LIST: 'LIST_TIMESHEETS',
   GET: 'GET_TIMESHEET',
@@ -9,42 +9,42 @@ var TimesheetActions = {
   DELETE: 'DELETE_TIMESHEET',
   RESTORE: 'RESTORE_TIMESHEET',
 
-  list: function (query) {
+  list (query) {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.LIST,
       query: query
     });
   },
 
-  get: function (id) {
+  get (id) {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.GET,
       timesheet: {_id: id}
     });
   },
 
-  create: function (timesheet) {
+  create (timesheet) {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.CREATE,
       timesheet: timesheet
     });
   },
 
-  update: function (timesheet) {
+  update (timesheet) {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.UPDATE,
       timesheet: timesheet
     });
   },
 
-  remove: function (timesheet) {
+  remove (timesheet) {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.DELETE,
       timesheet: timesheet
     });
   },
 
-  restore: function (timesheet) {
+  restore (timesheet) {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.RESTORE,
       timesheet: timesheet
@@ -52,4 +52,4 @@ var TimesheetActions = {
   }
 };
 
-module.exports = TimesheetActions;
+export default TimesheetActions;

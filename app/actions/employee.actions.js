@@ -1,6 +1,6 @@
-var dispatcher = require('../flux/flux.dispatcher');
+import dispatcher from '../flux/flux.dispatcher';
 
-var EmployeeActions = {
+const EmployeeActions = {
 
   LIST: 'LIST_EMPLOYEES',
   GET: 'GET_EMPLOYEE',
@@ -9,42 +9,42 @@ var EmployeeActions = {
   DELETE: 'DELETE_EMPLOYEE',
   RESTORE: 'RESTORE_EMPLOYEE',
 
-  list: function (query) {
+  list (query) {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.LIST,
       query: query
     });
   },
 
-  get: function (id) {
+  get (id) {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.GET,
       employee: {_id: id}
     });
   },
 
-  create: function (employee) {
+  create (employee) {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.CREATE,
       employee: employee
     });
   },
 
-  update: function (employee) {
+  update (employee) {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.UPDATE,
       employee: employee
     });
   },
 
-  remove: function (employee) {
+  remove (employee) {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.DELETE,
       employee: employee
     });
   },
 
-  restore: function (employee) {
+  restore (employee) {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.RESTORE,
       employee: employee
@@ -52,4 +52,4 @@ var EmployeeActions = {
   }
 };
 
-module.exports = EmployeeActions;
+export default EmployeeActions;

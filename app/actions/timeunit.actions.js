@@ -1,6 +1,6 @@
-var dispatcher = require('../flux/flux.dispatcher');
+import dispatcher from '../flux/flux.dispatcher';
 
-var TimeunitActions = {
+const TimeunitActions = {
 
   LIST: 'LIST_TIMEUNITS',
   GET: 'GET_TIMEUNIT',
@@ -9,7 +9,7 @@ var TimeunitActions = {
   DELETE: 'DELETE_TIMEUNIT',
   RESTORE: 'RESTORE_TIMEUNIT',
 
-  list: function (timesheet, query) {
+  list (timesheet, query) {
     dispatcher.handleViewAction({
       actionType: TimeunitActions.LIST,
       timesheet: timesheet,
@@ -17,7 +17,7 @@ var TimeunitActions = {
     });
   },
 
-  get: function (timesheet, id) {
+  get (timesheet, id) {
     dispatcher.handleViewAction({
       actionType: TimeunitActions.GET,
       timeunit: {_id: id},
@@ -25,7 +25,7 @@ var TimeunitActions = {
     });
   },
 
-  create: function (timesheet, timeunit) {
+  create (timesheet, timeunit) {
     dispatcher.handleViewAction({
       actionType: TimeunitActions.CREATE,
       timeunit: timeunit,
@@ -33,7 +33,7 @@ var TimeunitActions = {
     });
   },
 
-  update: function (timesheet, timeunit) {
+  update (timesheet, timeunit) {
     dispatcher.handleViewAction({
       actionType: TimeunitActions.UPDATE,
       timeunit: timeunit,
@@ -41,7 +41,7 @@ var TimeunitActions = {
     });
   },
 
-  remove: function (timesheet, timeunit) {
+  remove (timesheet, timeunit) {
     dispatcher.handleViewAction({
       actionType: TimeunitActions.DELETE,
       timeunit: timeunit,
@@ -49,7 +49,7 @@ var TimeunitActions = {
     });
   },
 
-  restore: function (timesheet, timeunit) {
+  restore (timesheet, timeunit) {
     dispatcher.handleViewAction({
       actionType: TimeunitActions.RESTORE,
       timeunit: timeunit,
@@ -58,4 +58,4 @@ var TimeunitActions = {
   }
 };
 
-module.exports = TimeunitActions;
+export default TimeunitActions;

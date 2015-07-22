@@ -1,29 +1,29 @@
-var dispatcher = require('../flux/flux.dispatcher');
+import dispatcher from '../flux/flux.dispatcher';
 
-var LoginActions = {
+const LoginActions = {
 
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   CURRENT_USER: 'CURRENT_USER',
 
-  currentUser: function () {
+  currentUser () {
     dispatcher.handleViewAction({
       actionType: LoginActions.CURRENT_USER
     });
   },
 
-  login: function (credentials) {
+  login (credentials) {
     dispatcher.handleViewAction({
       actionType: LoginActions.LOGIN,
       credentials: credentials
     });
   },
 
-  logout: function () {
+  logout () {
     dispatcher.handleViewAction({
       actionType: LoginActions.LOGOUT
     });
   }
 };
 
-module.exports = LoginActions;
+export default LoginActions;

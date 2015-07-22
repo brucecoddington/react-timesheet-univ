@@ -1,9 +1,9 @@
-let db = require('../services/db'),
-  _ = require('lodash'),
-  Boom = require('boom');
+import db from '../services/db';
+import _ from 'lodash';
+import Boom from 'boom';
 
-module.exports = {
-  index: function (request, reply) {
+export default {
+  index (request, reply) {
     let timesheetId = request.params.timesheetId;
     let query = _.extend({timesheet_id: timesheetId}, request.query);
 
@@ -11,7 +11,7 @@ module.exports = {
       .then(reply);
   },
 
-  create: function (request, reply) {
+  create (request, reply) {
 
     db.insert('timeunits', request.payload)
       .then(reply)
@@ -20,7 +20,7 @@ module.exports = {
       });
   },
 
-  show: function (request, reply) {
+  show (request, reply) {
     let id = request.params.timeunitId;
 
     db.findOne('timeunits', {_id: id})
@@ -30,7 +30,7 @@ module.exports = {
       });
   },
 
-  update: function (request, reply) {
+  update (request, reply) {
     let id = request.params.timeunitId;
 
     db.update('timeunits', {_id: id}, request.payload)
@@ -40,7 +40,7 @@ module.exports = {
       });
   },
 
-  destroy: function (request, reply) {
+  destroy (request, reply) {
     let id = request.params.timeunitId;
 
     db.remove('timeunits', {_id: id})
