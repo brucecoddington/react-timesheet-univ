@@ -19,40 +19,37 @@ class SnackbarStore extends Store {
   }
 
   info (payload) {
-    let self = this;
 
-    return new Promise((resolve) => {
-      self.setState({
+    return new Promise(resolve => {
+      this.setState({
         message: payload.action.message,
         messageType: payload.action.actionType
       });
-      self.reset();
+      this.reset();
       resolve();
     });
   }
 
   error (payload) {
-    let self = this;
 
-    return new Promise((resolve) => {
-      self.setState({
+    return new Promise(resolve => {
+      this.setState({
         message: payload.action.message,
         messageType: payload.action.actionType
       });
-      self.reset();
+      this.reset();
       resolve();
     });
   }
 
   success (payload) {
-    let self = this;
 
-    return new Promise((resolve) => {
-      self.setState({
+    return new Promise(resolve => {
+      this.setState({
         message: payload.action.message,
         messageType: payload.action.actionType
       });
-      self.reset();
+      this.reset();
       resolve();
     });
   }
@@ -71,13 +68,12 @@ class SnackbarStore extends Store {
   }
 
   hide () {
-    let self = this;
 
-    return new Promise((resolve) => {
-      window.clearTimeout(self.currentTimeout);
-      self.currentTimeout = null;
+    return new Promise(resolve => {
+      window.clearTimeout(this.currentTimeout);
+      this.currentTimeout = null;
 
-      self.setState({
+      this.setState({
         message: ''
       });
 

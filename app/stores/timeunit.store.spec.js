@@ -1,12 +1,12 @@
-describe('Timeunit Store: ', function () {
+describe('Timeunit Store: ', () => {
 
   let TimeunitStore;
 
-  beforeEach(function () {
+  beforeEach(() => {
     TimeunitStore = require('./timeunit.store');
   });
 
-  it('should instantiate the TimeunitStore', function () {
+  it('should instantiate the TimeunitStore', () => {
     expect(TimeunitStore).to.be.defined;
   });
 });

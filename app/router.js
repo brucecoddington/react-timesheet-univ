@@ -13,7 +13,7 @@ export default class Router {
 
   run(cb) {
     // start the router
-    this.router.run(function (Handler, state) {
+    this.router.run((Handler, state) => {
       React.render(<Handler />, document.getElementById('app'), cb);
     });
   }

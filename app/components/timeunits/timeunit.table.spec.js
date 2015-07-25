@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Timeunit Table Component: ', function () {
+describe('Timeunit Table Component: ', () => {
 
   let TimeunitTable,
     TimeunitStore,
@@ -11,13 +11,13 @@ describe('Timeunit Table Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
     TimeunitStore from '../../stores/timeunit.store');
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     timeunits = [{}, {}];
 
     TimeunitTable from './timeunit.table');
@@ -26,7 +26,7 @@ describe('Timeunit Table Component: ', function () {
     );
   });
 
-  it('should instantiate the TimeunitTable', function () {
+  it('should instantiate the TimeunitTable', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 });

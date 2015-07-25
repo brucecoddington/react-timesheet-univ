@@ -2,7 +2,7 @@ let _ from 'lodash');
 let proxyquire from 'proxyquireify')(require);
 let mockComponent from '../mock');
 
-describe('Project Detail Component: ', function () {
+describe('Project Detail Component: ', () => {
 
   let ProjectDetail,
     element,
@@ -11,12 +11,12 @@ describe('Project Detail Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     proxies = {
       './project.form': mockComponent('ProjectForm'),
       '../../actions/project.actions': {
@@ -39,61 +39,61 @@ describe('Project Detail Component: ', function () {
     spies.validateAll = sinon.stub(element, 'validateAll');
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.transitionTo.restore();
     spies.validateAll.restore();
   });
 
-  it('should instantiate the ProjectDetail', function () {
+  it('should instantiate the ProjectDetail', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('getting the project', function () {
-    describe('and the project exists on the store state', function () {
-      beforeEach(function () {
+  describe('getting the project', () => {
+    describe('and the project exists on the store state', () => {
+      beforeEach(() => {
         element.store.state.project = {_id: 'abc123'};
         element.get();
       });
 
-      it('should set the project on the component state', function () {
+      it('should set the project on the component state', () => {
         expect(element.state.project._id).to.equal('abc123');
       });
     });
 
-    describe('and the project does NOT exist in the stored state', function () {
-      beforeEach(function () {
+    describe('and the project does NOT exist in the stored state', () => {
+      beforeEach(() => {
         element.get();
       });
 
-      it('should fire a get project action', function () {
+      it('should fire a get project action', () => {
         expect(proxies['../../actions/project.actions'].get).to.have.been.calledWith('abc123');
       });
     });
   });
 
-  describe('saving an project', function () {
-    beforeEach(function () {
+  describe('saving an project', () => {
+    beforeEach(() => {
       element.saveProject({preventDefault: _.noop});
     });
 
-    it('should validate the entire project', function () {
+    it('should validate the entire project', () => {
       expect(spies.validateAll).to.have.been.called;
     });
 
-    describe('and the project passes validation', function () {
-      beforeEach(function () {
+    describe('and the project passes validation', () => {
+      beforeEach(() => {
         spies.hasErrors = sinon.stub(element, 'hasErrors').returns(false);
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.hasErrors.restore();
       });
 
-      it('should fire an update action', function () {
+      it('should fire an update action', () => {
         expect(proxies['../../actions/project.actions'].update).to.have.been.called;
       });
 
-      it('should transition back to the project list', function () { 
+      it('should transition back to the project list', () => { 
         expect(spies.transitionTo).to.have.been.calledWith('projects');
       });
     });

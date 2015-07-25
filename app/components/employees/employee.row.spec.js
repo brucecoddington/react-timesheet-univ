@@ -1,4 +1,4 @@
-describe('Employee Row Component: ', function () {
+describe('Employee Row Component: ', () => {
 
   let EmployeeRow,
     SnackbarActions,
@@ -11,26 +11,26 @@ describe('Employee Row Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     EmployeeStore from '../../stores/employee.store');
     EmployeeRow from './employee.row');
     SnackbarActions from '../../actions/snackbar.actions');
     EmployeeActions from '../../actions/employee.actions');
   });
 
-  it('should instantiate the EmployeeRow', function () {
+  it('should instantiate the EmployeeRow', () => {
     element = TestUtils.renderIntoDocument(<EmployeeRow employee={{_id: 1}} store={EmployeeStore} />);
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the row', function () {
-    describe('when the employee is deleted', function () {
-      beforeEach(function () {
+  describe('clicking the row', () => {
+    describe('when the employee is deleted', () => {
+      beforeEach(() => {
         employee = {
           _id: 'abc123',
           deleted: true
@@ -42,17 +42,17 @@ describe('Employee Row Component: ', function () {
         element.showDetail();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.error.restore();
       });
 
-      it('should display an error in the snackbar', function () {
+      it('should display an error in the snackbar', () => {
         expect(spies.error).to.have.been.calledWith('You cannot edit a deleted employee.');
       });
     });
 
-    describe('when the employee is NOT deleted', function () {
-      beforeEach(function () {
+    describe('when the employee is NOT deleted', () => {
+      beforeEach(() => {
         employee = {
           _id: 'abc123',
           username: 'sterlingArcher',
@@ -64,22 +64,22 @@ describe('Employee Row Component: ', function () {
         element.showDetail();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.transitionTo.restore();
       });
 
-      it('should set the employee on the stored state', function () {
+      it('should set the employee on the stored state', () => {
         expect(element.props.store.getState().employee.username).to.equal('sterlingArcher');
       });
 
-      it('should transition to the detail route', function () {
+      it('should transition to the detail route', () => {
         expect(spies.transitionTo).to.have.been.calledWith('employees.detail', {_id: 'abc123'});
       });
     });
   });
 
-  describe('clicking the remove button', function () {
-    beforeEach(function () {
+  describe('clicking the remove button', () => {
+    beforeEach(() => {
       employee = {
         _id: 'abc123',
         username: 'pamPoovey',
@@ -93,21 +93,21 @@ describe('Employee Row Component: ', function () {
       TestUtils.Simulate.click(button);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       spies.remove.restore();
     });
 
-    it('should set the employee to deleted', function () {
+    it('should set the employee to deleted', () => {
       expect(element.props.employee.deleted).to.be.true;
     });
 
-    it('should fire a remove employee action', function () {
+    it('should fire a remove employee action', () => {
       expect(spies.remove).to.have.been.calledWith(employee);
     });
   });
 
-  describe('clicking the restore button', function () {
-    beforeEach(function () {
+  describe('clicking the restore button', () => {
+    beforeEach(() => {
       employee = {
         _id: 'abc123',
         username: 'cyrilFiggus',
@@ -121,15 +121,15 @@ describe('Employee Row Component: ', function () {
       TestUtils.Simulate.click(button);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       spies.restore.restore();
     });
 
-    it('should set the employee to restored', function () {
+    it('should set the employee to restored', () => {
       expect(element.props.employee.deleted).to.be.false;
     });
 
-    it('should fire a restore employee action', function () {
+    it('should fire a restore employee action', () => {
       expect(spies.restore).to.have.been.calledWith(employee);
     });
   });

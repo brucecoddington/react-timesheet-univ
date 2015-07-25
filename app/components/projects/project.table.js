@@ -11,7 +11,7 @@ const ProjectTable = React.createClass({
   render () {
     let store = this.props.store;
 
-    let projectRows = this.props.projects.map(function (project) {
+    let projectRows = this.props.projects.map(project => {
       return (
         <ProjectRow project={project} key={project._id} store={store} />
       );

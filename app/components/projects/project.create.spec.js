@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Project Create Component: ', function () {
+describe('Project Create Component: ', () => {
 
   let ProjectCreate,
     element,
@@ -9,12 +9,12 @@ describe('Project Create Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     ProjectCreate from './project.create');
     ProjectActions from '../../actions/project.actions');
 
@@ -25,39 +25,39 @@ describe('Project Create Component: ', function () {
     spies.create = sinon.stub(ProjectActions, 'create', _.noop);
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.validateAll.restore();
     spies.transitionTo.restore();
     spies.create.restore();
   });
 
-  it('should instantiate the ProjectCreate', function () {
+  it('should instantiate the ProjectCreate', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('saving an project', function () {
-    beforeEach(function () {
+  describe('saving an project', () => {
+    beforeEach(() => {
       element.saveProject({preventDefault: _.noop});
     });
 
-    it('should validate the entire project', function () {
+    it('should validate the entire project', () => {
       expect(spies.validateAll).to.have.been.called;
     });
 
-    describe('when the project passes validation', function () {
-      beforeEach(function () {
+    describe('when the project passes validation', () => {
+      beforeEach(() => {
         spies.hasErrors = sinon.stub(element, 'hasErrors').returns(false);
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.hasErrors.restore();
       });
 
-      it('should fire a create action', function () {
+      it('should fire a create action', () => {
         expect(spies.create).to.have.been.called;
       });
 
-      it('should transition back to the project list', function () {
+      it('should transition back to the project list', () => {
         expect(spies.transitionTo).to.have.been.calledWith('projects');
       });
     });

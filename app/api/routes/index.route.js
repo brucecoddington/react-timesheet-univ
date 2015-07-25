@@ -6,7 +6,7 @@ import fetch from '../../util/fetch';
 
 import ProjectStore from '../../stores/project.store';
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
 
   server.path(Path.join(__dirname, '../../..'));
 
@@ -21,8 +21,8 @@ exports.register = function (server, options, next) {
 
   return next();
 
-  function handler(request, reply) {
-    return renderApp(request, function (error, html, data) {
+  function handler (request, reply) {
+    return renderApp(request, (error, html, data) => {
       if (!error) {
         reply.view('./index', {html: html, data: data});
       }
@@ -42,18 +42,18 @@ exports.register = function (server, options, next) {
     let router = Router.create({
       routes: AppRoutes,
       location: request.url.path,
-      onAbort: function (redirect) {
+      onAbort: (redirect) => {
         cb({redirect: redirect});
       },
-      onError: function (err) {
+      onError: (err) => {
         console.log('Routing Error');
         console.log(err);
       }
     });
 
-    router.run(function (Handler, state) {
+    router.run((Handler, state) => {
       return fetch(state)
-        .then((stateData) => {
+        .then(stateData => {
           cb(null, React.renderToString(<Handler />), stateData);
         });
     });

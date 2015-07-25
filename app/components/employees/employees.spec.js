@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Employees Component: ', function () {
+describe('Employees Component: ', () => {
 
   let Employees,
     element,
@@ -9,27 +9,27 @@ describe('Employees Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     Employees from './employees');
     element = TestUtils.renderIntoDocument(<Employees />);
     spies.transitionTo = sinon.stub(element, 'transitionTo');
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.transitionTo.restore();
   });
 
-  it('should instantiate the Employees', function () {
+  it('should instantiate the Employees', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the new employee button', function () {
-    it('should transition to the create employee route', function () {
+  describe('clicking the new employee button', () => {
+    it('should transition to the create employee route', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
       expect(spies.transitionTo).to.have.been.calledWith('employees.create');

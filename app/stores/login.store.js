@@ -6,14 +6,15 @@ import axios from 'axios';
 import Store from '../flux/flux.store';
 import actions from '../actions/login.actions';
 import SnackbarAction from '../actions/snackbar.actions';
+import urls from '../util/urls';
 
 class LoginStore extends Store {
 
   constructor() {
     super();
 
-    this.loginUrl = '/api/login';
-    this.logoutUrl = '/api/logout';
+    this.loginUrl = urls.apiResource('login');
+    this.logoutUrl = urls.apiResource('logout');
     this.authErrorMessage = 'Invalid username and password combination.';
 
     let events = {};
@@ -79,7 +80,7 @@ class LoginStore extends Store {
             this.setState({pausedTransition: null});
           }
           else {
-            Router.transitionTo('/app/employees');
+            Router.transitionTo('/employees');
           }
 
           SnackbarAction.success(`Welcome back, ${res.data.user.username}.`);

@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Project Form Component: ', function () {
+describe('Project Form Component: ', () => {
 
   let ProjectForm,
     CancleButton,
@@ -12,13 +12,13 @@ describe('Project Form Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
     CancelButton from '../common/buttons/cancel.button');
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     project =  {};
     errors = {};
 
@@ -40,16 +40,16 @@ describe('Project Form Component: ', function () {
     spies.transitionTo = sinon.stub(element, 'transitionTo');
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.transitionTo.restore();
   });
 
-  it('should instantiate the ProjectForm', function () {
+  it('should instantiate the ProjectForm', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the cancel button', function () {
-    it('should go back to the projects home', function () {
+  describe('clicking the cancel button', () => {
+    it('should go back to the projects home', () => {
       let cancel = TestUtils.findRenderedComponentWithType(element, CancelButton);
       let button = TestUtils.findRenderedDOMComponentWithTag(cancel, 'button');
       TestUtils.Simulate.click(button);

@@ -1,12 +1,12 @@
-describe('Login Store: ', function () {
+describe('Login Store: ', () => {
 
   let LoginStore;
 
-  beforeEach(function () {
+  beforeEach(() => {
     LoginStore = require('./login.store');
   });
 
-  it('should instantiate the LoginStore', function () {
+  it('should instantiate the LoginStore', () => {
     expect(LoginStore).to.be.defined;
   });
 });

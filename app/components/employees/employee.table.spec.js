@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Employee Table Component: ', function () {
+describe('Employee Table Component: ', () => {
 
   let EmployeeTable,
     EmployeeStore,
@@ -11,13 +11,13 @@ describe('Employee Table Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
     EmployeeStore from '../../stores/employee.store');
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     employees = [{}, {}];
 
     EmployeeTable from './employee.table');
@@ -26,7 +26,7 @@ describe('Employee Table Component: ', function () {
     );
   });
 
-  it('should instantiate the EmployeeTable', function () {
+  it('should instantiate the EmployeeTable', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 });

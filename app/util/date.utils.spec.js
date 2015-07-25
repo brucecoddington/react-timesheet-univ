@@ -1,16 +1,16 @@
-describe('Date Utils: ', function () {
+describe('Date Utils: ', () => {
 
   var DateUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     DateUtils = require('./date.utils');
   });
 
-  it('should instantiate the DateUtils', function () {
+  it('should instantiate the DateUtils', () => {
     expect(DateUtils).to.be.defined;
   });
 
-  describe('momentShortDate', function () {
+  describe('momentShortDate', () => {
 
     it('should display "Nov 15, 2010" for 2010-11-15', function() {
       expect(DateUtils.momentShortDate("2010-11-15")).to.equal('Nov 15, 2010');
@@ -33,7 +33,7 @@ describe('Date Utils: ', function () {
     });
   });
 
-  describe('momentLongDate', function () {
+  describe('momentLongDate', () => {
 
     it('should display "November 15th, 2010" for 2010-11-15', function() {
       expect(DateUtils.momentLongDate("2010-11-15")).to.equal('November 15th, 2010');

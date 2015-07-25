@@ -9,14 +9,13 @@ const TimeunitTable = React.createClass({
   },
 
   render () {
-    let self = this;
-
-    let timeunitRows = this.props.timeunits.map(function (timeunit) {
+    
+    let timeunitRows = this.props.timeunits.map(timeunit => {
       return (
         <TimeunitRow timeunit={timeunit}
           key={timeunit._id}
-          timesheet={self.props.timesheet}
-          store={self.props.store} />
+          timesheet={this.props.timesheet}
+          store={this.props.store} />
       );
     });
 

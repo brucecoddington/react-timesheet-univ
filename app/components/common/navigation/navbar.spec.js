@@ -2,7 +2,7 @@ let _ from 'lodash');
 let proxyquire from 'proxyquireify')(require);
 let mockComponent from '../../mock');
 
-describe('Navbar Component: ', function () {
+describe('Navbar Component: ', () => {
 
   let Navbar,
     element,
@@ -10,12 +10,12 @@ describe('Navbar Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     proxies = {
       '../../../stores/login.store': {
         getState: sinon.stub().returns({user: {_id: 'abc123'}}),
@@ -39,12 +39,12 @@ describe('Navbar Component: ', function () {
     element = TestUtils.renderIntoDocument(<Navbar />);
   });
 
-  it('should instantiate the Navbar', function () {
+  it('should instantiate the Navbar', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('when navigating between routes', function () {
-    it('should set the appropriate active class', function () {
+  describe('when navigating between routes', () => {
+    it('should set the appropriate active class', () => {
       let Links = TestUtils.scryRenderedComponentsWithType(element, proxies['react-router'].Link);
       let projectLink = TestUtils.findRenderedDOMComponentWithClass(element, 'active');
       expect(projectLink.getDOMNode().innerText).to.equal('Projects');

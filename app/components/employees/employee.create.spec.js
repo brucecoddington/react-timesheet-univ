@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Employee Create Component: ', function () {
+describe('Employee Create Component: ', () => {
 
   let EmployeeCreate,
     element,
@@ -9,12 +9,12 @@ describe('Employee Create Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     EmployeeCreate from './employee.create');
     EmployeeActions from '../../actions/employee.actions');
 
@@ -25,39 +25,39 @@ describe('Employee Create Component: ', function () {
     spies.create = sinon.stub(EmployeeActions, 'create');
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.validateAll.restore();
     spies.transitionTo.restore();
     spies.create.restore();
   });
 
-  it('should instantiate the EmployeeCreate', function () {
+  it('should instantiate the EmployeeCreate', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('saving an employee', function () {
-    beforeEach(function () {
+  describe('saving an employee', () => {
+    beforeEach(() => {
       element.saveEmployee({preventDefault: _.noop});
     });
 
-    it('should validate the entire employee', function () {
+    it('should validate the entire employee', () => {
       expect(spies.validateAll).to.have.been.called;
     });
 
-    describe('when the employee passes validation', function () {
-      beforeEach(function () {
+    describe('when the employee passes validation', () => {
+      beforeEach(() => {
         spies.hasErrors = sinon.stub(element, 'hasErrors').returns(false);
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.hasErrors.restore();
       });
 
-      it('should fire a create action', function () {
+      it('should fire a create action', () => {
         expect(spies.create).to.have.been.called;
       });
 
-      it('should transition back to the employee list', function () {
+      it('should transition back to the employee list', () => {
         expect(spies.transitionTo).to.have.been.calledWith('employees');
       });
     });

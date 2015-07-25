@@ -1,6 +1,6 @@
 import projectsController from '../handlers/projects';
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
 
   const projects =  '/api/projects';
   const projectId = '/api/projects/{projectId}';

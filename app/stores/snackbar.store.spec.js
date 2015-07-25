@@ -1,12 +1,12 @@
-describe('Notifications Store: ', function () {
+describe('Notifications Store: ', () => {
 
   let SnackbarStore;
 
-  beforeEach(function () {
+  beforeEach(() => {
     SnackbarStore = require('./snackbar.store');
   });
 
-  it('should instantiate the SnackbarStore', function () {
+  it('should instantiate the SnackbarStore', () => {
     expect(SnackbarStore).to.be.defined;
   });
 });

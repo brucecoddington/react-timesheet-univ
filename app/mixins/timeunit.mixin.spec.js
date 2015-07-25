@@ -1,12 +1,12 @@
-describe('Timeunit Mixin: ', function () {
+describe('Timeunit Mixin: ', () => {
 
   var TimeunitMixin;
 
-  beforeEach(function () {
+  beforeEach(() => {
     TimeunitMixin = require('./timeunit.mixin');
   });
 
-  it('should instantiate the TimeunitMixin', function () {
+  it('should instantiate the TimeunitMixin', () => {
     expect(TimeunitMixin).to.be.defined;
   });
 });

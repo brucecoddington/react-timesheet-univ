@@ -45,7 +45,7 @@ const TimeunitForm = React.createClass({
     let projects = this.projectStore.getState().projects;
     let options = [];
 
-    projects.forEach(function (project) {
+    projects.forEach(project => {
       options.push({value: project.name, label: project.name});
     });
 

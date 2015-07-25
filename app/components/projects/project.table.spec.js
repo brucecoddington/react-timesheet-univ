@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Project Table Component: ', function () {
+describe('Project Table Component: ', () => {
 
   let ProjectTable,
     ProjectStore,
@@ -11,13 +11,13 @@ describe('Project Table Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
     ProjectStore from '../../stores/project.store');
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     projects = [{}, {}];
 
     ProjectTable from './project.table');
@@ -26,7 +26,7 @@ describe('Project Table Component: ', function () {
     );
   });
 
-  it('should instantiate the ProjectTable', function () {
+  it('should instantiate the ProjectTable', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 });

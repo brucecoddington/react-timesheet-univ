@@ -2,7 +2,7 @@ let _ from 'lodash');
 let proxyquire from 'proxyquireify')(require);
 let mockComponent from '../mock');
 
-describe('Employee Detail Component: ', function () {
+describe('Employee Detail Component: ', () => {
 
   let EmployeeDetail,
     element,
@@ -11,12 +11,12 @@ describe('Employee Detail Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     proxies = {
       './employee.form': mockComponent('EmployeeForm'),
       '../../actions/employee.actions': {
@@ -39,61 +39,61 @@ describe('Employee Detail Component: ', function () {
     spies.validateAll = sinon.stub(element, 'validateAll');
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.transitionTo.restore();
     spies.validateAll.restore();
   });
 
-  it('should instantiate the EmployeeDetail', function () {
+  it('should instantiate the EmployeeDetail', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('getting the employee', function () {
-    describe('and the employee exists on the store state', function () {
-      beforeEach(function () {
+  describe('getting the employee', () => {
+    describe('and the employee exists on the store state', () => {
+      beforeEach(() => {
         element.store.state.employee = {_id: 'abc123'};
         element.get();
       });
 
-      it('should set the employee on the component state', function () {
+      it('should set the employee on the component state', () => {
         expect(element.state.employee._id).to.equal('abc123');
       });
     });
 
-    describe('and the employee does NOT exist in the stored state', function () {
-      beforeEach(function () {
+    describe('and the employee does NOT exist in the stored state', () => {
+      beforeEach(() => {
         element.get();
       });
 
-      it('should fire a get employee action', function () {
+      it('should fire a get employee action', () => {
         expect(proxies['../../actions/employee.actions'].get).to.have.been.calledWith('abc123');
       });
     });
   });
 
-  describe('saving an employee', function () {
-    beforeEach(function () {
+  describe('saving an employee', () => {
+    beforeEach(() => {
       element.saveEmployee({preventDefault: _.noop});
     });
 
-    it('should validate the entire employee', function () {
+    it('should validate the entire employee', () => {
       expect(spies.validateAll).to.have.been.called;
     });
 
-    describe('and the employee passes validation', function () {
-      beforeEach(function () {
+    describe('and the employee passes validation', () => {
+      beforeEach(() => {
         spies.hasErrors = sinon.stub(element, 'hasErrors').returns(false);
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.hasErrors.restore();
       });
 
-      it('should fire an update action', function () {
+      it('should fire an update action', () => {
         expect(proxies['../../actions/employee.actions'].update).to.have.been.called;
       });
 
-      it('should transition back to the employee list', function () { 
+      it('should transition back to the employee list', () => { 
         expect(spies.transitionTo).to.have.been.calledWith('employees');
       });
     });

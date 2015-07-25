@@ -1,4 +1,4 @@
-describe('Timeunit Row Component: ', function () {
+describe('Timeunit Row Component: ', () => {
 
   let TimeunitRow,
     SnackbarActions,
@@ -12,19 +12,19 @@ describe('Timeunit Row Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     TimeunitStore from '../../stores/timeunit.store');
     TimeunitRow from './timeunit.row');
     SnackbarActions from '../../actions/snackbar.actions');
     TimeunitActions from '../../actions/timeunit.actions');
   });
 
-  it('should instantiate the TimeunitRow', function () {
+  it('should instantiate the TimeunitRow', () => {
     element = TestUtils.renderIntoDocument(
       <TimeunitRow timesheet={{_id: 1}}
         timeunit={{_id: 1}} 
@@ -33,9 +33,9 @@ describe('Timeunit Row Component: ', function () {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the row', function () {
-    describe('when the timeunit is deleted', function () {
-      beforeEach(function () {
+  describe('clicking the row', () => {
+    describe('when the timeunit is deleted', () => {
+      beforeEach(() => {
         timeunit = {
           _id: 'timeunitId',
           deleted: true
@@ -53,17 +53,17 @@ describe('Timeunit Row Component: ', function () {
         element.showDetail();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.error.restore();
       });
 
-      it('should display an error in the snackbar', function () {
+      it('should display an error in the snackbar', () => {
         expect(spies.error).to.have.been.calledWith('You cannot edit a deleted timeunit.');
       });
     });
 
-    describe('when the timeunit is NOT deleted', function () {
-      beforeEach(function () {
+    describe('when the timeunit is NOT deleted', () => {
+      beforeEach(() => {
         timeunit = {
           _id: 'timeunitId',
           name: 'timeunitOne',
@@ -81,23 +81,23 @@ describe('Timeunit Row Component: ', function () {
         element.showDetail();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.transitionTo.restore();
       });
 
-      it('should set the timeunit on the stored state', function () {
+      it('should set the timeunit on the stored state', () => {
         expect(element.props.store.getState().timeunit.name).to.equal('timeunitOne');
       });
 
-      it('should transition to the detail route', function () {
+      it('should transition to the detail route', () => {
         expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.detail', 
           { _id: "timesheetId", timeunit_id: "timeunitId", user_id: "userId" });
       });
     });
   });
 
-  describe('clicking the remove button', function () {
-    beforeEach(function () {
+  describe('clicking the remove button', () => {
+    beforeEach(() => {
       timeunit = {
         _id: 'timeunitId',
         deleted: false
@@ -116,21 +116,21 @@ describe('Timeunit Row Component: ', function () {
       TestUtils.Simulate.click(button);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       spies.remove.restore();
     });
 
-    it('should set the timeunit to deleted', function () {
+    it('should set the timeunit to deleted', () => {
       expect(element.props.timeunit.deleted).to.be.true;
     });
 
-    it('should fire a remove timeunit action', function () {
+    it('should fire a remove timeunit action', () => {
       expect(spies.remove).to.have.been.calledWith(timesheet, timeunit);
     });
   });
 
-  describe('clicking the restore button', function () {
-    beforeEach(function () {
+  describe('clicking the restore button', () => {
+    beforeEach(() => {
       timeunit = {
         _id: 'timeunitId',
         deleted: true
@@ -149,15 +149,15 @@ describe('Timeunit Row Component: ', function () {
       TestUtils.Simulate.click(button);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       spies.restore.restore();
     });
 
-    it('should set the timeunit to restored', function () {
+    it('should set the timeunit to restored', () => {
       expect(element.props.timeunit.deleted).to.be.false;
     });
 
-    it('should fire a restore timeunit action', function () {
+    it('should fire a restore timeunit action', () => {
       expect(spies.restore).to.have.been.calledWith(timesheet, timeunit);
     });
   });

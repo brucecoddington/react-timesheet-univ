@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Timesheet Form Component: ', function () {
+describe('Timesheet Form Component: ', () => {
 
   let TimesheetForm,
     CancleButton,
@@ -11,13 +11,13 @@ describe('Timesheet Form Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
     CancelButton from '../common/buttons/cancel.button');
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     timesheet =  {};
     errors = {};
 
@@ -40,17 +40,17 @@ describe('Timesheet Form Component: ', function () {
     spies.getParams = sinon.stub(element, 'getParams').returns({user_id: 'userId'});
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.transitionTo.restore();
     spies.getParams.restore();
   });
 
-  it('should instantiate the TimesheetForm', function () {
+  it('should instantiate the TimesheetForm', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the cancel button', function () {
-    it('should go back to the timesheets home', function () {
+  describe('clicking the cancel button', () => {
+    it('should go back to the timesheets home', () => {
       let cancel = TestUtils.findRenderedComponentWithType(element, CancelButton);
       let button = TestUtils.findRenderedDOMComponentWithTag(cancel, 'button');
       TestUtils.Simulate.click(button);

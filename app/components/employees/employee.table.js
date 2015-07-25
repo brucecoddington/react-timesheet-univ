@@ -11,7 +11,7 @@ const EmployeeTable = React.createClass({
   render () {
     let store = this.props.store;
 
-    let employeeRows = this.props.employees.map(function (employee) {
+    let employeeRows = this.props.employees.map(employee => {
       return (
         <EmployeeRow employee={employee} key={employee._id} store={store}/>
       );

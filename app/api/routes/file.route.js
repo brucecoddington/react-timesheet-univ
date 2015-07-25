@@ -1,6 +1,6 @@
 import Path from 'path';
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
 
   // Serve static content
   server.route({

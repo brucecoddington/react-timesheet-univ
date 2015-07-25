@@ -1,6 +1,6 @@
 let _ from 'lodash');
 
-describe('Timeunits Component: ', function () {
+describe('Timeunits Component: ', () => {
 
   let Timeunits,
     timesheet,
@@ -10,12 +10,12 @@ describe('Timeunits Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     Timeunits from './timeunits');
 
     timesheet = {_id: 'timesheetId'};
@@ -27,16 +27,16 @@ describe('Timeunits Component: ', function () {
       {user_id: 'userId', _id: 'timesheetId', timeunit_id: 'timeunitId'});
   });
 
-  afterEach(function () {
+  afterEach(() => {
     spies.transitionTo.restore();
   });
 
-  it('should instantiate the Timeunits', function () {
+  it('should instantiate the Timeunits', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the new employee button', function () {
-    it('should transition to the create employee route', function () {
+  describe('clicking the new employee button', () => {
+    it('should transition to the create employee route', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
       

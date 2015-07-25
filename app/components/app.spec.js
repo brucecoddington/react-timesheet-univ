@@ -1,7 +1,7 @@
 let proxyquire from 'proxyquireify')(require);
 let mockComponent  from './mock');
 
-describe('App: ', function () {
+describe('App: ', () => {
 
   let App,
     element,
@@ -10,12 +10,12 @@ describe('App: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     proxies = {
       './common/navigation/navbar': mockComponent('Navbar'),
       './common/section': mockComponent('SectionHeader'),
@@ -31,12 +31,12 @@ describe('App: ', function () {
     element = TestUtils.renderIntoDocument(<App />);
   });
 
-  it('should instantiate the App', function () {
+  it('should instantiate the App', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('during the will transition to lifecyle', function () {
-    it('should require an authenticated user from the login store', function () {
+  describe('during the will transition to lifecyle', () => {
+    it('should require an authenticated user from the login store', () => {
       App.willTransitionTo('transitionArg', 'paramsArg');
       expect(proxies['../stores/login.store'].requireAuthenticatedUser).to.have.been.calledWith('transitionArg');
     });

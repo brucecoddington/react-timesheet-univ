@@ -1,12 +1,12 @@
-describe('Project Mixin: ', function () {
+describe('Project Mixin: ', () => {
 
   var Project;
 
-  beforeEach(function () {
+  beforeEach(() => {
     Project = require('./project.mixin');
   });
 
-  it('should instantiate the Project', function () {
+  it('should instantiate the Project', () => {
     expect(Project).to.be.defined;
   });
 });

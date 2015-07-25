@@ -4,7 +4,7 @@ module.exports = (() => {
     _ = require('lodash');
 
   let db;
-  let initDb = function initDb() {
+  let initDb = () => {
     db = {};
 
     db.users = new DataStore({filename: 'data/db/users.json', autoload: true});

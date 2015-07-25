@@ -2,7 +2,7 @@ import usersController from '../handlers/users';
 import timesheetsController from '../handlers/timesheets';
 import timeunitsController from '../handlers/timeunits';
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
 
   const users =         '/api/users';
   const userId =        '/api/users/{userId}';

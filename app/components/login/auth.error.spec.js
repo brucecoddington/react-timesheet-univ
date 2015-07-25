@@ -1,7 +1,7 @@
 let proxyquire from 'proxyquireify')(require);
 let mockComponent from '../mock');let _ from 'lodash');
 
-describe('Auth Error Component: ', function () {
+describe('Auth Error Component: ', () => {
 
   let AuthError,
     element,
@@ -10,17 +10,17 @@ describe('Auth Error Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     AuthError from './auth.error');
     element = TestUtils.renderIntoDocument(<AuthError authError="none" />);
   });
 
-  it('should instantiate the AuthError', function () {
+  it('should instantiate the AuthError', () => {
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 });

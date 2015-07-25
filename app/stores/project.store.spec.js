@@ -1,12 +1,12 @@
-describe('Project Store: ', function () {
+describe('Project Store: ', () => {
 
   let ProjectStore;
 
-  beforeEach(function () {
+  beforeEach(() => {
     ProjectStore = require('./project.store');
   });
 
-  it('should instantiate the ProjectStore', function () {
+  it('should instantiate the ProjectStore', () => {
     expect(ProjectStore).to.be.defined;
   });
 });

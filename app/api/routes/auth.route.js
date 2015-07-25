@@ -1,7 +1,7 @@
 import loginHandler from '../handlers/login';
 import logoutHandler from '../handlers/logout';
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
 
   const login = '/api/login';
   const logout = '/api/logout';

@@ -5,22 +5,22 @@ import NProgress from 'nprogress';
 export default () => {
 
   axios.interceptors.request.use(
-    function (config) {
+    (config) => {
       NProgress.start();
       return config;
     },
-    function (err) {
+    (err) => {
       NProgress.done();
       return Promise.reject(err);
     }
   );
 
   axios.interceptors.response.use(
-    function (response) {
+    (response) => {
       NProgress.done();
       return response;
     },
-    function (err) {
+    (err) => {
       NProgress.done();
       return Promise.reject(err);
     }

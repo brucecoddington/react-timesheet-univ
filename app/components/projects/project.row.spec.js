@@ -1,4 +1,4 @@
-describe('Project Row Component: ', function () {
+describe('Project Row Component: ', () => {
 
   let ProjectRow,
     SnackbarActions,
@@ -11,26 +11,26 @@ describe('Project Row Component: ', function () {
 
   let React, TestUtils;
 
-  beforeEach(function () {
+  beforeEach(() => {
     React from 'react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     ProjectStore from '../../stores/project.store');
     ProjectRow from './project.row');
     SnackbarActions from '../../actions/snackbar.actions');
     ProjectActions from '../../actions/project.actions');
   });
 
-  it('should instantiate the ProjectRow', function () {
+  it('should instantiate the ProjectRow', () => {
     element = TestUtils.renderIntoDocument(<ProjectRow project={{_id: 1}} store={ProjectStore} />);
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
   });
 
-  describe('clicking the row', function () {
-    describe('when the project is deleted', function () {
-      beforeEach(function () {
+  describe('clicking the row', () => {
+    describe('when the project is deleted', () => {
+      beforeEach(() => {
         project = {
           _id: 'abc123',
           deleted: true
@@ -42,17 +42,17 @@ describe('Project Row Component: ', function () {
         element.showDetail();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.error.restore();
       });
 
-      it('should display an error in the snackbar', function () {
+      it('should display an error in the snackbar', () => {
         expect(spies.error).to.have.been.calledWith('You cannot edit a deleted project.');
       });
     });
 
-    describe('when the project is NOT deleted', function () {
-      beforeEach(function () {
+    describe('when the project is NOT deleted', () => {
+      beforeEach(() => {
         project = {
           _id: 'abc123',
           name: 'projectOne',
@@ -64,22 +64,22 @@ describe('Project Row Component: ', function () {
         element.showDetail();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         spies.transitionTo.restore();
       });
 
-      it('should set the project on the stored state', function () {
+      it('should set the project on the stored state', () => {
         expect(element.props.store.getState().project.name).to.equal('projectOne');
       });
 
-      it('should transition to the detail route', function () {
+      it('should transition to the detail route', () => {
         expect(spies.transitionTo).to.have.been.calledWith('projects.detail', {_id: 'abc123'});
       });
     });
   });
 
-  describe('clicking the remove button', function () {
-    beforeEach(function () {
+  describe('clicking the remove button', () => {
+    beforeEach(() => {
       project = {
         _id: 'abc123',
         name: 'projectTwo',
@@ -93,21 +93,21 @@ describe('Project Row Component: ', function () {
       TestUtils.Simulate.click(button);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       spies.remove.restore();
     });
 
-    it('should set the project to deleted', function () {
+    it('should set the project to deleted', () => {
       expect(element.props.project.deleted).to.be.true;
     });
 
-    it('should fire a remove project action', function () {
+    it('should fire a remove project action', () => {
       expect(spies.remove).to.have.been.calledWith(project);
     });
   });
 
-  describe('clicking the restore button', function () {
-    beforeEach(function () {
+  describe('clicking the restore button', () => {
+    beforeEach(() => {
       project = {
         _id: 'abc123',
         name: 'projectThree',
@@ -121,15 +121,15 @@ describe('Project Row Component: ', function () {
       TestUtils.Simulate.click(button);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       spies.restore.restore();
     });
 
-    it('should set the project to restored', function () {
+    it('should set the project to restored', () => {
       expect(element.props.project.deleted).to.be.false;
     });
 
-    it('should fire a restore project action', function () {
+    it('should fire a restore project action', () => {
       expect(spies.restore).to.have.been.calledWith(project);
     });
   });

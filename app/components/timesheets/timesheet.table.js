@@ -11,7 +11,7 @@ const TimesheetTable = React.createClass({
   render () {
     let store = this.props.store;
 
-    let timesheetRows = this.props.timesheets.map(function (timesheet) {
+    let timesheetRows = this.props.timesheets.map(timesheet => {
       return (
         <TimesheetRow timesheet={timesheet} key={timesheet._id} store={store} />
       );

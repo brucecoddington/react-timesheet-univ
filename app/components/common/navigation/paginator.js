@@ -64,7 +64,7 @@ const Paginator = React.createClass({
     }
 
     let iterator = Array.apply(null, Array(p.maxVisible))
-      .map(function(v, i) {
+      .map((v, i) => {
         return skip + i + 1;
       });
 
@@ -76,7 +76,7 @@ const Paginator = React.createClass({
           <i className="fa fa-chevron-left" />
         </a>
 
-        {iterator.map(function(page) {
+        {iterator.map(page => {
           return (
             <a key={page}
               onClick={this.goTo.bind(this, page)}

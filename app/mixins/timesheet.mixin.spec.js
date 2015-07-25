@@ -1,12 +1,12 @@
-describe('Timesheet Mixin: ', function () {
+describe('Timesheet Mixin: ', () => {
   
   var Timesheet;
 
-  beforeEach(function () {
+  beforeEach(() => {
     Timesheet = require('./timesheet.mixin');
   });
 
-  it('should instantiate the Timesheet', function () {
+  it('should instantiate the Timesheet', () => {
     expect(Timesheet).to.be.defined;
   });
 });
