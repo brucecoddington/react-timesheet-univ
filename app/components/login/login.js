@@ -52,14 +52,14 @@ const LoginForm = React.createClass({
           <div className="center aligned eight wide column">
             <form className="ui form" name="loginForm" onSubmit={this.handleSubmit}>
               <div className="inline field">
-                <label htmlFor="login">Username</label>
+                <label htmlFor="username">Username</label>
                 <input type="text"
                   name="username" ref="login"
                   value={this.state.credentials.username}
                   onChange={this.validate} required />
               </div>
               <div className="inline field">
-                <label htmlFor="pass">Password</label>
+                <label htmlFor="password">Password</label>
                 <input type="password"
                   name="password" ref="password"
                   value={this.state.credentials.password}

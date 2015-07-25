@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react/addons';
 import Router, {Navigation, State} from 'react-router';
+import _ from 'lodash';
 
 import EmployeeTable from './employee.table';
 import EmployeeActions from '../../actions/employee.actions';
@@ -7,6 +8,12 @@ import EmployeeStore from '../../stores/employee.store';
 import Paginator from '../common/navigation/paginator';
 
 const Employees = React.createClass({
+
+  statics: {
+    fetch (params, query) {
+      return EmployeeStore.list({action: {query: {page: 1}}});
+    }
+  },
 
   mixins: [
     Navigation,
@@ -30,7 +37,9 @@ const Employees = React.createClass({
   },
 
   componentWillMount () {
-    this.requestEmployees({page: 1});
+    if (this.state.pageConfig.data.length === 0) {
+      this.requestEmployees({page: 1});
+    }
     this.store.addChangeListener(this.onChange);
   },
 

@@ -2,8 +2,8 @@ import projectsController from '../handlers/projects';
 
 exports.register = function (server, options, next) {
 
-  const projects =  '/projects';
-  const projectId = '/projects/{projectId}';
+  const projects =  '/api/projects';
+  const projectId = '/api/projects/{projectId}';
 
   server.route([
     {method: 'GET',     path: projects, handler: projectsController.index},

@@ -4,6 +4,8 @@ import actions from '../actions/timesheet.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
 import LoginStore from './login.store';
+import rehydrate from '../util/rehydrate';
+import urls from '../util/urls';
 
 class TimesheetStore extends Store {
 
@@ -19,7 +21,7 @@ class TimesheetStore extends Store {
     events[actions.CREATE]  = this.create;
     this.register(events);
 
-    this.setState({
+    let state = rehydrate.setDefaults({
       timesheet: {},
       pageConfig: {
         data: [],
@@ -29,16 +31,12 @@ class TimesheetStore extends Store {
       }
     });
 
-    return this;
+    this.setState(state);
   }
 
   url (timesheetId) {
-    let url = 'users/' + LoginStore.getUserId() + '/timesheets';
-    if (timesheetId) {
-      url += '/' + timesheetId;
-    }
-
-    return url;
+    var resource = `users/${LoginStore.getUserId()}/timesheets`;
+    return urls.apiResource(resource, timesheetId);
   }
 
   list (payload) {
@@ -47,6 +45,7 @@ class TimesheetStore extends Store {
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
         self.setState({pageConfig: res.data});
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve timesheets.');
@@ -59,7 +58,7 @@ class TimesheetStore extends Store {
     return axios.get(this.url(payload.action.timesheet._id))
       .then(function (res) {
         self.setState({timesheet: res.data});
-        return true;
+        return self.getState();
       })
       .catch(function (data) {
         SnackbarAction.error('There was an error getting the timesheet');
@@ -74,6 +73,7 @@ class TimesheetStore extends Store {
       .then(function (res) {
         self.setState({timesheet: res.data});
         SnackbarAction.success('Timesheet : ' + timesheet.name + ', updated.');
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('There was an error updating timesheet.');
@@ -89,7 +89,7 @@ class TimesheetStore extends Store {
       .then(function (res) {
         self.setState({timesheet: res.data});
         SnackbarAction.success('Timesheet : ' + timesheet.name + ', was deleted.');
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to delete timesheet.');
@@ -105,7 +105,7 @@ class TimesheetStore extends Store {
       .then(function (res) {
         self.setState({timesheet: res.data});
         SnackbarAction.success('Timesheet : ' + timesheet.name + ', was restored.');
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to restore timesheet.');
@@ -119,6 +119,7 @@ class TimesheetStore extends Store {
       .then(function (res) {
         self.setState({timesheet: res.data});
         SnackbarAction.success('Timesheet : ' + timesheet.name + ', created.');
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('There was an error creating timesheet.');

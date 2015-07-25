@@ -4,12 +4,12 @@ import timeunitsController from '../handlers/timeunits';
 
 exports.register = function (server, options, next) {
 
-  const users =         '/users';
-  const userId =        '/users/{userId}';
-  const timesheets =    '/users/{userId}/timesheets';
-  const timesheetId =   '/users/{userId}/timesheets/{timesheetId}';
-  const timeunits =     '/users/{userId}/timesheets/{timesheetId}/timeunits';
-  const timeunitId =    '/users/{userId}/timesheets/{timesheetId}/timeunits/{timeunitId}';
+  const users =         '/api/users';
+  const userId =        '/api/users/{userId}';
+  const timesheets =    '/api/users/{userId}/timesheets';
+  const timesheetId =   '/api/users/{userId}/timesheets/{timesheetId}';
+  const timeunits =     '/api/users/{userId}/timesheets/{timesheetId}/timeunits';
+  const timeunitId =    '/api/users/{userId}/timesheets/{timesheetId}/timeunits/{timeunitId}';
 
   server.route([
     {method: 'GET',     path: users, handler: usersController.index},

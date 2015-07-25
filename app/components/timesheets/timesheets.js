@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react/addons';
 import Router, {Navigation} from 'react-router';
+import _ from 'lodash';
 
 import TimesheetTable from './timesheet.table';
 import TimesheetActions from '../../actions/timesheet.actions';
@@ -8,6 +9,12 @@ import TimesheetStore from '../../stores/timesheet.store';
 import Paginator from '../common/navigation/paginator';
 
 let Timesheets = React.createClass({
+
+  statics: {
+    fetch (params, query) {
+      return TimesheetStore.list({action: {query: {page: 1}}});
+    }
+  },
 
   mixins: [
     Navigation
@@ -30,7 +37,9 @@ let Timesheets = React.createClass({
   },
 
   componentWillMount () {
-    this.requestTimesheets({page: 1});
+    if (this.state.pageConfig.data.length === 0) {
+      this.requestTimesheets({page: 1});
+    }
     this.store.addChangeListener(this.onChange);
   },
 

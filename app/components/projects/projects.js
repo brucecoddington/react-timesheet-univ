@@ -1,14 +1,20 @@
 import React, {PropTypes} from 'react/addons';
 import Router, {Navigation} from 'react-router';
+import _ from 'lodash';
 
 import ProjectTable from './project.table';
 import ProjectActions from '../../actions/project.actions';
 import ProjectStore from '../../stores/project.store';
 
 import Paginator from '../common/navigation/paginator';
-import SnackbarAction from '../../actions/snackbar.actions';
 
 const Projects = React.createClass({
+
+  statics: {
+    fetch (params, query) {
+      return ProjectStore.list({action: {query: {page: 1}}});
+    }
+  },
 
   mixins: [
     Navigation
@@ -31,7 +37,10 @@ const Projects = React.createClass({
   },
 
   componentWillMount () {
-    this.requestProjects({page: 1});
+    if (this.state.pageConfig.data.length === 0) {
+      this.requestProjects({page: 1});
+    }
+
     this.store.addChangeListener(this.onChange);
   },
 

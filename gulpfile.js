@@ -6,7 +6,6 @@ var
   concat =      require('gulp-concat'),
   filesize =    require('gulp-filesize'),
   gulpif =      require('gulp-if'),
-  jade =        require('gulp-jade'),
   jshint =      require('gulp-jshint'),
   less =        require('gulp-less'),
   livereload =  require('gulp-livereload'),
@@ -31,8 +30,8 @@ var
 
 // main tasks
 gulp.task('core', ['webpack', 'concat:css', 'copy:assets']);
-gulp.task('dev',  ['core', 'jade:dev']);
-gulp.task('prod', ['core', 'jade:prod', 'uglify']);
+gulp.task('dev',  ['core']);
+gulp.task('prod', ['core', 'uglify']);
 gulp.task('init', ['build:css']);
 
 // server tasks
@@ -56,7 +55,6 @@ gulp.task('debug', shell.task([pkg.scripts.debug]));
 gulp.task('watch:dev', function () {
   gulp.watch(['./assets/less/**/*.scss', './app/**/*.less'], ['concat:css']);
   gulp.watch(['./semantic/src/**/*'], ['build:css']);
-  gulp.watch(['./app/index.jade'], ['jade:dev']);
   gulp.start('dev');
 });
 
@@ -64,7 +62,6 @@ gulp.task('watch:prod', function () {
   gulp.watch(['./assets/less/**/*.less', './app/**/*.less'], ['concat:css']);
   gulp.watch(['./dist/assets/js/app.js'], ['uglify']);
   gulp.watch(['./semantic/src/**/*'], ['build:css']);
-  gulp.watch(['./app/index.jade'], ['jade:prod']);
   gulp.start('prod');
 });
 
@@ -73,38 +70,6 @@ gulp.task('test', function (done) {
     configFile: __dirname + '/karma.conf.js',
     singleRun: false
   }, done);
-});
-
-// Build index.html
-gulp.task('clean:index', function (cb) {
-  return del(['./dist/index.html'], cb);
-});
-
-gulp.task('jade:dev', ['clean:index'], function () {
-  return gulp.src('./app/index.jade')
-    .pipe(plumber())
-    .pipe(jade({
-      pretty: true,
-      data: {
-        env: 'development'
-      }
-    }))
-    .pipe(gulp.dest('./dist'))
-    .pipe(livereload());
-});
-
-gulp.task('jade:prod', ['clean:index'], function () {
-  return gulp.src('./app/index.jade')
-    .pipe(plumber())
-    .pipe(jade({
-      pretty: true,
-      data: {
-        env: 'production',
-        debug: false
-      }
-    }))
-    .pipe(gulp.dest('./dist'))
-    .pipe(livereload());
 });
 
 // clean and copy assets

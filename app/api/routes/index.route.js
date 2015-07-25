@@ -1,44 +1,10 @@
-'use strict';
+import Path from 'path';
+import Router from 'react-router';
+import React from 'react/addons';
+import AppRoutes from '../../routes';
+import fetch from '../../util/fetch';
 
-
-// 'use strict';
-//
-// var Path = require('path');
-//
-// exports.register = function (server, options, next) {
-//
-//   server.path(Path.join(__dirname, '../../client/'));
-//
-//   server.route({
-//     method: 'GET',
-//     path: '/',
-//     config: {
-//       handler: {
-//         file: 'dist/index.html'
-//       },
-//       auth: false
-//     }
-//   });
-//
-//   return next();
-// };
-//
-// exports.register.attributes = {
-//   name: 'serve-index',
-//   version: '0.0.1'
-// };
-
-
-
-
-
-
-let Path = require('path');
-let Router = require('react-router');
-let React = require('react/addons');
-let AppRoutes = require('../../routes');
-
-
+import ProjectStore from '../../stores/project.store';
 
 exports.register = function (server, options, next) {
 
@@ -46,29 +12,9 @@ exports.register = function (server, options, next) {
 
   server.route({
     method: 'GET',
-    path: '/login',
+    path: '/{route*}',
     config: {
       handler: handler,
-      auth: false
-    }
-  });
-
-  server.route({
-    method: 'GET',
-    path: '/page/{route*}',
-    config: {
-      handler: handler,
-      auth: false
-    }
-  });
-
-  server.route({
-    method: 'GET',
-    path: '/',
-    config: {
-      handler: function (request, reply) {
-        reply.redirect('/page');
-      },
       auth: false
     }
   });
@@ -106,9 +52,12 @@ exports.register = function (server, options, next) {
     });
 
     router.run(function (Handler, state) {
-      cb(null, React.renderToString(<Handler />));
+      return fetch(state)
+        .then((stateData) => {
+          cb(null, React.renderToString(<Handler />), stateData);
+        });
     });
-  };
+  }
 };
 
 exports.register.attributes = {

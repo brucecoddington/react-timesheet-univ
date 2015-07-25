@@ -10,9 +10,9 @@ import SnackbarStore from '../stores/snackbar.store';
 const App = React.createClass({
 
   statics: {
-    willTransitionTo (transition, params) {
-      return LoginStore.requireAuthenticatedUser(transition);
-    }
+    // willTransitionTo (transition, params) {
+    //   return LoginStore.requireAuthenticatedUser(transition);
+    // }
   },
 
   render  () {

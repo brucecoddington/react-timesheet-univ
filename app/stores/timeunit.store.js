@@ -4,6 +4,8 @@ import actions from '../actions/timeunit.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
 import LoginStore from './login.store';
+import rehydrate from '../util/rehydrate';
+import urls from '../util/urls';
 
 class TimeunitStore extends Store {
 
@@ -19,21 +21,18 @@ class TimeunitStore extends Store {
     events[actions.CREATE]  = this.create;
     this.register(events);
 
-    this.setState({
+    let state = rehydrate.setDefaults({
       timeunit: {},
       timeunits: []
     });
 
-    return this;
+    this.setState(state);
   }
 
   url (timesheetId, timeunitId) {
     let userId = LoginStore.getState().user._id || 'all';
-    let url = '/users/' + userId + '/timesheets/' + timesheetId + '/timeunits';
-    if (timeunitId) {
-      url += '/' + timeunitId;
-    }
-    return url;
+    let resource = `users/${userId}/timesheets/${timesheetId}/timeunits`;
+    return urls.apiResource(resource, timeunitId);
   }
 
   list (payload) {
@@ -43,6 +42,7 @@ class TimeunitStore extends Store {
     return axios.get(this.url(timesheet._id))
       .then(function (res) {
         self.setState({timeunits: res.data});
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve logged hours.');
@@ -57,7 +57,7 @@ class TimeunitStore extends Store {
     return axios.get(this.url(timesheet._id, timeunit._id))
       .then(function (res) {
         self.setState({timeunit: res.data});
-        return true;
+        return self.getState();
       })
       .catch(function (data) {
         SnackbarAction.error('There was an error getting the time.');
@@ -73,6 +73,7 @@ class TimeunitStore extends Store {
       .then(function (res) {
         self.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time has been updated.');
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('There was an error updating time.');
@@ -89,7 +90,7 @@ class TimeunitStore extends Store {
       .then(function (res) {
         self.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was deleted.');
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to delete time.');
@@ -106,7 +107,7 @@ class TimeunitStore extends Store {
       .then(function (res) {
         self.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was restored.');
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to restore time.');
@@ -123,6 +124,7 @@ class TimeunitStore extends Store {
       .then(function (res) {
         self.setState({timeunit: res.data});
         SnackbarAction.success('Your time has been logged.');
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to log your time.');

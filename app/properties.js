@@ -13,6 +13,7 @@ export default {
   },
 
   server : {
+    url: 'http://localhost',
     port: 3000
   }
 };

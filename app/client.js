@@ -5,4 +5,5 @@ import LoginStore from './stores/login.store';
 progress();
 
 // Fire off the router and get the app rolling
-LoginStore.current().then(new Router().run);
+//LoginStore.current().then(new Router().run);
+new Router().run();

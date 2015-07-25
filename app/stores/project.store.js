@@ -3,6 +3,8 @@ import Store from '../flux/flux.store';
 import actions from '../actions/project.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
+import rehydrate from '../util/rehydrate';
+import urls from '../util/urls';
 
 class ProjectStore extends Store {
 
@@ -18,7 +20,7 @@ class ProjectStore extends Store {
     events[actions.CREATE]  = this.create;
     this.register(events);
 
-    this.setState({
+    let state = rehydrate.setDefaults({
       project: {},
       pageConfig: {
         data: [],
@@ -28,16 +30,11 @@ class ProjectStore extends Store {
       }
     });
 
-    return this;
+    this.setState(state);
   }
 
   url (projectId) {
-    let url = '/projects';
-    if (projectId) {
-      url += '/' + projectId;
-    }
-
-    return url;
+    return urls.apiResource('projects', projectId);
   }
 
   // page = page number
@@ -48,13 +45,14 @@ class ProjectStore extends Store {
 
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
+
         if (!_.isUndefined(res.data.data)) {
           self.setState({pageConfig: res.data});
         }
         else {
           self.setState({projects: res.data});
         }
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve projects.');

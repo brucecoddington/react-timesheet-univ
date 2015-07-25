@@ -42,7 +42,7 @@ const EmployeeRow = React.createClass({
   render () {
     let employee = this.props.employee;
 
-    let classNames = classNames('repeated-item fadeable-row', {
+    let rowClasses = classNames('repeated-item fadeable-row', {
       'faded': employee.deleted
     });
 
@@ -52,7 +52,7 @@ const EmployeeRow = React.createClass({
     });
 
     return (
-      <tr className={classNames} ref={employee._id} onClick={this.showDetail}>
+      <tr className={rowClasses} ref={employee._id} onClick={this.showDetail}>
 
         <td>{employee.username}</td>
         <td>{employee.email}</td>

@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import Store from '../flux/flux.store';
 import actions from '../actions/employee.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
-import _ from 'lodash';
+import rehydrate from '../util/rehydrate';
+import urls from '../util/urls';
 
 class EmployeeStore extends Store {
 
@@ -18,7 +20,7 @@ class EmployeeStore extends Store {
     events[actions.CREATE]  = this.create;
     this.register(events);
 
-    this.setState({
+    let state = rehydrate.setDefaults({
       employee: {},
       pageConfig: {
         data: [],
@@ -28,16 +30,11 @@ class EmployeeStore extends Store {
       }
     });
 
-    return this;
+    this.setState(state);
   }
 
   url (employeeId) {
-    let url = '/users';
-    if (employeeId) {
-      url += '/' + employeeId;
-    }
-
-    return url;
+    return urls.apiResource('users', employeeId);
   }
 
   list (payload) {
@@ -46,6 +43,7 @@ class EmployeeStore extends Store {
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
         self.setState({pageConfig: res.data});
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to retrieve employees.');
@@ -58,7 +56,7 @@ class EmployeeStore extends Store {
     return axios.get(this.url(payload.action.employee._id))
       .then(function (res) {
         self.setState({employee: res.data});
-        return true;
+        return self.getState();
       })
       .catch(function (data) {
         SnackbarAction.error('There was an error getting the employee');
@@ -73,6 +71,7 @@ class EmployeeStore extends Store {
       .then(function (res) {
         self.setState({employee: res.data});
         SnackbarAction.success('Employee : ' + employee.username + ', updated.');
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('There was an error updating employee.');
@@ -88,7 +87,7 @@ class EmployeeStore extends Store {
       .then(function (res) {
         self.setState({employee: res.data});
         SnackbarAction.success('Employee : ' + res.data.username + ', was deleted.');
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to delete employee.');
@@ -104,7 +103,7 @@ class EmployeeStore extends Store {
       .then(function (res) {
         self.setState({employee: res.data});
         SnackbarAction.success('Employee : ' + res.data.username + ', was restored.');
-        return true;
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('Error attempting to restore employee.');
@@ -118,6 +117,7 @@ class EmployeeStore extends Store {
       .then(function (res) {
         self.setState({employee: res.data});
         SnackbarAction.success('Employee : ' + res.data.username + ', created.');
+        return self.getState();
       })
       .catch(function (x) {
         SnackbarAction.error('There was an error creating employee.');

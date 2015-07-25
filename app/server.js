@@ -31,34 +31,34 @@ server.views({
 // register the api routes
 server.register([
   require('./api/routes/file.route'),
-  require('./api/routes/index.route'),
   require('./api/routes/auth.route'),
   require('./api/routes/projects.route'),
-  require('./api/routes/users.route')
+  require('./api/routes/users.route'),
+  require('./api/routes/index.route')
 
 ], (err) => {
   if (err) console.log('Error registering routes: ' + err);
 });
 
 // Setup security session and cookie
-server.register(cookie, (err) => {
-
-  server.auth.strategy('session', 'cookie', true, {
-    password: props.security.cookieSecret,
-    isSecure: false,
-    validateFunc: function (session, callback) {
-
-      cache.get(session.sid, function (err, cached) {
-
-        if (err || !cached) {
-          return callback(err, false);
-        }
-
-        return callback(null, true, cached.user);
-      });
-    }
-  });
-});
+// server.register(cookie, (err) => {
+//
+//   server.auth.strategy('session', 'cookie', true, {
+//     password: props.security.cookieSecret,
+//     isSecure: false,
+//     validateFunc: function (session, callback) {
+//
+//       cache.get(session.sid, function (err, cached) {
+//
+//         if (err || !cached) {
+//           return callback(err, false);
+//         }
+//
+//         return callback(null, true, cached.user);
+//       });
+//     }
+//   });
+// });
 
 // seed the database
 require('./api/services/data').init();
