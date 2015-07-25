@@ -37,7 +37,7 @@ const Projects = React.createClass({
   },
 
   componentWillMount () {
-    if (this.state.pageConfig.data.length === 0) {
+    if (this.state.projects.data.length === 0) {
       this.requestProjects({page: 1});
     }
 
@@ -54,7 +54,7 @@ const Projects = React.createClass({
 
   render () {
 
-    let numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
+    let numPages = Math.ceil(this.state.projects.totalItems / 5);
     let pagesShown = Math.min(numPages, 5);
 
     return (
@@ -66,7 +66,7 @@ const Projects = React.createClass({
         </div>
 
         <div className="row">
-          <ProjectTable projects={this.state.pageConfig.data} store={ProjectStore}/>
+          <ProjectTable projects={this.state.projects.data} store={ProjectStore}/>
         </div>
 
         <div className="ui grid pad-top">

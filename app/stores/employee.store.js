@@ -22,7 +22,7 @@ class EmployeeStore extends Store {
 
     let state = rehydrate.setDefaults({
       employee: {},
-      pageConfig: {
+      employees: {
         data: [],
         totalItems: 0,
         limit: 5,
@@ -42,7 +42,7 @@ class EmployeeStore extends Store {
 
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
-        self.setState({pageConfig: res.data});
+        self.setState({employees: res.data});
         return self.getState();
       })
       .catch(function (x) {

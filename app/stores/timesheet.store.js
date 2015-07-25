@@ -23,7 +23,7 @@ class TimesheetStore extends Store {
 
     let state = rehydrate.setDefaults({
       timesheet: {},
-      pageConfig: {
+      timesheets: {
         data: [],
         totalItems: 0,
         limit: 5,
@@ -44,7 +44,7 @@ class TimesheetStore extends Store {
 
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
-        self.setState({pageConfig: res.data});
+        self.setState({timesheets: res.data});
         return self.getState();
       })
       .catch(function (x) {

@@ -22,7 +22,7 @@ class ProjectStore extends Store {
 
     let state = rehydrate.setDefaults({
       project: {},
-      pageConfig: {
+      projects: {
         data: [],
         totalItems: 0,
         limit: 5,
@@ -45,13 +45,7 @@ class ProjectStore extends Store {
 
     return axios.get(this.url(), {params: payload.action.query})
       .then(function (res) {
-
-        if (!_.isUndefined(res.data.data)) {
-          self.setState({pageConfig: res.data});
-        }
-        else {
-          self.setState({projects: res.data});
-        }
+        self.setState({projects: res.data});
         return self.getState();
       })
       .catch(function (x) {

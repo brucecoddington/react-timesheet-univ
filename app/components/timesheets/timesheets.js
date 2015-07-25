@@ -37,7 +37,7 @@ let Timesheets = React.createClass({
   },
 
   componentWillMount () {
-    if (this.state.pageConfig.data.length === 0) {
+    if (this.state.timesheets.data.length === 0) {
       this.requestTimesheets({page: 1});
     }
     this.store.addChangeListener(this.onChange);
@@ -53,7 +53,7 @@ let Timesheets = React.createClass({
 
   render () {
 
-    let numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
+    let numPages = Math.ceil(this.state.timesheets.totalItems / 5);
     let pagesShown = Math.min(numPages, 5);
 
     return (
@@ -65,7 +65,7 @@ let Timesheets = React.createClass({
         </div>
 
         <div className="row">
-          <TimesheetTable timesheets={this.state.pageConfig.data} store={this.store} />
+          <TimesheetTable timesheets={this.state.timesheets.data} store={this.store} />
         </div>
 
         <div className="ui grid pad-top">

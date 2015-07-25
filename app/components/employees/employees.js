@@ -37,7 +37,7 @@ const Employees = React.createClass({
   },
 
   componentWillMount () {
-    if (this.state.pageConfig.data.length === 0) {
+    if (this.state.employees.data.length === 0) {
       this.requestEmployees({page: 1});
     }
     this.store.addChangeListener(this.onChange);
@@ -53,7 +53,7 @@ const Employees = React.createClass({
 
   render () {
 
-    let numPages = Math.ceil(this.state.pageConfig.totalItems / 5);
+    let numPages = Math.ceil(this.state.employees.totalItems / 5);
     let pagesShown = Math.min(numPages, 5);
 
     return (
@@ -65,7 +65,7 @@ const Employees = React.createClass({
         </div>
 
         <div className="row">
-          <EmployeeTable employees={this.state.pageConfig.data} store={this.store} />
+          <EmployeeTable employees={this.state.employees.data} store={this.store} />
         </div>
 
         <div className="ui grid pad-top">
