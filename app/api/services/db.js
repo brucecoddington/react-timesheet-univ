@@ -6,7 +6,7 @@ module.exports = (() => {
   let db;
   let initDb = function initDb() {
     db = {};
-    
+
     db.users = new DataStore({filename: 'data/db/users.json', autoload: true});
     db.users.ensureIndex({fieldName: 'username', unique: true});
     db.users.ensureIndex({fieldName: 'email', unique: true});
@@ -17,11 +17,11 @@ module.exports = (() => {
     db.projects = new DataStore({filename: 'data/db/projects.json', autoload: true});
     db.projects.ensureIndex({fieldName: 'name', unique: true});
 
-    db.find = function (model, query) {
+    db.find = (model, query) => {
       return Q.ninvoke(db[model], 'find', query);
     };
 
-    db.page = function (model, query) {
+    db.page = (model, query) => {
       let deferred = Q.defer();
 
       let page = query.page || 1;
@@ -33,7 +33,7 @@ module.exports = (() => {
       let pageConfig = {page: page, limit: 5};
 
       db[model]
-        .count(sanitizedQuery, function (err, total) {
+        .count(sanitizedQuery, (err, total) => {
           if (err) {
             deferred.reject(err);
           }
@@ -45,7 +45,7 @@ module.exports = (() => {
             .sort(sort)
             .skip(skip)
             .limit(5)
-            .exec(function (err, docs) {
+            .exec((err, docs) => {
               if (err) {
                 deferred.reject(err);
               }
@@ -58,23 +58,23 @@ module.exports = (() => {
       return deferred.promise;
     };
 
-    db.count = function (model, query) {
+    db.count = (model, query) => {
       return Q.ninvoke(db[model], 'count', query);
     };
 
-    db.insert = function (model, body) {
+    db.insert = (model, body) => {
       return Q.ninvoke(db[model], 'insert', body);
     };
 
-    db.findOne = function (model, query) {
+    db.findOne = (model, query) => {
       return Q.ninvoke(db[model], 'findOne', query);
     };
 
-    db.update = function (model, query, body, options) {
+    db.update = (model, query, body, options) => {
       options = options || {};
       let deferred = Q.defer();
 
-      db[model].update(query, body, options, function (err, numChanged, upsert) {
+      db[model].update(query, body, options, (err, numChanged, upsert) => {
         if (numChanged > 0) {
           deferred.resolve(body);
         }
@@ -86,10 +86,10 @@ module.exports = (() => {
       return deferred.promise;
     };
 
-    db.remove = function (model, query) {
+    db.remove = (model, query) => {
       return Q.ninvoke(db[model], 'remove', query);
     };
-    
+
     return db;
   };
 

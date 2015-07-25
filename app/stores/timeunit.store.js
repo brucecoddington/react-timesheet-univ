@@ -36,80 +36,75 @@ class TimeunitStore extends Store {
   }
 
   list (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
 
     return axios.get(this.url(timesheet._id))
-      .then(function (res) {
-        self.setState({timeunits: res.data});
-        return self.getState();
+      .then(res => {
+        this.setState({timeunits: res.data});
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to retrieve logged hours.');
       });
   }
 
   get (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
     let timeunit = payload.action.timeunit;
 
     return axios.get(this.url(timesheet._id, timeunit._id))
-      .then(function (res) {
-        self.setState({timeunit: res.data});
-        return self.getState();
+      .then(res => {
+        this.setState({timeunit: res.data});
+        return this.getState();
       })
-      .catch(function (data) {
+      .catch((data) => {
         SnackbarAction.error('There was an error getting the time.');
       });
   }
 
   update (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
     let timeunit = payload.action.timeunit;
 
     return axios.put(this.url(timesheet._id, timeunit._id), timeunit)
-      .then(function (res) {
-        self.setState({timeunit: res.data});
+      .then(res => {
+        this.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time has been updated.');
-        return self.getState();
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error updating time.');
       });
   }
 
   remove (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
     let timeunit = payload.action.timeunit;
     timeunit.deleted = true;
 
     return axios.put(this.url(timesheet._id, timeunit._id), timeunit)
-      .then(function (res) {
-        self.setState({timeunit: res.data});
+      .then(res => {
+        this.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was deleted.');
-        return self.getState();
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to delete time.');
       });
   }
 
   restore (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
     let timeunit = payload.action.timeunit;
     timeunit.deleted = false;
 
     let prom = axios.put(this.url(timesheet._id, timeunit._id), timeunit)
-      .then(function (res) {
-        self.setState({timeunit: res.data});
+      .then(res => {
+        this.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was restored.');
-        return self.getState();
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to restore time.');
       });
 
@@ -117,16 +112,15 @@ class TimeunitStore extends Store {
   }
 
   create (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
 
     return axios.post(this.url(timesheet._id), payload.action.timeunit)
-      .then(function (res) {
-        self.setState({timeunit: res.data});
+      .then(res => {
+        this.setState({timeunit: res.data});
         SnackbarAction.success('Your time has been logged.');
-        return self.getState();
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to log your time.');
       });
   }

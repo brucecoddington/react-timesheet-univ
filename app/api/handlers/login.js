@@ -25,11 +25,11 @@ function login (request, reply) {
   }
 
   db.findOne('users', {username: request.payload.username})
-    .then((user) => {
+    .then(user => {
       authenticatedUser = user;
       return validate(request.payload.password, user.password);
     })
-    .then((isValid) => {
+    .then(isValid => {
 
       if (!isValid) {
         Q.reject(Boom.unauthorized('Invalid username or password'));
@@ -41,7 +41,7 @@ function login (request, reply) {
       request.auth.session.set({ sid: props.session.secret });
       return reply(sanitize(authenticatedUser));
     })
-    .fail((err) => {
+    .fail(err => {
       reply(Boom.unauthorized(err.message)).code(401);
     });
 }

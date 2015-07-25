@@ -1,17 +1,16 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 
 import TimesheetActions from '../../actions/timesheet.actions';
 import TimesheetForm from './timesheet.form';
 import TimesheetMixin from '../../mixins/timesheet.mixin';
+import TimesheetStore from '../../stores/timesheet.store';
 
 let TimesheetCreate = React.createClass({
 
-  mixins: [
-    Navigation,
-    State,
-    TimesheetMixin
-  ],
+  mixins: [Navigation, RouterState, TimesheetMixin],
+
+  store: TimesheetStore,
 
   getInitialState () {
     return {

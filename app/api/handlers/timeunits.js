@@ -15,7 +15,7 @@ export default {
 
     db.insert('timeunits', request.payload)
       .then(reply)
-      .fail(function (err) {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -25,7 +25,7 @@ export default {
 
     db.findOne('timeunits', {_id: id})
       .then(reply)
-      .fail(function (err) {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -35,7 +35,7 @@ export default {
 
     db.update('timeunits', {_id: id}, request.payload)
       .then(reply)
-      .fail(function (err) {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -47,7 +47,7 @@ export default {
       .then(() => {
         reply().code(204);
       })
-      .fail(function (err) {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   }

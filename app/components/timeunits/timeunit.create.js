@@ -1,18 +1,20 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 
 import TimeunitForm from './timeunit.form';
 import TimeunitMixin from '../../mixins/timeunit.mixin';
 import TimeunitActions from '../../actions/timeunit.actions';
+import TimeunitStore from '../../stores/timeunit.store';
+
 import TimesheetActions from '../../actions/timesheet.actions';
+import TimesheetStore from '../../stores/timesheet.store';
 
 const TimeunitCreate = React.createClass({
 
-  mixins: [
-    Navigation,
-    State,
-    TimeunitMixin
-  ],
+  mixins: [Navigation, RouterState, TimeunitMixin],
+
+  store: TimeunitStore,
+  timesheetStore: TimesheetStore,
 
   getInitialState () {
     return {

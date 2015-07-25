@@ -10,16 +10,14 @@ export default {
 
       db.page('projects', query)
         .then(reply)
-        .fail((err) => {
+        .fail(err => {
           reply(Boom.badImplementation(err));
         });
     } else {
 
       db.find('projects', query)
-        .then((projects) => {
-          reply(projects);
-        })
-        .fail((err) => {
+        .then(reply)
+        .fail(err => {
           reply(Boom.badImplementation(err));
         });
     }
@@ -28,10 +26,8 @@ export default {
   create (request, reply) {
 
     db.insert('projects', request.payload)
-      .then((project) => {
-        reply(project);
-      })
-      .fail((err) => {
+      .then(reply)
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -40,10 +36,8 @@ export default {
     let id = request.params.projectId;
 
     db.findOne('projects', {_id: id})
-      .then((project) => {
-        reply(project);
-      })
-      .fail((err) => {
+      .then(reply)
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -52,10 +46,8 @@ export default {
     let id = request.params.projectId;
 
     db.update('projects', {_id: id}, request.payload)
-      .then((project) => {
-        reply(project);
-      })
-      .fail((err) => {
+      .then(reply)
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -67,7 +59,7 @@ export default {
       .then(() => {
         reply().code(200);
       })
-      .fail((err) => {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   }

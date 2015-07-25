@@ -12,13 +12,11 @@ let Timesheets = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return TimesheetStore.list({action: {query: {page: 1}}});
+      return TimesheetStore.list({action: {query: query}});
     }
   },
 
-  mixins: [
-    Navigation
-  ],
+  mixins: [Navigation],
 
   store: TimesheetStore,
 

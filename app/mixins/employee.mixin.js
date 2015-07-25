@@ -1,8 +1,4 @@
-import EmployeeStore from '../stores/employee.store';
-
 export default {
-
-  store: EmployeeStore,
 
   validate (event) {
     var field = event.target.name;

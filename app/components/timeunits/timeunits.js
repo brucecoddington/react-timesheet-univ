@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 import _ from 'lodash';
 
 import TimeunitTable from './timeunit.table';
@@ -10,14 +10,17 @@ import LoginStore from '../../stores/login.store';
 
 let Timeunits = React.createClass({
 
+  statics: {
+    fetch (params, query) {
+      return TimeunitStore.list({action: {query: query}});
+    }
+  },
+
   propTypes: {
     timesheet: PropTypes.object.isRequired
   },
 
-  mixins: [
-    Navigation,
-    State
-  ],
+  mixins: [Navigation, RouterState],
 
   store: TimeunitStore,
   timesheetStore: TimesheetStore,

@@ -40,88 +40,83 @@ class TimesheetStore extends Store {
   }
 
   list (payload) {
-    let self = this;
 
     return axios.get(this.url(), {params: payload.action.query})
-      .then(function (res) {
-        self.setState({timesheets: res.data});
-        return self.getState();
+      .then(res => {
+        this.setState({timesheets: res.data});
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to retrieve timesheets.');
       });
   }
 
   get (payload) {
-    let self = this;
 
     return axios.get(this.url(payload.action.timesheet._id))
-      .then(function (res) {
-        self.setState({timesheet: res.data});
-        return self.getState();
+      .then(res => {
+        console.log('res : ' + JSON.stringify(res.data));
+        this.setState({timesheet: res.data});
+        return this.getState();
       })
-      .catch(function (data) {
+      .catch((data) => {
         SnackbarAction.error('There was an error getting the timesheet');
       });
   }
 
   update (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
 
     return axios.put(this.url(timesheet._id), timesheet)
-      .then(function (res) {
-        self.setState({timesheet: res.data});
-        SnackbarAction.success('Timesheet : ' + timesheet.name + ', updated.');
-        return self.getState();
+      .then(res => {
+        this.setState({timesheet: res.data});
+        SnackbarAction.success(`Timesheet : ${timesheet.name}, updated.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error updating timesheet.');
       });
   }
 
   remove (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
     timesheet.deleted = true;
 
     return axios.put(this.url(timesheet._id), timesheet)
-      .then(function (res) {
-        self.setState({timesheet: res.data});
-        SnackbarAction.success('Timesheet : ' + timesheet.name + ', was deleted.');
-        return self.getState();
+      .then(res => {
+        this.setState({timesheet: res.data});
+        SnackbarAction.success(`Timesheet : ${timesheet.name}, was deleted.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to delete timesheet.');
       });
   }
 
   restore (payload) {
-    let self = this;
     let timesheet = payload.action.timesheet;
     timesheet.deleted = false;
 
     return axios.put(this.url(timesheet._id), timesheet)
-      .then(function (res) {
-        self.setState({timesheet: res.data});
-        SnackbarAction.success('Timesheet : ' + timesheet.name + ', was restored.');
-        return self.getState();
+      .then(res => {
+        this.setState({timesheet: res.data});
+        SnackbarAction.success(`Timesheet : ${timesheet.name}, was restored.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to restore timesheet.');
       });
   }
 
   create (payload) {
-    let self = this;
 
     return axios.post(this.url(), payload.action.timesheet)
-      .then(function (res) {
-        self.setState({timesheet: res.data});
-        SnackbarAction.success('Timesheet : ' + timesheet.name + ', created.');
-        return self.getState();
+      .then(res => {
+        this.setState({timesheet: res.data});
+        SnackbarAction.success(`Timesheet : ${timesheet.name}, created.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error creating timesheet.');
       });
   }

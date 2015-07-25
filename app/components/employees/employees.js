@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 import _ from 'lodash';
 
 import EmployeeTable from './employee.table';
@@ -11,14 +11,11 @@ const Employees = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return EmployeeStore.list({action: {query: {page: 1}}});
+      return EmployeeStore.list({action: {query: params}});
     }
   },
 
-  mixins: [
-    Navigation,
-    State
-  ],
+  mixins: [Navigation, RouterState],
 
   store: EmployeeStore,
 

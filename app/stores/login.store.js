@@ -39,88 +39,84 @@ class LoginStore extends Store {
   }
 
   current (payload) {
-    let self = this;
 
     if (this.getState().authenticated) {
-      SnackbarAction.success('Welcome back, ' + this.getState().user.username + '.');
-      return Promise.resolve(self.getState());
+      SnackbarAction.success(`Welcome back, ${this.getState().user.username}.`);
+      return Promise.resolve(this.getState());
     }
     else {
-      return axios.get(self.loginUrl)
-        .then(function (res) {
-          self.setState({
+      return axios.get(this.loginUrl)
+        .then(res => {
+          this.setState({
             authenticated: res.data.authenticated,
             user: res.data.user
           });
-          SnackbarAction.success('Welcome back, ' + res.data.user.username + '.');
-          return self.getState();
+          SnackbarAction.success(`Welcome back, ${res.data.user.username}.`);
+          return this.getState();
         })
-        .catch(function (data) {
+        .catch((data) => {
           SnackbarAction.error('There was an error getting the current user');
         });
     }
   }
 
   login (payload) {
-    let self = this;
 
     return axios.post(this.loginUrl, payload.action.credentials)
-      .then(function (res) {
+      .then(res => {
         let authenticated = res.data.authenticated;
-        self.setState({
+        this.setState({
           authenticated: authenticated,
           user: res.data.user
         });
 
         if (authenticated) {
-          self.setState({authError: null, authReason: null});
+          this.setState({authError: null, authReason: null});
 
-          let pausedTransition = self.getState().pausedTransition;
+          let pausedTransition = this.getState().pausedTransition;
           if (pausedTransition) {
             pausedTransition.retry();
-            self.setState({pausedTransition: null});
+            this.setState({pausedTransition: null});
           }
           else {
             Router.transitionTo('/app/employees');
           }
 
-          SnackbarAction.success('Welcome back, ' + res.data.user.username + '.');
+          SnackbarAction.success(`Welcome back, ${res.data.user.username}.`);
         }
         else {
-          self.setState({authError: self.authErrorMessage});
+          this.setState({authError: this.authErrorMessage});
         }
       })
-      .catch(function (x) {
-        self.setState({authError: self.authErrorMessage});
+      .catch((x) => {
+        this.setState({authError: this.authErrorMessage});
       });
   }
 
   logout (payload) {
-    let self = this;
 
     return axios.post(this.logoutUrl)
-      .then(function (res) {
-        self.initState();
+      .then(res => {
+        this.initState();
         Router.transitionTo('/login');
       })
-      .catch(function (x) {
+      .catch((x) => {
         SnackbarAction.error('There was an error logging out.');
       });
   }
 
   requireAuthenticatedUser (transition) {
-    let self = this;
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       let authCheckInterval = setInterval(() => {
-        if (self.getState().authenticated) {
+        if (this.getState().authenticated) {
           clearInterval(authCheckInterval);
           resolve(true);
         }
       }, 200);
 
-      if (!self.getState().authenticated && transition.path !== '/login') {
-        self.setState({pausedTransition: transition});
+      if (!this.getState().authenticated && transition.path !== '/login') {
+        this.setState({pausedTransition: transition});
         transition.redirect('/login');
       }
     });

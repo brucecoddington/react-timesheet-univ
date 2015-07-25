@@ -5,6 +5,9 @@ export default (routerState) => {
 
   let { params, query } = routerState;
 
+  console.log('params : ' + JSON.stringify(params));
+  console.log('query : ' + JSON.stringify(query));
+
   let fetchers = routerState.routes.filter((route) => {
     return route.handler.fetch;
   })

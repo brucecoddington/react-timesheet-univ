@@ -1,9 +1,6 @@
 import Router from 'react-router';
-import TimesheetStore from '../stores/timesheet.store';
 
 export default {
-
-  store: TimesheetStore,
 
   validate (event) {
     var field = event.target.name;

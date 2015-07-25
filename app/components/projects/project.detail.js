@@ -1,18 +1,23 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 import _ from 'lodash';
 
 import ProjectForm from './project.form';
 import ProjectActions from '../../actions/project.actions';
 import ProjectMixin from '../../mixins/project.mixin';
+import ProjectStore from '../../stores/project.store';
 
 let ProjectDetail = React.createClass({
 
-  mixins: [
-    Navigation,
-    State,
-    ProjectMixin
-  ],
+  statics: {
+    fetch (params) {
+      return ProjectStore.get({action: {project: params}});
+    }
+  },
+
+  mixins: [Navigation, RouterState, ProjectMixin],
+
+  store: ProjectStore,
 
   saveProject (event) {
     event.preventDefault();

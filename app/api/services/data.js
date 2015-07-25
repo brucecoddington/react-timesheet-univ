@@ -16,10 +16,10 @@ function seed() {
     bcrypt.hash(user.password, 10, function (err, hash) {
       user.password = hash;
       db.insert('users', user)
-        .then(function (){
+        .then(() => {
           console.log("Created user " + user.username + " and timesheets.");
         })
-        .fail(function (err) {
+        .fail(err => {
           console.log("Error creating " + user.username + " : " + err);
         });;
     });
@@ -29,11 +29,11 @@ function seed() {
 export default {
   init () {
     db.findOne('users', {username: 'admin'})
-      .then(function (user) {
+      .then(user => {
         console.log("Found user. DB already seeded.");
         if (user === null) seed();
       })
-      .fail(function (err) {
+      .fail(err => {
         console.log("Error : " + err);
       });
   }

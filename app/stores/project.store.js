@@ -41,73 +41,69 @@ class ProjectStore extends Store {
   // sort = property to sort on
   // returns totalItems
   list (payload) {
-    let self = this;
 
     return axios.get(this.url(), {params: payload.action.query})
-      .then(function (res) {
-        self.setState({projects: res.data});
-        return self.getState();
+      .then(res => {
+        this.setState({projects: res.data});
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to retrieve projects.');
       });
   }
 
   get (payload) {
-    let self = this;
 
     return axios.get(this.url(payload.action.project._id))
-      .then(function (res) {
-        self.setState({project: res.data});
-        return true;
+      .then(res => {
+        this.setState({project: res.data});
+        return this.getState();
       })
-      .catch(function (data) {
+      .catch((data) => {
         SnackbarAction.error('There was an error getting the project');
       });
   }
 
   update (payload) {
-    let self = this;
     let project = payload.action.project;
 
     return axios.put(this.url(project._id), project)
-      .then(function (res) {
-        self.setState({project: res.data});
-        SnackbarAction.success('Project : ' + project.name + ', updated.');
+      .then(res => {
+        this.setState({project: res.data});
+        SnackbarAction.success(`Project : ${project.name}, updated.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error updating project.');
       });
   }
 
   remove (payload) {
-    let self = this;
     let project = payload.action.project;
     project.deleted = true;
 
     return axios.put(this.url(project._id), project)
-      .then(function (res) {
-        self.setState({project: res.data});
-        SnackbarAction.success('Project : ' + res.data.name + ', was deleted.');
-        return true;
+      .then(res => {
+        this.setState({project: res.data});
+        SnackbarAction.success(`Project : ${res.data.name}, was deleted.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to delete project.');
       });
   }
 
   restore (payload) {
-    let self = this;
     let project = payload.action.project;
     project.deleted = false;
 
     let prom = axios.put(this.url(project._id), project)
-      .then(function (res) {
-        self.setState({project: res.data});
-        SnackbarAction.success('Project : ' + res.data.name + ', was restored.');
-        return true;
+      .then(res => {
+        this.setState({project: res.data});
+        SnackbarAction.success(`Project : ${res.data.name}, was restored.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to restore project.');
       });
 
@@ -115,14 +111,14 @@ class ProjectStore extends Store {
   }
 
   create (payload) {
-    let self = this;
 
     return axios.post(this.url(), payload.action.project)
-      .then(function (res) {
-        self.setState({project: res.data});
-        SnackbarAction.success('Project : ' + res.data.name + ', created.');
+      .then(res => {
+        this.setState({project: res.data});
+        SnackbarAction.success(`Project : ${res.data.name}, created.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error creating project.');
       });
   }

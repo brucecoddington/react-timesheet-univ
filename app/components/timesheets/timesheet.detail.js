@@ -1,19 +1,24 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 import _ from 'lodash';
 
 import TimesheetForm from './timesheet.form';
 import Timeunits from '../timeunits/timeunits';
 import TimesheetActions from '../../actions/timesheet.actions';
 import TimesheetMixin from '../../mixins/timesheet.mixin';
+import TimesheetStore from '../../stores/timesheet.store';
 
 const TimesheetDetail = React.createClass({
 
-  mixins: [
-    Navigation,
-    State,
-    TimesheetMixin
-  ],
+  statics: {
+    fetch (params, query) {
+      return TimesheetStore.get({action: {timesheet: params}});
+    }
+  },
+
+  mixins: [Navigation, RouterState, TimesheetMixin],
+
+  store: TimesheetStore,
 
   saveTimesheet (event) {
     event.preventDefault();

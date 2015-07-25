@@ -1,13 +1,8 @@
 import Router from 'react-router';
-import TimeunitStore from '../stores/timeunit.store';
-import TimesheetStore from '../stores/timesheet.store';
 import ProjectStore from '../stores/project.store';
 import _ from 'lodash';
 
 export default {
-
-  store: TimeunitStore,
-  timesheetStore: TimesheetStore,
 
   validate (event) {
     var field = event.target.name;

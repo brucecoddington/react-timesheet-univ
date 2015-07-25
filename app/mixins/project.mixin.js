@@ -1,10 +1,7 @@
 import _ from 'lodash';
 import Router from 'react-router';
-import ProjectStore from '../stores/project.store';
 
 export default {
-
-  store: ProjectStore,
 
   validate (event) {
     var field = event.target.name;

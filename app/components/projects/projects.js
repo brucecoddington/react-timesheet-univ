@@ -16,9 +16,7 @@ const Projects = React.createClass({
     }
   },
 
-  mixins: [
-    Navigation
-  ],
+  mixins: [Navigation],
 
   store: ProjectStore,
 

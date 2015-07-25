@@ -1,17 +1,16 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 
 import ProjectForm from './project.form';
 import ProjectActions from '../../actions/project.actions';
 import ProjectMixin from '../../mixins/project.mixin';
+import ProjectStore from '../../stores/project.store';
 
 const ProjectCreate = React.createClass({
 
-  mixins: [
-    Navigation,
-    State,
-    ProjectMixin
-  ],
+  mixins: [Navigation, RouterState, ProjectMixin],
+
+  store: ProjectStore,
 
   getInitialState () {
     return {

@@ -7,19 +7,15 @@ export default {
     if (query.page) {
 
       db.page('users', query)
-        .then((users) => {
-          reply(users);
-        })
-        .fail((err) => {
+        .then(reply)
+        .fail(err => {
           reply(err).code(500);
         });
     } else {
 
       db.find('users', query)
-        .then((users) => {
-          reply(users);
-        })
-        .fail((err) => {
+        .then(reply)
+        .fail(err => {
           reply(err).code(500);
         });
     }
@@ -28,10 +24,8 @@ export default {
   create (request, reply) {
 
     db.insert('users', request.payload)
-      .then(function (user) {
-        reply(user);
-      })
-      .fail((err) => {
+      .then(reply)
+      .fail(err => {
         reply(err).code(500);
       });
   },
@@ -40,10 +34,8 @@ export default {
     let id = request.params.userId;
 
     db.findOne('users', {_id: id})
-      .then(function (user) {
-        reply(user);
-      })
-      .fail((err) => {
+      .then(reply)
+      .fail(err => {
         reply(err).code(500);
       });
   },
@@ -52,10 +44,8 @@ export default {
     let id = request.params.userId;
 
     db.update('users', {_id: id}, request.payload)
-      .then(function (user) {
-        reply(user);
-      })
-      .fail((err) => {
+      .then(reply)
+      .fail(err => {
         reply(err).code(500);
       });
   },
@@ -67,7 +57,7 @@ export default {
       .then(() => {
         res.send(200);
       })
-      .fail((err) => {
+      .fail(err => {
         reply(err).code(500);
       });
   }

@@ -21,7 +21,7 @@ class SnackbarStore extends Store {
   info (payload) {
     let self = this;
 
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       self.setState({
         message: payload.action.message,
         messageType: payload.action.actionType
@@ -34,7 +34,7 @@ class SnackbarStore extends Store {
   error (payload) {
     let self = this;
 
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       self.setState({
         message: payload.action.message,
         messageType: payload.action.actionType
@@ -47,7 +47,7 @@ class SnackbarStore extends Store {
   success (payload) {
     let self = this;
 
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       self.setState({
         message: payload.action.message,
         messageType: payload.action.actionType
@@ -73,7 +73,7 @@ class SnackbarStore extends Store {
   hide () {
     let self = this;
 
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       window.clearTimeout(self.currentTimeout);
       self.currentTimeout = null;
 

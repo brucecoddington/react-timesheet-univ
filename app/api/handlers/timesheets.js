@@ -14,14 +14,14 @@ export default {
     if (query.page) {
       db.page('timesheets', query)
         .then(reply)
-        .fail((err) => {
+        .fail(err => {
           reply(Boom.badImplementation(err));
         });
     }
     else {
       db.find('timesheets', query)
         .then(reply)
-        .fail((err) => {
+        .fail(err => {
           reply(Boom.badImplementation(err));
         });
     }
@@ -35,7 +35,7 @@ export default {
 
     db.insert('timesheets', newTimesheet)
       .then(reply)
-      .fail((err) => {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -46,7 +46,7 @@ export default {
 
     db.findOne('timesheets', {user_id: userId, _id: id})
       .then(reply)
-      .fail((err) => {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -56,7 +56,7 @@ export default {
 
     db.update('timesheets', {_id: id}, request.payload)
       .then(reply)
-      .fail((err) => {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   },
@@ -68,7 +68,7 @@ export default {
       .then(() => {
         reply().code(204);
       })
-      .fail((err) => {
+      .fail(err => {
         reply(Boom.badImplementation(err));
       });
   }

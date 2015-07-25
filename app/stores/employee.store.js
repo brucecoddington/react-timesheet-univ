@@ -38,88 +38,82 @@ class EmployeeStore extends Store {
   }
 
   list (payload) {
-    let self = this;
 
     return axios.get(this.url(), {params: payload.action.query})
-      .then(function (res) {
-        self.setState({employees: res.data});
-        return self.getState();
+      .then(res => {
+        this.setState({employees: res.data});
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to retrieve employees.');
       });
   }
 
   get (payload) {
-    let self = this;
 
     return axios.get(this.url(payload.action.employee._id))
-      .then(function (res) {
-        self.setState({employee: res.data});
-        return self.getState();
+      .then(res => {
+        this.setState({employee: res.data});
+        return this.getState();
       })
-      .catch(function (data) {
+      .catch((data) => {
         SnackbarAction.error('There was an error getting the employee');
       });
   }
 
   update (payload) {
-    let self = this;
     let employee = payload.action.employee;
 
     return axios.put(this.url(employee._id), employee)
-      .then(function (res) {
-        self.setState({employee: res.data});
-        SnackbarAction.success('Employee : ' + employee.username + ', updated.');
-        return self.getState();
+      .then(res => {
+        this.setState({employee: res.data});
+        SnackbarAction.success(`Employee : ${employee.username}, updated.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error updating employee.');
       });
   }
 
   remove (payload) {
-    let self = this;
     let employee = payload.action.employee;
     employee.deleted = true;
 
     return axios.put(this.url(employee._id), employee)
-      .then(function (res) {
-        self.setState({employee: res.data});
-        SnackbarAction.success('Employee : ' + res.data.username + ', was deleted.');
-        return self.getState();
+      .then(res => {
+        this.setState({employee: res.data});
+        SnackbarAction.success(`Employee : ${res.data.username}, was deleted.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to delete employee.');
       });
   }
 
   restore (payload) {
-    let self = this;
     let employee = payload.action.employee;
     employee.deleted = false;
 
     return axios.put(this.url(employee._id), employee)
-      .then(function (res) {
-        self.setState({employee: res.data});
-        SnackbarAction.success('Employee : ' + res.data.username + ', was restored.');
-        return self.getState();
+      .then(res => {
+        this.setState({employee: res.data});
+        SnackbarAction.success(`Employee : ${res.data.username}, was restored.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('Error attempting to restore employee.');
       });
   }
 
   create (payload) {
-    let self = this;
 
     return axios.post(this.url(), payload.action.employee)
-      .then(function (res) {
-        self.setState({employee: res.data});
-        SnackbarAction.success('Employee : ' + res.data.username + ', created.');
-        return self.getState();
+      .then(res => {
+        this.setState({employee: res.data});
+        SnackbarAction.success(`Employee : ${res.data.username}, created.`);
+        return this.getState();
       })
-      .catch(function (x) {
+      .catch(x => {
         SnackbarAction.error('There was an error creating employee.');
       });
   }

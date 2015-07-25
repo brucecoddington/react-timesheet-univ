@@ -34,16 +34,15 @@ export default class Store extends EventEmitter {
   }
 
   register (events) {
-    let self = this;
 
-    dispatcher.register(function (payload) {
+    dispatcher.register((payload) => {
       let action = payload.action;
       let promise = events[action.actionType];
 
       if (!_.isUndefined(promise)) {
-        promise.apply(self, [payload])
+        promise.apply(this, [payload])
           .then(() => {
-            self.emitChange();
+            this.emitChange();
           });
       }
       return true;

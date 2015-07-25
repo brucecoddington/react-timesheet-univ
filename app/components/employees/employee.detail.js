@@ -1,18 +1,23 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation, State as RouterState} from 'react-router';
 import _ from 'lodash';
 
 import EmployeeForm from './employee.form';
 import EmployeeActions from '../../actions/employee.actions';
 import EmployeeMixin from '../../mixins/employee.mixin';
+import EmployeeStore from '../../stores/employee.store';
 
 const EmployeeDetail = React.createClass({
 
-  mixins: [
-    Navigation,
-    State,
-    EmployeeMixin
-  ],
+  statics: {
+    fetch (params) {
+      return EmployeeStore.get({action: {employee: params}});
+    }
+  },
+
+  mixins: [Navigation, RouterState, EmployeeMixin],
+
+  store: EmployeeStore,
 
   saveEmployee (event) {
     event.preventDefault();
