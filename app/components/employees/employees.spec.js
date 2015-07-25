@@ -10,12 +10,12 @@ describe('Employees Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    Employees from './employees');
+    Employees = require('./employees');
     element = TestUtils.renderIntoDocument(<Employees />);
     spies.transitionTo = sinon.stub(element, 'transitionTo');
   });

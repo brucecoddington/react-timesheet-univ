@@ -10,13 +10,13 @@ describe('Snackbar Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
     SnackbarActions from '../../actions/snackbar.actions');
   });
 
   beforeEach(() => {
-    Snackbar from './snackbar');
+    Snackbar = require('./snackbar');
     element = TestUtils.renderIntoDocument(<Snackbar />);
   });
 
@@ -27,7 +27,7 @@ describe('Snackbar Component: ', () => {
   describe('when there is no message', () => {
 
     beforeEach(() => {
-      Snackbar from './snackbar');
+      Snackbar = require('./snackbar');
       element = TestUtils.renderIntoDocument(<Snackbar />);
     });
 
@@ -39,7 +39,7 @@ describe('Snackbar Component: ', () => {
 
   describe('with a success message', () => {
     beforeEach(() => {
-      Snackbar from './snackbar');
+      Snackbar = require('./snackbar');
       element = TestUtils.renderIntoDocument(<Snackbar />);
       element.setState({messageType: 'success', message: 'success'});
     });
@@ -52,7 +52,7 @@ describe('Snackbar Component: ', () => {
 
   describe('with an info message', () => {
     beforeEach(() => {
-      Snackbar from './snackbar');
+      Snackbar = require('./snackbar');
       element = TestUtils.renderIntoDocument(<Snackbar />);
       element.setState({messageType: 'info', message: 'info'});
     });
@@ -65,7 +65,7 @@ describe('Snackbar Component: ', () => {
 
   describe('with an error message', () => {
     beforeEach(() => {
-      Snackbar from './snackbar');
+      Snackbar = require('./snackbar');
       element = TestUtils.renderIntoDocument(<Snackbar />);
       element.setState({messageType: 'error', message: 'error'});
     });
@@ -79,7 +79,7 @@ describe('Snackbar Component: ', () => {
   describe('clicking the close icon', () => {
     beforeEach(() => {
       spies.hide = sinon.stub(SnackbarActions, 'hide');
-      Snackbar from './snackbar');
+      Snackbar = require('./snackbar');
       element = TestUtils.renderIntoDocument(<Snackbar />);
     });
 

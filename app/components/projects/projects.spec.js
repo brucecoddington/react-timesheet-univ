@@ -10,12 +10,12 @@ describe('Projects Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    Projects from './projects');
+    Projects = require('./projects');
     element = TestUtils.renderIntoDocument(<Projects />);
     spies.transitionTo = sinon.stub(element, 'transitionTo');
   });

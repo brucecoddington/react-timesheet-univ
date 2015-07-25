@@ -7,16 +7,16 @@ describe('Save Button: ', () => {
     button,
     testCtrl,
     spies = {};
-    
+
   let React, TestUtils
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    SaveButton from './save.button');
+    SaveButton = require('./save.button');
     testCtrl = { onSave: _.noop };
     spies.save = sinon.spy(testCtrl, 'onSave');
 

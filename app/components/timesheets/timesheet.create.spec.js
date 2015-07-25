@@ -10,13 +10,13 @@ describe('Timesheet Create Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    TimesheetCreate from './timesheet.create');
-    TimesheetActions from '../../actions/timesheet.actions');
+    TimesheetCreate = require('./timesheet.create');
+    TimesheetActions = require('../../actions/timesheet.actions');
 
     element = TestUtils.renderIntoDocument(<TimesheetCreate />);
 

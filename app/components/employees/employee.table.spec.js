@@ -12,9 +12,9 @@ describe('Employee Table Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    EmployeeStore from '../../stores/employee.store');
+    EmployeeStore = require('../../stores/employee.store');
   });
 
   beforeEach(() => {

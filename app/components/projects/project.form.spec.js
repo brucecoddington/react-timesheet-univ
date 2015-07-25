@@ -5,7 +5,7 @@ describe('Project Form Component: ', () => {
   let ProjectForm,
     CancleButton,
     project,
-    errors, 
+    errors,
     element,
     spies = {},
     proxies;
@@ -13,7 +13,7 @@ describe('Project Form Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
     CancelButton from '../common/buttons/cancel.button');
   });
@@ -27,7 +27,7 @@ describe('Project Form Component: ', () => {
     spies.toggleAdmin = sinon.stub();
     spies.onSave = sinon.stub();
 
-    ProjectForm from './project.form');
+    ProjectForm = require('./project.form');
     element = TestUtils.renderIntoDocument(
       <ProjectForm project={project}
         errors={errors}

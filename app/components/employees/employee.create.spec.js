@@ -10,13 +10,13 @@ describe('Employee Create Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    EmployeeCreate from './employee.create');
-    EmployeeActions from '../../actions/employee.actions');
+    EmployeeCreate = require('./employee.create');
+    EmployeeActions = require('../../actions/employee.actions');
 
     element = TestUtils.renderIntoDocument(<EmployeeCreate />);
 

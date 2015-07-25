@@ -10,13 +10,13 @@ describe('Project Create Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    ProjectCreate from './project.create');
-    ProjectActions from '../../actions/project.actions');
+    ProjectCreate = require('./project.create');
+    ProjectActions = require('../../actions/project.actions');
 
     element = TestUtils.renderIntoDocument(<ProjectCreate />);
 

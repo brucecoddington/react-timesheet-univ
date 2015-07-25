@@ -13,21 +13,21 @@ describe('Timeunit Row Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    TimeunitStore from '../../stores/timeunit.store');
-    TimeunitRow from './timeunit.row');
-    SnackbarActions from '../../actions/snackbar.actions');
-    TimeunitActions from '../../actions/timeunit.actions');
+    TimeunitStore = require('../../stores/timeunit.store');
+    TimeunitRow = require('./timeunit.row');
+    SnackbarActions = require('../../actions/snackbar.actions');
+    TimeunitActions = require('../../actions/timeunit.actions');
   });
 
   it('should instantiate the TimeunitRow', () => {
     element = TestUtils.renderIntoDocument(
       <TimeunitRow timesheet={{_id: 1}}
-        timeunit={{_id: 1}} 
+        timeunit={{_id: 1}}
         store={TimeunitStore} />
     );
     expect(TestUtils.isCompositeComponent(element)).to.be.true;
@@ -46,8 +46,8 @@ describe('Timeunit Row Component: ', () => {
         spies.error = sinon.stub(SnackbarActions, 'error');
 
         element = TestUtils.renderIntoDocument(
-          <TimeunitRow timeunit={timeunit} 
-            timesheet={timesheet} 
+          <TimeunitRow timeunit={timeunit}
+            timesheet={timesheet}
             store={TimeunitStore} />
         );
         element.showDetail();
@@ -90,7 +90,7 @@ describe('Timeunit Row Component: ', () => {
       });
 
       it('should transition to the detail route', () => {
-        expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.detail', 
+        expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.detail',
           { _id: "timesheetId", timeunit_id: "timeunitId", user_id: "userId" });
       });
     });
@@ -109,7 +109,7 @@ describe('Timeunit Row Component: ', () => {
 
       element = TestUtils.renderIntoDocument(
         <TimeunitRow timeunit={timeunit}
-          timesheet={timesheet} 
+          timesheet={timesheet}
           store={TimeunitStore} />
       );
       button = TestUtils.findRenderedDOMComponentWithClass(element, 'button');
@@ -142,7 +142,7 @@ describe('Timeunit Row Component: ', () => {
 
       element = TestUtils.renderIntoDocument(
         <TimeunitRow timeunit={timeunit}
-          timesheet={timesheet} 
+          timesheet={timesheet}
           store={TimeunitStore} />
       );
       button = TestUtils.findRenderedDOMComponentWithClass(element, 'button');

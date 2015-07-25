@@ -12,15 +12,15 @@ describe('Employee Row Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    EmployeeStore from '../../stores/employee.store');
-    EmployeeRow from './employee.row');
-    SnackbarActions from '../../actions/snackbar.actions');
-    EmployeeActions from '../../actions/employee.actions');
+    EmployeeStore = require('../../stores/employee.store');
+    EmployeeRow = require('./employee.row');
+    SnackbarActions = require('../../actions/snackbar.actions');
+    EmployeeActions = require('../../actions/employee.actions');
   });
 
   it('should instantiate the EmployeeRow', () => {

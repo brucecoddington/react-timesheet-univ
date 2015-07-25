@@ -11,17 +11,17 @@ describe('Timeunits Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    Timeunits from './timeunits');
+    Timeunits = require('./timeunits');
 
     timesheet = {_id: 'timesheetId'};
 
     element = TestUtils.renderIntoDocument(<Timeunits timesheet={timesheet}/>);
-    
+
     spies.transitionTo = sinon.stub(element, 'transitionTo');
     spies.getParams = sinon.stub(element, 'getParams').returns(
       {user_id: 'userId', _id: 'timesheetId', timeunit_id: 'timeunitId'});
@@ -39,7 +39,7 @@ describe('Timeunits Component: ', () => {
     it('should transition to the create employee route', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
-      
+
       expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.create', {
         user_id: 'userId', _id: 'timesheetId', timeunit_id: 'timeunitId'});
     });

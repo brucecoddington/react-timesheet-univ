@@ -12,9 +12,9 @@ describe('Timesheet Form Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    CancelButton from '../common/buttons/cancel.button');
+    CancelButton = require('../common/buttons/cancel.button');
   });
 
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Timesheet Form Component: ', () => {
     spies.toggleAdmin = sinon.stub();
     spies.onSave = sinon.stub();
 
-    TimesheetForm from './timesheet.form');
+    TimesheetForm = require('./timesheet.form');
     element = TestUtils.renderIntoDocument(
       <TimesheetForm timesheet={timesheet}
         errors={errors}

@@ -11,12 +11,12 @@ describe('Auth Error Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    AuthError from './auth.error');
+    AuthError = require('./auth.error');
     element = TestUtils.renderIntoDocument(<AuthError authError="none" />);
   });
 

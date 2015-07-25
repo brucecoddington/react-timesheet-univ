@@ -12,15 +12,15 @@ describe('Timeunit Table Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    TimeunitStore from '../../stores/timeunit.store');
+    TimeunitStore = require('../../stores/timeunit.store');
   });
 
   beforeEach(() => {
     timeunits = [{}, {}];
 
-    TimeunitTable from './timeunit.table');
+    TimeunitTable = require('./timeunit.table');
     element = TestUtils.renderIntoDocument(
       <TimeunitTable timeunits={timeunits} store={TimeunitStore} />
     );

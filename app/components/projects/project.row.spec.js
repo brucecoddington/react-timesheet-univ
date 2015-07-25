@@ -12,15 +12,15 @@ describe('Project Row Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    ProjectStore from '../../stores/project.store');
-    ProjectRow from './project.row');
-    SnackbarActions from '../../actions/snackbar.actions');
-    ProjectActions from '../../actions/project.actions');
+    ProjectStore = require('../../stores/project.store');
+    ProjectRow = require('./project.row');
+    SnackbarActions = require('../../actions/snackbar.actions');
+    ProjectActions = require('../../actions/project.actions');
   });
 
   it('should instantiate the ProjectRow', () => {

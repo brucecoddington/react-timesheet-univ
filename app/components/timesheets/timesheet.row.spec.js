@@ -12,15 +12,15 @@ describe('Timesheet Row Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    TimesheetStore from '../../stores/timesheet.store');
-    TimesheetRow from './timesheet.row');
-    SnackbarActions from '../../actions/snackbar.actions');
-    TimesheetActions from '../../actions/timesheet.actions');
+    TimesheetStore = require('../../stores/timesheet.store');
+    TimesheetRow = require('./timesheet.row');
+    SnackbarActions = require('../../actions/snackbar.actions');
+    TimesheetActions = require('../../actions/timesheet.actions');
   });
 
   it('should instantiate the TimesheetRow', () => {

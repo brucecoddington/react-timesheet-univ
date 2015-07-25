@@ -12,15 +12,15 @@ describe('Timesheet Table Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    TimesheetStore from '../../stores/timesheet.store');
+    TimesheetStore = require('../../stores/timesheet.store');
   });
 
   beforeEach(() => {
     timesheets = [{}, {}];
 
-    TimesheetTable from './timesheet.table');
+    TimesheetTable = require('./timesheet.table');
     element = TestUtils.renderIntoDocument(
       <TimesheetTable timesheets={timesheets} store={TimesheetStore} />
     );

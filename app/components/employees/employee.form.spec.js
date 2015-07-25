@@ -13,7 +13,7 @@ describe('Employee Form Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
     CancelButton from '../common/buttons/cancel.button');
   });
@@ -27,7 +27,7 @@ describe('Employee Form Component: ', () => {
     spies.toggleAdmin = sinon.stub();
     spies.onSave = sinon.stub();
 
-    EmployeeForm from './employee.form');
+    EmployeeForm = require('./employee.form');
     element = TestUtils.renderIntoDocument(
       <EmployeeForm employee={employee}
         errors={errors}

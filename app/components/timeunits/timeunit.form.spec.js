@@ -12,9 +12,9 @@ describe('Timeunit Form Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    CancelButton from '../common/buttons/cancel.button');
+    CancelButton = require('../common/buttons/cancel.button');
   });
 
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Timeunit Form Component: ', () => {
     spies.toggleAdmin = sinon.stub();
     spies.onSave = sinon.stub();
 
-    TimeunitForm from './timeunit.form');
+    TimeunitForm = require('./timeunit.form');
     element = TestUtils.renderIntoDocument(
       <TimeunitForm timeunit={timeunit}
         errors={errors}

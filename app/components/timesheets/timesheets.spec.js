@@ -10,12 +10,12 @@ describe('Timesheets Component: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    Timesheets from './timesheets');
+    Timesheets = require('./timesheets');
     element = TestUtils.renderIntoDocument(<Timesheets />);
     spies.transitionTo = sinon.stub(element, 'transitionTo');
   });

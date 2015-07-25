@@ -10,12 +10,12 @@ describe('Cancel Button: ', () => {
   let React, TestUtils;
 
   beforeEach(() => {
-    React from 'react/addons');
+    React = require('react/addons');
     TestUtils = React.addons.TestUtils;
   });
 
   beforeEach(() => {
-    CancelButton from './cancel.button');
+    CancelButton = require('./cancel.button');
     testCtrl = { onCancel: _.noop };
     spies.cancel = sinon.spy(testCtrl, 'onCancel');
 
