@@ -6,6 +6,8 @@ import ProjectActions from '../../actions/project.actions';
 import ProjectMixin from '../../mixins/project.mixin';
 import ProjectStore from '../../stores/project.store';
 
+import SectionHeader from '../common/section';
+
 const ProjectCreate = React.createClass({
 
   mixins: [Navigation, ProjectMixin],
@@ -44,13 +46,18 @@ const ProjectCreate = React.createClass({
 
   render () {
     return (
-      <ProjectForm project={this.state.project}
-        errors={this.state.errors}
-        hasErrors={this.hasErrors}
-        validateAll={this.validateAll}
-        saveText={this.state.saveText}
-        onSave={this.saveProject}
-        validate={this.validate} />
+      <div>
+        <div className="row">
+          <SectionHeader header='Create Project' />
+        </div>
+        <ProjectForm project={this.state.project}
+          errors={this.state.errors}
+          hasErrors={this.hasErrors}
+          validateAll={this.validateAll}
+          saveText={this.state.saveText}
+          onSave={this.saveProject}
+          validate={this.validate} />
+      </div>
     );
   }
 });

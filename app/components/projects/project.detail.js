@@ -7,6 +7,8 @@ import ProjectActions from '../../actions/project.actions';
 import ProjectMixin from '../../mixins/project.mixin';
 import ProjectStore from '../../stores/project.store';
 
+import SectionHeader from '../common/section';
+
 let ProjectDetail = React.createClass({
 
   statics: {
@@ -62,13 +64,18 @@ let ProjectDetail = React.createClass({
 
   render  () {
     return (
-      <ProjectForm project={this.state.project}
-        errors={this.state.errors}
-        validateAll={this.validateAll}
-        hasErrors={this.hasErrors}
-        saveText={this.state.saveText}
-        onSave={this.saveProject}
-        validate={this.validate}/>
+      <div>
+        <div className="row">
+          <SectionHeader header='Edit Project' />
+        </div>
+        <ProjectForm project={this.state.project}
+          errors={this.state.errors}
+          validateAll={this.validateAll}
+          hasErrors={this.hasErrors}
+          saveText={this.state.saveText}
+          onSave={this.saveProject}
+          validate={this.validate}/>
+      </div>
     );
   }
 });

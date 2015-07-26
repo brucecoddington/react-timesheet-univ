@@ -9,6 +9,8 @@ import TimeunitStore from '../../stores/timeunit.store';
 import TimesheetActions from '../../actions/timesheet.actions';
 import TimesheetStore from '../../stores/timesheet.store';
 
+import SectionHeader from '../common/section';
+
 const TimeunitCreate = React.createClass({
 
   mixins: [Navigation, TimeunitMixin],
@@ -62,16 +64,21 @@ const TimeunitCreate = React.createClass({
 
   render () {
     return (
-      <TimeunitForm timeunit={this.state.timeunit}
-        errors={this.state.errors}
-        validateAll={this.validateAll}
-        hasErrors={this.hasErrors}
-        saveText={this.state.saveText}
-        onSave={this.saveTimeunit}
-        validate={this.validate}
-        validateProject={this.validateProject}
-        validateDateWorked={this.validateDateWorked}
-        params={this.props.params} />
+      <div>
+        <div className="row">
+          <SectionHeader header='Log Time' />
+        </div>
+        <TimeunitForm timeunit={this.state.timeunit}
+          errors={this.state.errors}
+          validateAll={this.validateAll}
+          hasErrors={this.hasErrors}
+          saveText={this.state.saveText}
+          onSave={this.saveTimeunit}
+          validate={this.validate}
+          validateProject={this.validateProject}
+          validateDateWorked={this.validateDateWorked}
+          params={this.props.params} />
+      </div>
     );
   }
 });

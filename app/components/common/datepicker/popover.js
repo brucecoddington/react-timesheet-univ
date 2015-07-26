@@ -1,4 +1,3 @@
-// import Tether from 'tether';
 import React, {PropTypes} from 'react/addons';
 
 const Popover = React.createClass({
@@ -11,10 +10,10 @@ const Popover = React.createClass({
   },
 
   componentWillMount () {
-    popoverContainer = document.createElement('span');
-    popoverContainer.className = 'datepicker-calendar-container';
+    window.popoverContainer = document.createElement('span');
+    window.popoverContainer.className = 'datepicker-calendar-container';
 
-    this._popoverElement = popoverContainer;
+    this._popoverElement = window.popoverContainer;
 
     document.querySelector('body').appendChild(this._popoverElement);
   },
@@ -63,7 +62,8 @@ const Popover = React.createClass({
     if (this._tether != null) {
       this._tether.setOptions(this._tetherOptions());
     } else {
-      // this._tether = new Tether(this._tetherOptions());
+      let Tether = require('tether');
+      this._tether = new Tether(this._tetherOptions());
     }
   },
 

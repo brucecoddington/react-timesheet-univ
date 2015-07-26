@@ -8,6 +8,7 @@ import TimesheetStore from '../../stores/timesheet.store';
 import LoginStore from '../../stores/login.store';
 
 import Paginator from '../common/navigation/paginator';
+import SectionHeader from '../common/section';
 
 let Timesheets = React.createClass({
 
@@ -57,6 +58,9 @@ let Timesheets = React.createClass({
 
     return (
       <div>
+        <div className="row">
+          <SectionHeader header='Timesheets' />
+        </div>
         <div className="row">
           <button className="ui right floated primary button pad-bottom" type="button" onClick={this.createNew}>
             New Timesheet

@@ -13,6 +13,7 @@
 {"name":"UserFour","beginDate":"2013-12-09T00:00:00.000Z","endDate":"2013-12-15T00:00:00.000Z","description":"Timesheet four for user","user_id":"Yvg1FGyd9YMvtBMv","_id":"a5H7h07111CPXZqn"}
 {"name":"UserNine","beginDate":"2013-01-13T00:00:00.000Z","endDate":"2013-01-19T00:00:00.000Z","description":"Timesheet nine for user","user_id":"Yvg1FGyd9YMvtBMv","_id":"bCNF4tewOOnGe2nA"}
 {"name":"AdminFour","beginDate":"2013-12-09T00:00:00.000Z","endDate":"2013-12-15T00:00:00.000Z","description":"Timesheet four for admin","user_id":"6pykHAkqq1KiaKAX","_id":"bRfmC8OOah2z7wrY"}
+{"name":"Make a new one","description":"A timesheet created server-side?","beginDate":"2015-07-25T05:00:00.000Z","user_id":"all","_id":"cd8fPTCltym041Jp"}
 {"name":"AdminTen","beginDate":"2014-01-20T00:00:00.000Z","endDate":"2014-01-26T00:00:00.000Z","description":"Timesheet ten for admin","user_id":"6pykHAkqq1KiaKAX","_id":"ch4vXPViRn19vyrS"}
 {"name":"AdminSix","beginDate":"2013-12-23T00:00:00.000Z","endDate":"2013-12-29T00:00:00.000Z","description":"Timesheet six for admin","user_id":"6pykHAkqq1KiaKAX","_id":"ffz5GAggsbqftGVf"}
 {"name":"AdminNine","beginDate":"2014-01-13T00:00:00.000Z","endDate":"2014-01-19T00:00:00.000Z","description":"Timesheet nine for admin","user_id":"6pykHAkqq1KiaKAX","_id":"irRRnGN23OeJ4e7S"}

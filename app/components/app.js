@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {PropTypes} from 'react/addons';
 import Router from 'react-router';
 
@@ -21,10 +22,7 @@ const App = React.createClass({
       <div>
         <NavBar />
         <div className="container">
-          <SectionHeader />
-          <div className="row">
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
 
         <Snackbar />

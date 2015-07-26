@@ -10,6 +10,8 @@ import TimesheetMixin from '../../mixins/timesheet.mixin';
 import TimesheetStore from '../../stores/timesheet.store';
 import TimeunitStore from '../../stores/timeunit.store';
 
+import SectionHeader from '../common/section';
+
 const TimesheetDetail = React.createClass({
 
   statics: {
@@ -66,6 +68,9 @@ const TimesheetDetail = React.createClass({
   render () {
     return (
       <div>
+        <div className="row">
+          <SectionHeader header='Edit Timesheet' />
+        </div>
         <div className="row">
           <TimesheetForm timesheet={this.state.timesheet}
             saveText={this.state.saveText}

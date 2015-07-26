@@ -6,6 +6,8 @@ import TimesheetForm from './timesheet.form';
 import TimesheetMixin from '../../mixins/timesheet.mixin';
 import TimesheetStore from '../../stores/timesheet.store';
 
+import SectionHeader from '../common/section';
+
 let TimesheetCreate = React.createClass({
 
   mixins: [Navigation, TimesheetMixin],
@@ -32,15 +34,20 @@ let TimesheetCreate = React.createClass({
 
   render () {
     return (
-      <TimesheetForm timesheet={this.state.timesheet}
-        saveText={this.state.saveText}
-        errors={this.state.errors}
-        hasErrors={this.hasErrors}
-        onSave={this.saveTimesheet}
-        validate={this.validate}
-        validateAll={this.validateAll}
-        validateBeginDate={this.validateBeginDate}
-        validateEndDate={this.validateEndDate}/>
+      <div>
+        <div className="row">
+          <SectionHeader header='Create Timesheet' />
+        </div>
+        <TimesheetForm timesheet={this.state.timesheet}
+          saveText={this.state.saveText}
+          errors={this.state.errors}
+          hasErrors={this.hasErrors}
+          onSave={this.saveTimesheet}
+          validate={this.validate}
+          validateAll={this.validateAll}
+          validateBeginDate={this.validateBeginDate}
+          validateEndDate={this.validateEndDate}/>
+      </div>
     );
   }
 });

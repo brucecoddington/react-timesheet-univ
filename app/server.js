@@ -5,11 +5,11 @@ import cookie from 'hapi-auth-cookie';
 import props from './properties';
 import jade from 'jade';
 
-import FileRoute from './api/routes/file.route';
-import AuthRoute from './api/routes/auth.route';
-import ProjectsRoute from './api/routes/projects.route';
-import UsersRoute from './api/routes/users.route';
-import IndexRoute from './api/routes/index.route';
+import FileRoutes from './api/routes/file.route';
+import AuthRoutes from './api/routes/auth.route';
+import ProjectsRoutes from './api/routes/projects.route';
+import UsersRoutes from './api/routes/users.route';
+import IndexRoutes from './api/routes/index.route';
 
 console.log('Booting Development Server');
 
@@ -37,7 +37,7 @@ server.views({
 
 // register the api routes
 server.register([
-  FileRoute, AuthRoute, ProjectsRoute, UsersRoute, IndexRoute
+  FileRoutes, AuthRoutes, ProjectsRoutes, UsersRoutes, IndexRoutes
 ], err => {
   if (err) console.log('Error registering routes: ' + err);
 });
@@ -52,11 +52,8 @@ server.register([
 //
 //       cache.get(session.sid, function (err, cached) {
 //         if (err || !cached) {
-//           console.log('authenticated false');
 //           return callback(err, false);
 //         }
-//
-//         console.log('authenticated true');
 //         return callback(null, true, cached.user);
 //       });
 //     }

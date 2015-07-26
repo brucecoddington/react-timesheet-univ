@@ -52,11 +52,9 @@ class TimesheetStore extends Store {
   }
 
   get (payload) {
-    console.log('timesheet : ' + JSON.stringify(payload.action.timesheet));
 
     return axios.get(this.url(payload.action.timesheet._id))
       .then(res => {
-        console.log('timeshett get res : ' + JSON.stringify(res));
         this.setState({timesheet: res.data});
         return this.getState();
       })

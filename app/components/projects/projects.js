@@ -6,6 +6,7 @@ import ProjectTable from './project.table';
 import ProjectActions from '../../actions/project.actions';
 import ProjectStore from '../../stores/project.store';
 
+import SectionHeader from '../common/section';
 import Paginator from '../common/navigation/paginator';
 
 const Projects = React.createClass({
@@ -57,6 +58,10 @@ const Projects = React.createClass({
 
     return (
       <div>
+        <div className="row">
+          <SectionHeader header='Projects' />
+        </div>
+
         <div className="one column row">
           <button className="ui right floated primary button pad-bottom" type="button" onClick={this.createNew}>
             New Project

@@ -7,6 +7,8 @@ import EmployeeActions from '../../actions/employee.actions';
 import EmployeeMixin from '../../mixins/employee.mixin';
 import EmployeeStore from '../../stores/employee.store';
 
+import SectionHeader from '../common/section';
+
 const EmployeeDetail = React.createClass({
 
   statics: {
@@ -66,14 +68,19 @@ const EmployeeDetail = React.createClass({
 
   render () {
     return (
-      <EmployeeForm employee={this.state.employee}
-        errors={this.state.errors}
-        validateAll={this.validateAll}
-        hasErrors={this.hasErrors}
-        saveText={this.state.saveText}
-        onSave={this.saveEmployee}
-        validate={this.validate}
-        toggleAdmin={this.toggleAdmin} />
+      <div>
+        <div className="row">
+          <SectionHeader header='Timesheets' />
+        </div>
+        <EmployeeForm employee={this.state.employee}
+          errors={this.state.errors}
+          validateAll={this.validateAll}
+          hasErrors={this.hasErrors}
+          saveText={this.state.saveText}
+          onSave={this.saveEmployee}
+          validate={this.validate}
+          toggleAdmin={this.toggleAdmin} />
+      </div>
     );
   }
 });

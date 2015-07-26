@@ -5,7 +5,9 @@ import _ from 'lodash';
 import EmployeeTable from './employee.table';
 import EmployeeActions from '../../actions/employee.actions';
 import EmployeeStore from '../../stores/employee.store';
+
 import Paginator from '../common/navigation/paginator';
+import SectionHeader from '../common/section';
 
 const Employees = React.createClass({
 
@@ -55,6 +57,10 @@ const Employees = React.createClass({
 
     return (
       <div>
+        <div className="row">
+          <SectionHeader header='Employees' />
+        </div>
+
         <div className="row">
           <button className="ui right floated primary button pad-bottom" type="button" onClick={this.createNew}>
             New Employee
