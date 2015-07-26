@@ -93,8 +93,8 @@ describe('Project Detail Component: ', () => {
         expect(proxies['../../actions/project.actions'].update).to.have.been.called;
       });
 
-      it('should transition back to the project list', () => { 
-        expect(spies.transitionTo).to.have.been.calledWith('projects');
+      it('should transition back to the project list', () => {
+        expect(spies.transitionTo).to.have.been.calledWith('/projects');
       });
     });
   });

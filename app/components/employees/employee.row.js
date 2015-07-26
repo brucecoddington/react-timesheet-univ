@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation} from 'react-router';
 import classNames from 'classnames';
 
 import EmployeeActions from '../../actions/employee.actions';
@@ -12,10 +12,7 @@ const EmployeeRow = React.createClass({
     store: PropTypes.object
   },
 
-  mixins: [
-    Navigation,
-    State
-  ],
+  mixins: [Navigation],
 
   showDetail () {
     let employee = this.props.employee;
@@ -24,7 +21,7 @@ const EmployeeRow = React.createClass({
       return;
     }
     this.props.store.setState({employee: employee});
-    this.transitionTo('employees.detail', {_id: employee._id});
+    this.transitionTo(`/employees/detail/${employee._id}`);
   },
 
   remove (e) {

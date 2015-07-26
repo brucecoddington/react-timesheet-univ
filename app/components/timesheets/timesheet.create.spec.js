@@ -60,7 +60,7 @@ describe('Timesheet Create Component: ', () => {
       });
 
       it('should transition back to the timesheet list', () => {
-        expect(spies.transitionTo).to.have.been.calledWith('timesheets', {user_id: 'userId'});
+        expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets');
       });
     });
   });

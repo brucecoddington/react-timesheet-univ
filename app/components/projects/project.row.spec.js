@@ -73,7 +73,7 @@ describe('Project Row Component: ', () => {
       });
 
       it('should transition to the detail route', () => {
-        expect(spies.transitionTo).to.have.been.calledWith('projects.detail', {_id: 'abc123'});
+        expect(spies.transitionTo).to.have.been.calledWith('/projects/abc123'});
       });
     });
   });

@@ -5,6 +5,7 @@ import _ from 'lodash';
 import TimesheetTable from './timesheet.table';
 import TimesheetActions from '../../actions/timesheet.actions';
 import TimesheetStore from '../../stores/timesheet.store';
+import LoginStore from '../../stores/login.store';
 
 import Paginator from '../common/navigation/paginator';
 
@@ -27,7 +28,7 @@ let Timesheets = React.createClass({
   },
 
   createNew () {
-    return this.transitionTo('timesheets.create', {user_id: '123'});
+    return this.transitionTo(`/employees/${LoginStore.getUserId()}/timesheets`);
   },
 
   onChange () {

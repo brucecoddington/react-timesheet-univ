@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State as RouterState} from 'react-router';
+import Router, {Navigation} from 'react-router';
 import _ from 'lodash';
 
 import EmployeeTable from './employee.table';
@@ -15,7 +15,7 @@ const Employees = React.createClass({
     }
   },
 
-  mixins: [Navigation, RouterState],
+  mixins: [Navigation],
 
   store: EmployeeStore,
 
@@ -26,7 +26,7 @@ const Employees = React.createClass({
   },
 
   createNew () {
-    this.transitionTo('employees.create');
+    this.transitionTo('/employees/create');
   },
 
   onChange () {

@@ -68,7 +68,7 @@ describe('Timeunit Create Component: ', () => {
       });
 
       it('should transition back to the timesheet detail for the timeunit', () => {
-        expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail', {user_id: 'userId', _id: 'abc123'});
+        expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets/abc123');
       });
     });
   });

@@ -54,7 +54,7 @@ describe('Project Form Component: ', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(cancel, 'button');
       TestUtils.Simulate.click(button);
 
-      expect(spies.transitionTo).to.have.been.calledWith('projects');
+      expect(spies.transitionTo).to.have.been.calledWith('/projects');
     });
   });
 });

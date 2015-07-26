@@ -1,6 +1,3 @@
-import React from 'react/addons';
-import Router, {Route, Redirect, DefaultRoute, NotFoundRoute} from 'react-router';
-
 import Index from './components/index';
 import App from './components/app';
 import Login from './components/login/login';
@@ -21,28 +18,27 @@ import TimeunitsCreate from './components/timeunits/timeunit.create';
 import TimeunitsEdit from './components/timeunits/timeunit.detail';
 
 // Initialize the routes
-export default (
-  <Route name="index" path="/" handler={Index}>
-    <Route name='login' path='/login' handler={Login} />
+export default {
+  path: '/', component: Index,
+  childRoutes: [
+    {path: 'login', component: Login},
+    {path: '/', component: App,
+      childRoutes: [
+        {path: 'projects', component: Projects},
+        {path: 'projects/detail/:_id', component: ProjectsDetail},
+        {path: 'projects/create', component: ProjectsCreate},
 
-    <Route name='app' path="/" handler={App}>
+        {path: 'employees', component: Employees},
+        {path: 'employees/detail/:_id', component: EmployeesDetail},
+        {path: 'employees/create', component: EmployeesCreate},
 
-      <Route name='projects'          path='/projects'              handler={Projects} />
-      <Route name='projects.detail'   path='/projects/detail/:_id'  handler={ProjectsDetail} />
-      <Route name='projects.create'   path='/projects/create'       handler={ProjectsCreate} />
+        {path: 'employees/:user_id/timesheets', component: Timesheets},
+        {path: 'employees/:user_id/timesheets/create', component: TimesheetsCreate},
+        {path: 'employees/:user_id/timesheets/detail/:_id', component: TimesheetsDetail},
 
-      <Route name='employees'         path='/employees'             handler={Employees} />
-      <Route name='employees.detail'  path='/employees/detail/:_id' handler={EmployeesDetail} />
-      <Route name='employees.create'  path='/employees/create'      handler={EmployeesCreate} />
-
-      <Route name='timesheets'        path='/employees/:user_id/timesheets'             handler={Timesheets} />
-      <Route name='timesheets.create' path='/employees/:user_id/timesheets/create'      handler={TimesheetsCreate} />
-      <Route name='timesheets.detail' path='/employees/:user_id/timesheets/detail/:_id' handler={TimesheetsDetail} />
-
-      <Route name='timesheets.detail.timeunits.create' path='/employees/:user_id/timesheets/detail/:_id/timeunits/create'            handler={TimeunitsCreate} />
-      <Route name='timesheets.detail.timeunits.detail'   path='/employees/:user_id/timesheets/detail/:_id/timeunits/edit/:timeunit_id' handler={TimeunitsEdit} />
-
-    </Route>
-
-  </Route>
-);
+        {path: 'employees/:user_id/timesheets/detail/:_id/timeunits/create', component: TimeunitsCreate},
+        {path: 'employees/:user_id/timesheets/detail/:_id/timeunits/edit/:timeunit_id', component: TimeunitsEdit}
+      ]
+    }
+  ]
+};

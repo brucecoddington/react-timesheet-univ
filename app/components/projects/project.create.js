@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State as RouterState} from 'react-router';
+import Router, {Navigation} from 'react-router';
 
 import ProjectForm from './project.form';
 import ProjectActions from '../../actions/project.actions';
@@ -8,7 +8,7 @@ import ProjectStore from '../../stores/project.store';
 
 const ProjectCreate = React.createClass({
 
-  mixins: [Navigation, RouterState, ProjectMixin],
+  mixins: [Navigation, ProjectMixin],
 
   store: ProjectStore,
 
@@ -38,7 +38,7 @@ const ProjectCreate = React.createClass({
 
     if (!this.hasErrors()) {
       ProjectActions.create(this.state.project);
-      this.transitionTo('projects');
+      this.transitionTo('/projects');
     }
   },
 

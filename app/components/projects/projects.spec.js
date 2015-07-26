@@ -32,7 +32,7 @@ describe('Projects Component: ', () => {
     it('should transition to the create project route', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
-      expect(spies.transitionTo).to.have.been.calledWith('projects.create');
+      expect(spies.transitionTo).to.have.been.calledWith('/projects/create');
     });
   });
 });

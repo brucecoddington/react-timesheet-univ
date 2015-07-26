@@ -1,17 +1,14 @@
 import React, {PropTypes} from 'react/addons';
 import classNames from 'classnames';
 import _ from 'lodash';
-import Router, {Link, State, Navigation} from 'react-router';
+import Router, {Link, Navigation} from 'react-router';
 
 import LoginStore from '../../../stores/login.store';
 import LoginActions from '../../../actions/login.actions';
 
 const NavBar = React.createClass({
 
-  mixins: [
-    State,
-    Navigation
-  ],
+  mixins: [Navigation],
 
   getInitialState () {
     let loggedInUser = LoginStore.getState().user;
@@ -46,19 +43,6 @@ const NavBar = React.createClass({
   },
 
   render  () {
-    let activeRoutes = _.pluck(this.getRoutes(), 'name').join('.').split('.');
-
-    let projectsClasses = classNames('item', {
-      active: _.contains(activeRoutes, 'projects')
-    });
-
-    let employeesClasses = classNames('item', {
-      active: _.contains(activeRoutes, 'employees')
-    });
-
-    let timesheetsClasses = classNames('item', {
-      active: _.contains(activeRoutes, 'timesheets')
-    });
 
     return (
       <div className="ui fixed menu fluid">
@@ -66,9 +50,9 @@ const NavBar = React.createClass({
           <i className="fa fa-clock-o fa-lg"/> {this.state.title}
         </a>
 
-        <Link className={projectsClasses} to="projects">Projects</Link>
-        <Link className={employeesClasses} to="employees">Employees</Link>
-        <Link className={timesheetsClasses} to="timesheets" params={{user_id: this.state.user._id}}>Timesheets</Link>
+        <Link className='item' to="/projects">Projects</Link>
+        <Link className='item' to="/employees">Employees</Link>
+        <Link className='item' to={`/employees/${this.state.user._id}/timesheets`}>Timesheets</Link>
 
         <a ref="logoutButton" className="right item logout" onClick={this.logout}>
           <i className="fa fa-power-off"/> Logout

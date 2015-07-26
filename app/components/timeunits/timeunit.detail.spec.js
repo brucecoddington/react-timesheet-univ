@@ -93,8 +93,8 @@ describe('Timeunit Detail Component: ', () => {
         expect(proxies['../../actions/timeunit.actions'].update).to.have.been.called;
       });
 
-      it('should transition back to the timeunit list', () => { 
-        expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail', { _id: "abc123", user_id: "userId" });
+      it('should transition back to the timeunit list', () => {
+        expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets/abc123');
       });
     });
   });

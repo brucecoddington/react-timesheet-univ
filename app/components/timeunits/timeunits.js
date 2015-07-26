@@ -32,11 +32,8 @@ let Timeunits = React.createClass({
   },
 
   logTime () {
-    this.transitionTo('timesheets.detail.timeunits.create', {
-      user_id: this.getParams().user_id,
-      _id: this.getParams()._id,
-      timeunit_id: this.getParams().timeunit_id
-    });
+    let timesheet = this.props.timesheet;
+    this.transitionTo(`/employees/${timesheet.user_id}/timesheets/detail/${timesheet._id}/timeunits/create`);
   },
 
   onChange () {

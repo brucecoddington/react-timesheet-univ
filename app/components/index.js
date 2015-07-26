@@ -1,14 +1,13 @@
 import React, {Component} from 'react/addons';
-import {RouteHandler, State, Navigation} from 'react-router';
+import {State as RouterState, Navigation} from 'react-router';
 
 const Index = React.createClass({
-	mixins: [
-    State,
-    Navigation
-  ],
+	mixins: [RouterState, Navigation],
 
 	render () {
-		return <RouteHandler />;
+		return (
+			<div>{this.props.children}</div>
+		);
 	}
 });
 

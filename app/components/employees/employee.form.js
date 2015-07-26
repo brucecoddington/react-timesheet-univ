@@ -23,7 +23,7 @@ const EmployeeForm = React.createClass({
 
   onCancel (event) {
     event.preventDefault();
-    this.transitionTo('employees');
+    this.transitionTo('/employees');
   },
 
   render () {

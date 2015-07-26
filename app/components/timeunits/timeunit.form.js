@@ -63,10 +63,7 @@ const TimeunitForm = React.createClass({
 
   onCancel (event) {
     event.preventDefault();
-    this.transitionTo('timesheets.detail', {
-      user_id: this.getParams().user_id,
-      _id: this.getParams()._id
-    });
+    this.transitionTo(`/employees/${this.getParams().user_id}/timesheets/${this.getParams()._id}`);
   },
 
   render  () {

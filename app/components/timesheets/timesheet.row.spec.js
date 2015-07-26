@@ -75,7 +75,7 @@ describe('Timesheet Row Component: ', () => {
       });
 
       it('should transition to the detail route', () => {
-        expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail', {user_id: 'userId', _id: 'abc123'});
+        expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets/abc123');
       });
     });
   });

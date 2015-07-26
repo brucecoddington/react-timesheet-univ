@@ -10,7 +10,7 @@ const SectionHeader = React.createClass({
   ],
 
   getSectionName () {
-    let activeRoute = _.last(this.getRoutes()).name;
+    //let activeRoute = _.last(this.getRoutes()).name;
     let sectionNames = {
       'employees': 'Employees',
       'employees.create': 'Create Employee',
@@ -26,7 +26,7 @@ const SectionHeader = React.createClass({
       'timesheets.detail.timeunits.create': 'Log Time'
     };
 
-    return sectionNames[activeRoute] || '';
+    // return sectionNames[activeRoute] || '';
   },
 
   render  () {

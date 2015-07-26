@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {RouteHandler} from 'react-router';
+import Router from 'react-router';
 
 import NavBar from './common/navigation/navbar';
 import SectionHeader from './common/section';
@@ -10,12 +10,12 @@ import SnackbarStore from '../stores/snackbar.store';
 const App = React.createClass({
 
   statics: {
-    // willTransitionTo (transition, params) {
-    //   return LoginStore.requireAuthenticatedUser(transition);
-    // }
+    willTransitionTo (transition, params) {
+      return LoginStore.requireAuthenticatedUser(transition);
+    }
   },
 
-  render  () {
+  render () {
 
     return (
       <div>
@@ -23,7 +23,7 @@ const App = React.createClass({
         <div className="container">
           <SectionHeader />
           <div className="row">
-            <RouteHandler />
+            {this.props.children}
           </div>
         </div>
 

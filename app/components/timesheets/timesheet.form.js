@@ -26,9 +26,7 @@ let TimesheetForm = React.createClass({
 
   onCancel (event) {
     event.preventDefault();
-    this.transitionTo('timesheets', {
-      user_id: this.getParams().user_id
-    });
+    this.transitionTo(`/employees/${this.state.timesheet.user_id}/timesheets`);
   },
 
   render () {

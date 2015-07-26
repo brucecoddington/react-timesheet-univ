@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State as RouterState} from 'react-router';
+import Router, {Navigation} from 'react-router';
 
 import EmployeeForm from './employee.form';
 import EmployeeActions from '../../actions/employee.actions';
@@ -8,7 +8,7 @@ import EmployeeStore from '../../stores/employee.store';
 
 const EmployeeCreate = React.createClass({
 
-  mixins : [Navigation, RouterState, EmployeeMixin],
+  mixins : [Navigation, EmployeeMixin],
 
   store: EmployeeStore,
 
@@ -40,7 +40,7 @@ const EmployeeCreate = React.createClass({
 
     if (!this.hasErrors()) {
       EmployeeActions.create(this.state.employee);
-      this.transitionTo('employees');
+      this.transitionTo('/employees');
     }
   },
 

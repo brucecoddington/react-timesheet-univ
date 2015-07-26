@@ -40,6 +40,7 @@ class LoginStore extends Store {
   }
 
   current (payload) {
+    console.log('in current');
 
     if (this.getState().authenticated) {
       SnackbarAction.success(`Welcome back, ${this.getState().user.username}.`);
@@ -118,7 +119,7 @@ class LoginStore extends Store {
 
       if (!this.getState().authenticated && transition.path !== '/login') {
         this.setState({pausedTransition: transition});
-        transition.redirect('/login');
+        Router.transitionTo('/login');
       }
     });
   }

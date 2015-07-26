@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State as RouterState} from 'react-router';
+import Router, {Navigation} from 'react-router';
 import _ from 'lodash';
 
 import EmployeeForm from './employee.form';
@@ -15,7 +15,7 @@ const EmployeeDetail = React.createClass({
     }
   },
 
-  mixins: [Navigation, RouterState, EmployeeMixin],
+  mixins: [Navigation, EmployeeMixin],
 
   store: EmployeeStore,
 
@@ -25,7 +25,7 @@ const EmployeeDetail = React.createClass({
 
     if (!this.hasErrors()) {
       EmployeeActions.update(this.state.employee);
-      this.transitionTo('employees');
+      this.transitionTo('/employees');
     }
   },
 

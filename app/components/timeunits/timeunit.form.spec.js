@@ -55,7 +55,7 @@ describe('Timeunit Form Component: ', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(cancel, 'button');
       TestUtils.Simulate.click(button);
 
-      expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail', { _id: 'timesheetId', user_id: "userId" });
+      expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets/timesheetId');
     });
   });
 });

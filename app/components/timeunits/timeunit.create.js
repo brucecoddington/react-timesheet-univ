@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State as RouterState} from 'react-router';
+import Router, {Navigation} from 'react-router';
 
 import TimeunitForm from './timeunit.form';
 import TimeunitMixin from '../../mixins/timeunit.mixin';
@@ -11,7 +11,7 @@ import TimesheetStore from '../../stores/timesheet.store';
 
 const TimeunitCreate = React.createClass({
 
-  mixins: [Navigation, RouterState, TimeunitMixin],
+  mixins: [Navigation, TimeunitMixin],
 
   store: TimeunitStore,
   timesheetStore: TimesheetStore,
@@ -30,10 +30,7 @@ const TimeunitCreate = React.createClass({
 
     if (!this.hasErrors()) {
       TimeunitActions.create(this.state.timesheet, this.state.timeunit);
-      this.transitionTo('timesheets.detail', {
-        user_id: this.getParams().user_id,
-        _id: this.getParams()._id
-      });
+      this.transitionTo(`/employees/${this.state.timesheet.user_id}/timesheets/${this.state.timesheet._id}`);
     }
   },
 

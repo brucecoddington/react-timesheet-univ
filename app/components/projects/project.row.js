@@ -21,7 +21,7 @@ const ProjectRow = React.createClass({
       return;
     }
     this.props.store.setState({project: this.props.project});
-    this.transitionTo('projects.detail', {_id: this.props.project._id});
+    this.transitionTo(`/projects/detail/${this.props.project._id}`);
   },
 
   remove (e) {

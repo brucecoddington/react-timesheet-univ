@@ -3,16 +3,18 @@ import _ from 'lodash';
 
 export default (routerState) => {
 
-  let { params, query } = routerState;
+  let { params, query, components } = routerState;
 
+  console.log('routerState : ' + JSON.stringify(routerState));
   console.log('params : ' + JSON.stringify(params));
   console.log('query : ' + JSON.stringify(query));
 
-  let fetchers = routerState.routes.filter((route) => {
-    return route.handler.fetch;
+  let fetchers = components.filter((component) => {
+    console.log('fetch : ' + typeof component.fetch);
+    return component.fetch;
   })
-  .map((route) => {
-    return route.handler.fetch(params, query);
+  .map((component) => {
+    return component.fetch(params, query);
   });
 
   return Promise.all(fetchers)

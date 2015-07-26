@@ -1,7 +1,8 @@
 import Path from 'path';
-import Router from 'react-router';
 import React from 'react/addons';
-import AppRoutes from '../../routes';
+import Router from 'react-router';
+import Location from 'react-router/lib/Location';
+import routes from '../../routes';
 import fetch from '../../util/fetch';
 
 import ProjectStore from '../../stores/project.store';
@@ -15,7 +16,8 @@ exports.register = (server, options, next) => {
     path: '/{route*}',
     config: {
       handler: handler,
-      auth: false
+      auth: false,
+      plugins: { 'hapi-auth-cookie': { redirectTo: false }}
     }
   });
 
@@ -38,23 +40,13 @@ exports.register = (server, options, next) => {
   }
 
   function renderApp (request, cb) {
+    let location = new Location(request.url.path, request.query);
 
-    let router = Router.create({
-      routes: AppRoutes,
-      location: request.url.path,
-      onAbort: (redirect) => {
-        cb({redirect: redirect});
-      },
-      onError: (err) => {
-        console.log('Routing Error');
-        console.log(err);
-      }
-    });
+    Router.run(routes, location, (error, initialState, transition) => {
 
-    router.run((Handler, state) => {
-      return fetch(state)
+      return fetch(initialState)
         .then(stateData => {
-          cb(null, React.renderToString(<Handler />), stateData);
+          cb(null, React.renderToString(<Router  {...initialState}/>), stateData);
         });
     });
   }

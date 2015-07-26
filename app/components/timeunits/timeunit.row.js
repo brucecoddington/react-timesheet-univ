@@ -27,8 +27,7 @@ const TimeunitRow = React.createClass({
       return;
     }
     this.props.store.setState({timeunit: timeunit});
-    this.transitionTo('timesheets.detail.timeunits.detail',
-      {user_id: timesheet.user_id, _id: timesheet._id, timeunit_id: timeunit._id});
+    this.transitionTo(`/employees/${timesheet.user_id}/timesheets/detail/${timesheet._id}/timeunits/edit/${timeunit._id}`);
   },
 
   remove (e) {

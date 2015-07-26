@@ -40,8 +40,7 @@ describe('Timeunits Component: ', () => {
       let button = TestUtils.findRenderedDOMComponentWithTag(element, 'button');
       TestUtils.Simulate.click(button);
 
-      expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.create', {
-        user_id: 'userId', _id: 'timesheetId', timeunit_id: 'timeunitId'});
+      expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets/timesheetId/timeunits/create');
     });
   });
 });

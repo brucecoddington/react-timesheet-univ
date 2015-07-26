@@ -22,7 +22,7 @@ const ProjectForm = React.createClass({
 
   onCancel (event) {
     event.preventDefault();
-    this.transitionTo('projects');
+    this.transitionTo('/projects');
   },
 
   render  () {

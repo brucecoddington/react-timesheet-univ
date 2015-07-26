@@ -90,8 +90,7 @@ describe('Timeunit Row Component: ', () => {
       });
 
       it('should transition to the detail route', () => {
-        expect(spies.transitionTo).to.have.been.calledWith('timesheets.detail.timeunits.detail',
-          { _id: "timesheetId", timeunit_id: "timeunitId", user_id: "userId" });
+        expect(spies.transitionTo).to.have.been.calledWith('/employees/userId/timesheets/timesheetId/timeunits/timeunitId');
       });
     });
   });

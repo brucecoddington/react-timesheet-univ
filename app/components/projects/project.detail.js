@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State as RouterState} from 'react-router';
+import Router, {Navigation} from 'react-router';
 import _ from 'lodash';
 
 import ProjectForm from './project.form';
@@ -15,7 +15,7 @@ let ProjectDetail = React.createClass({
     }
   },
 
-  mixins: [Navigation, RouterState, ProjectMixin],
+  mixins: [Navigation, ProjectMixin],
 
   store: ProjectStore,
 
@@ -25,7 +25,7 @@ let ProjectDetail = React.createClass({
 
     if (!this.hasErrors()) {
       ProjectActions.update(this.state.project);
-      this.transitionTo('projects');
+      this.transitionTo('/projects');
     }
   },
 

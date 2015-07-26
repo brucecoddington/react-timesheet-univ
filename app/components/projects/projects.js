@@ -27,7 +27,7 @@ const Projects = React.createClass({
   },
 
   createNew () {
-    this.transitionTo('projects.create');
+    this.transitionTo('/projects/create');
   },
 
   onChange () {

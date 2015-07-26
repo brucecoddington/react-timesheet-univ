@@ -26,7 +26,7 @@ const TimesheetDetail = React.createClass({
 
     if (!this.hasErrors()) {
       TimesheetActions.update(this.state.timesheet);
-      this.transitionTo('timesheets', {user_id: this.getParams().user_id});
+      this.transitionTo(`/employees/${this.state.timesheet.user_id}/timesheets`);
     }
   },
 
