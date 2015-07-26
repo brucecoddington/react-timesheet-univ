@@ -53,7 +53,7 @@ const TimesheetDetail = React.createClass({
   },
 
   componentWillMount () {
-    this.get(this.getParams()._id);
+    this.get(this.props.params._id);
     this.store.addChangeListener(this.onChange);
   },
 

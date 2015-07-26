@@ -53,7 +53,7 @@ const TimeunitCreate = React.createClass({
   },
 
   componentDidMount () {
-    this.getTimesheet(this.getParams()._id);
+    this.getTimesheet(this.props.params._id);
   },
 
   componentWillUnmount () {
@@ -70,7 +70,8 @@ const TimeunitCreate = React.createClass({
         onSave={this.saveTimeunit}
         validate={this.validate}
         validateProject={this.validateProject}
-        validateDateWorked={this.validateDateWorked} />
+        validateDateWorked={this.validateDateWorked}
+        params={this.props.params} />
     );
   }
 });

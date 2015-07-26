@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, {PropTypes} from 'react/addons';
-import Router, {Navigation, State} from 'react-router';
+import Router, {Navigation} from 'react-router';
 
 import ProjectActions from '../../actions/project.actions';
 import ProjectStore from '../../stores/project.store';
@@ -22,13 +22,11 @@ const TimeunitForm = React.createClass({
     onSave:             PropTypes.func.isRequired,
     errors:             PropTypes.object,
     saveText:           PropTypes.string,
-    hasErrors:          PropTypes.func
+    hasErrors:          PropTypes.func,
+    params:             PropTypes.object.isRequired
   },
 
-  mixins: [
-    Navigation,
-    State
-  ],
+  mixins: [Navigation],
 
   projectStore: ProjectStore,
 
@@ -63,7 +61,7 @@ const TimeunitForm = React.createClass({
 
   onCancel (event) {
     event.preventDefault();
-    this.transitionTo(`/employees/${this.getParams().user_id}/timesheets/${this.getParams()._id}`);
+    this.transitionTo(`/employees/${this.props.params.user_id}/timesheets/detail/${this.props.params._id}`);
   },
 
   render  () {

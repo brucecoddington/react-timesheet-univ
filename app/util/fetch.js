@@ -2,15 +2,11 @@ import {Promise} from 'es6-promise';
 import _ from 'lodash';
 
 export default (routerState) => {
+  if (!routerState) return {};
 
   let { params, query, components } = routerState;
 
-  console.log('routerState : ' + JSON.stringify(routerState));
-  console.log('params : ' + JSON.stringify(params));
-  console.log('query : ' + JSON.stringify(query));
-
   let fetchers = components.filter((component) => {
-    console.log('fetch : ' + typeof component.fetch);
     return component.fetch;
   })
   .map((component) => {

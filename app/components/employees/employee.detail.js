@@ -32,7 +32,7 @@ const EmployeeDetail = React.createClass({
   get () {
     let employee = this.store.getState().employee;
     if (_.isEmpty(employee)) {
-      let employeeId = this.getParams()._id;
+      let employeeId = this.props.params._id;
       EmployeeActions.get(employeeId);
     }
     else {

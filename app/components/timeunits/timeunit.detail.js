@@ -9,7 +9,7 @@ import TimeunitStore from '../../stores/timeunit.store';
 import TimesheetActions from '../../actions/timesheet.actions';
 import TimesheetStore from '../../stores/timesheet.store';
 
-const TimeunitEdit = React.createClass({
+const TimeunitDetail = React.createClass({
 
   statics: {
     fetch (params, query) {
@@ -44,8 +44,8 @@ const TimeunitEdit = React.createClass({
   },
 
   componentDidMount () {
-    this.getTimesheet(this.getParams()._id);
-    this.get(this.getParams()._id, this.getParams().timeunit_id);
+    this.getTimesheet(this.props.params._id);
+    this.get(this.props.params._id, this.props.params.timeunit_id);
   },
 
   componentWillUnmount () {
@@ -93,9 +93,10 @@ const TimeunitEdit = React.createClass({
         onSave={this.saveTimeunit}
         validate={this.validate}
         validateProject={this.validateProject}
-        validateDateWorked={this.validateDateWorked} />
+        validateDateWorked={this.validateDateWorked}
+        params={this.props.params} />
     );
   }
 });
 
-export default TimeunitEdit;
+export default TimeunitDetail;

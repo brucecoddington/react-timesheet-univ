@@ -8,7 +8,6 @@ export default {
 
     if (ExecutionEnvironment.canUseDOM && window.AppState) {
       appState = window.AppState;
-      //delete window.AppState;
     }
     else {
       appState = {};
