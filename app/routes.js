@@ -34,7 +34,7 @@ export default {
 
         {path: 'employees/:user_id/timesheets', component: Timesheets},
         {path: 'employees/:user_id/timesheets/create', component: TimesheetsCreate},
-        {path: 'employees/:user_id/timesheets/detail/:_id', component: TimesheetsDetail},
+        {path: 'employees/:user_id/timesheets/detail/:_id', components: TimesheetsDetail},
 
         {path: 'employees/:user_id/timesheets/detail/:_id/timeunits/create', component: TimeunitsCreate},
         {path: 'employees/:user_id/timesheets/detail/:_id/timeunits/detail/:timeunit_id', component: TimeunitsEdit}

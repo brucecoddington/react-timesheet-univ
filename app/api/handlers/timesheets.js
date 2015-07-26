@@ -41,10 +41,9 @@ export default {
   },
 
   show (request, reply) {
-    let userId = request.params.userId;
     let id = request.params.timesheetId;
 
-    db.findOne('timesheets', {user_id: userId, _id: id})
+    db.findOne('timesheets', {_id: id})
       .then(reply)
       .fail(err => {
         reply(Boom.badImplementation(err));

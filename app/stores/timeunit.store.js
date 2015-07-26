@@ -30,7 +30,7 @@ class TimeunitStore extends Store {
   }
 
   url (timesheetId, timeunitId) {
-    let userId = LoginStore.getState().user._id || 'all';
+    let userId = LoginStore.getUserId();
     let resource = `users/${userId}/timesheets/${timesheetId}/timeunits`;
     return urls.apiResource(resource, timeunitId);
   }

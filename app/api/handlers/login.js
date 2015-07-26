@@ -6,13 +6,22 @@ import props from '../../properties';
 
 export default {
   index: sendCurrentUser,
-  login: login
+  login: login,
+  resolveCurrentUser: resolveCurrentUser
 };
 
 function sendCurrentUser (request, reply) {
   request.server.app.cache.get(props.session.secret, (err, auth) => {
     let currentUser = auth ? auth.user : null;
     reply(sanitize(currentUser));
+  });
+}
+
+function resolveCurrentUser (request, cb) {
+  request.server.app.cache.get(props.session.secret, (err, auth) => {
+    // if not authenticated, use the default user
+    let currentUser = auth ? auth.user : {_id: 'all'};
+    return cb(sanitize(currentUser));
   });
 }
 

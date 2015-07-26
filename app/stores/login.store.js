@@ -6,6 +6,7 @@ import axios from 'axios';
 import Store from '../flux/flux.store';
 import actions from '../actions/login.actions';
 import SnackbarAction from '../actions/snackbar.actions';
+import rehydrate from '../util/rehydrate';
 import urls from '../util/urls';
 
 class LoginStore extends Store {
@@ -22,26 +23,26 @@ class LoginStore extends Store {
     events[actions.LOGOUT]  = this.logout;
     events[actions.CURRENT_USER] = this.current;
     this.register(events);
+
     this.initState();
   }
 
   initState () {
-    this.setState({
+    let state = rehydrate.setDefaults({
       user: {_id: 'all'},
       authenticated: false,
       credentials: {},
       pausedTransition: null
     });
+
+    this.setState(state);
   }
 
   getUserId () {
-    let user = this.getState().user;
-    return (user !== null && user._id) ? user._id : 'all';
+    return this.getState().user._id;
   }
 
   current (payload) {
-    console.log('in current');
-
     if (this.getState().authenticated) {
       SnackbarAction.success(`Welcome back, ${this.getState().user.username}.`);
       return Promise.resolve(this.getState());
@@ -119,7 +120,7 @@ class LoginStore extends Store {
 
       if (!this.getState().authenticated && transition.path !== '/login') {
         this.setState({pausedTransition: transition});
-        Router.transitionTo('/login');
+        transition.redirect('/login');
       }
     });
   }

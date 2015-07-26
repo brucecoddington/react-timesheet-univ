@@ -10,12 +10,6 @@ import LoginStore from '../../stores/login.store';
 
 let Timeunits = React.createClass({
 
-  statics: {
-    fetch (params, query) {
-      return TimeunitStore.list({action: {query: query}});
-    }
-  },
-
   propTypes: {
     timesheet: PropTypes.object.isRequired
   },
@@ -45,7 +39,9 @@ let Timeunits = React.createClass({
   },
 
   componentWillMount () {
-    this.requestTimeunits(this.props.timesheet);
+    if (this.state.timeunits.length === 0) {
+      this.requestTimeunits(this.props.timesheet);
+    }
     this.store.addChangeListener(this.onChange);
     this.timesheetStore.addChangeListener(this.onTimesheetChange);
   },

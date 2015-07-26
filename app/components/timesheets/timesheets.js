@@ -13,7 +13,7 @@ let Timesheets = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return TimesheetStore.list({action: {query: query}});
+      return TimesheetStore.list({action: {query: {page: 1}}});
     }
   },
 

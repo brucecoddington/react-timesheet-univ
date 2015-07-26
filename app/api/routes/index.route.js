@@ -5,7 +5,7 @@ import Location from 'react-router/lib/Location';
 import routes from '../../routes';
 import fetch from '../../util/fetch';
 
-import ProjectStore from '../../stores/project.store';
+import Login from '../handlers/login';
 
 exports.register = (server, options, next) => {
 
@@ -16,8 +16,7 @@ exports.register = (server, options, next) => {
     path: '/{route*}',
     config: {
       handler: handler,
-      auth: false,
-      plugins: { 'hapi-auth-cookie': { redirectTo: false }}
+      auth: false
     }
   });
 
@@ -43,10 +42,13 @@ exports.register = (server, options, next) => {
     let location = new Location(request.url.path, request.query);
 
     Router.run(routes, location, (error, initialState, transition) => {
-
-      return fetch(initialState)
-        .then(stateData => {
-          cb(null, React.renderToString(<Router  {...initialState}/>), stateData);
+      Login.resolveCurrentUser(request, currentUser => {
+        
+        return fetch(initialState, currentUser)
+          .then(stateData => {
+            console.log('stateData : ' + JSON.stringify(stateData));
+            cb(null, React.renderToString(<Router  {...initialState}/>), stateData);
+          });
         });
     });
   }

@@ -11,7 +11,7 @@ const Employees = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return EmployeeStore.list({action: {query: params}});
+      return EmployeeStore.list({action: {query: {page: 1}}});
     }
   },
 

@@ -13,7 +13,7 @@ const TimeunitDetail = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return TimeunitStore.get({action: {}});
+      return TimeunitStore.get({action: {timeunit: {_id: params.timeunit_id}, timesheet: {_id: params._id}}});
     }
   },
 

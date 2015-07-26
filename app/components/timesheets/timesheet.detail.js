@@ -1,18 +1,20 @@
 import React, {PropTypes} from 'react/addons';
 import Router, {Navigation, State as RouterState} from 'react-router';
 import _ from 'lodash';
+import {Promise} from 'es6-promise';
 
 import TimesheetForm from './timesheet.form';
 import Timeunits from '../timeunits/timeunits';
 import TimesheetActions from '../../actions/timesheet.actions';
 import TimesheetMixin from '../../mixins/timesheet.mixin';
 import TimesheetStore from '../../stores/timesheet.store';
+import TimeunitStore from '../../stores/timeunit.store';
 
 const TimesheetDetail = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return TimesheetStore.get({action: {timesheet: params}});
+      return Promise.all([TimesheetStore.get({action: {timesheet: params}}), TimeunitStore.list({action: {timesheet: params}})]);
     }
   },
 
