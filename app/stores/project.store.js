@@ -18,9 +18,11 @@ class ProjectStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
+    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
     let state = rehydrate.setDefaults({
+      rehydratedProjects: false,
       project: {},
       projects: {
         data: [],
@@ -121,6 +123,10 @@ class ProjectStore extends Store {
       .catch(x => {
         SnackbarAction.error('There was an error creating project.');
       });
+  }
+
+  rehydrate (payload) {
+    this.setState({rehydratedProjects: true});
   }
 }
 

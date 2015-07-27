@@ -1,4 +1,6 @@
 import React, {PropTypes} from 'react/addons';
+import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
+
 import classNames from 'classnames';
 import _ from 'lodash';
 import Router, {Link, Navigation} from 'react-router';
@@ -42,7 +44,28 @@ const NavBar = React.createClass({
     LoginStore.removeChangeListener(this.onLoginChange);
   },
 
+  isActive (segments, include, exclude) {
+    return _.includes(segments, include) && !_.includes(segments, exclude);
+  },
+
   render  () {
+    let segments = [];
+
+    if (ExecutionEnvironment.canUseDOM) {
+      segments = document.location.pathname.split('/');
+    }
+
+    let projectsClasses = classNames('item', {
+      active: this.isActive(segments, 'projects')
+    });
+
+    let employeesClasses = classNames('item', {
+      active: this.isActive(segments, 'employees', 'timesheets')
+    });
+
+    let timesheetsClasses = classNames('item', {
+      active: this.isActive(segments, 'timesheets')
+    });
 
     return (
       <div className="ui fixed menu fluid">
@@ -50,9 +73,9 @@ const NavBar = React.createClass({
           <i className="fa fa-clock-o fa-lg"/> {this.state.title}
         </a>
 
-        <Link className='item' to="/projects">Projects</Link>
-        <Link className='item' to="/employees">Employees</Link>
-        <Link className='item' to={`/employees/${this.state.user._id}/timesheets`}>Timesheets</Link>
+        <Link className={projectsClasses} activeClassName='' to="/projects">Projects</Link>
+        <Link className={employeesClasses} activeClassName='' to="/employees">Employees</Link>
+        <Link className={timesheetsClasses} activeClassName='' to={`/employees/${this.state.user._id}/timesheets`}>Timesheets</Link>
 
         <a ref="logoutButton" className="right item logout" onClick={this.logout}>
           <i className="fa fa-power-off"/> Logout

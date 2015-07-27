@@ -8,6 +8,7 @@ const TimesheetActions = {
   UPDATE: 'UPDATE_TIMESHEET',
   DELETE: 'DELETE_TIMESHEET',
   RESTORE: 'RESTORE_TIMESHEET',
+  REHYDRATE: 'REHYDRATE_TIMESHEET',
 
   list (query) {
     dispatcher.handleViewAction({
@@ -48,6 +49,12 @@ const TimesheetActions = {
     dispatcher.handleViewAction({
       actionType: TimesheetActions.RESTORE,
       timesheet: timesheet
+    });
+  },
+
+  rehydrate () {
+    dispatcher.handleViewAction({
+      actionType: TimesheetActions.REHYDRATE
     });
   }
 };

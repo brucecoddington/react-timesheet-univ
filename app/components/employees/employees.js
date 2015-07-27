@@ -36,9 +36,13 @@ const Employees = React.createClass({
   },
 
   componentWillMount () {
-    if (this.state.employees.data.length === 0) {
+    if (!this.state.rehydratedEmployees) {
       this.requestEmployees({page: 1});
     }
+    else {
+      EmployeeActions.rehydrate();
+    }
+
     this.store.addChangeListener(this.onChange);
   },
 

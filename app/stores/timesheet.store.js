@@ -19,9 +19,11 @@ class TimesheetStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
+    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
     let state = rehydrate.setDefaults({
+      rehydratedTimesheets: false,
       timesheet: {},
       timesheets: {
         data: [],
@@ -118,6 +120,10 @@ class TimesheetStore extends Store {
       .catch(x => {
         SnackbarAction.error('There was an error creating timesheet.');
       });
+  }
+
+  rehydrate (payload) {
+    this.setState({rehydratedTimesheets: true});
   }
 }
 

@@ -37,9 +37,13 @@ let Timesheets = React.createClass({
   },
 
   componentWillMount () {
-    if (this.state.timesheets.data.length === 0) {
+    if (!this.state.rehydratedTimesheets) {
       this.requestTimesheets({page: 1});
     }
+    else {
+      TimesheetActions.rehydrate();
+    }
+
     this.store.addChangeListener(this.onChange);
   },
 

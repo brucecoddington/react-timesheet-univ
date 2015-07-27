@@ -18,9 +18,11 @@ class EmployeeStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
+    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
     let state = rehydrate.setDefaults({
+      rehydratedEmployees: false,
       employee: {},
       employees: {
         data: [],
@@ -116,6 +118,10 @@ class EmployeeStore extends Store {
       .catch(x => {
         SnackbarAction.error('There was an error creating employee.');
       });
+  }
+
+  rehydrate (payload) {
+    this.setState({rehydratedEmployees: true});
   }
 }
 

@@ -19,9 +19,11 @@ class TimeunitStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
+    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
     let state = rehydrate.setDefaults({
+      rehydratedTimeunits: false,
       timeunit: {},
       timeunits: []
     });
@@ -123,6 +125,10 @@ class TimeunitStore extends Store {
       .catch(x => {
         SnackbarAction.error('Error attempting to log your time.');
       });
+  }
+
+  rehydrate (payload) {
+    this.setState({rehydratedTimeunits: true});
   }
 }
 

@@ -8,6 +8,7 @@ const TimeunitActions = {
   UPDATE: 'UPDATE_TIMEUNIT',
   DELETE: 'DELETE_TIMEUNIT',
   RESTORE: 'RESTORE_TIMEUNIT',
+  REHYDRATE: 'REHYDRATE_TIMEUNIT',
 
   list (timesheet, query) {
     dispatcher.handleViewAction({
@@ -54,6 +55,12 @@ const TimeunitActions = {
       actionType: TimeunitActions.RESTORE,
       timeunit: timeunit,
       timesheet: timesheet
+    });
+  },
+
+  rehydrate () {
+    dispatcher.handleViewAction({
+      actionType: TimeunitActions.REHYDRATE
     });
   }
 };

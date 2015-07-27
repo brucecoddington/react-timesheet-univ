@@ -36,8 +36,11 @@ const Projects = React.createClass({
   },
 
   componentWillMount () {
-    if (this.state.projects.data.length === 0) {
+    if (!this.state.rehydratedProjects) {
       this.requestProjects({page: 1});
+    }
+    else {
+      ProjectActions.rehydrate();
     }
 
     this.store.addChangeListener(this.onChange);
