@@ -44,7 +44,7 @@ exports.register = (server, options, next) => {
     Router.run(routes, location, (error, initialState, transition) => {
       Login.resolveCurrentUser(request, currentUser => {
 
-        return fetch(initialState, currentUser)
+        return fetch(initialState, currentUser, request)
           .then(stateData => {
             cb(null, React.renderToString(<Router  {...initialState}/>), stateData);
           });
