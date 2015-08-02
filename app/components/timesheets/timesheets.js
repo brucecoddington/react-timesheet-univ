@@ -14,7 +14,8 @@ let Timesheets = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return TimesheetStore.list({action: {query: {page: 1}}});
+      return TimesheetStore.list({action: {query: {page: 1}}})
+        .then(res => {return TimesheetStore.getState()});
     }
   },
 
@@ -37,14 +38,8 @@ let Timesheets = React.createClass({
   },
 
   componentWillMount () {
-    if (!this.state.rehydratedTimesheets) {
-      this.requestTimesheets({page: 1});
-    }
-    else {
-      TimesheetActions.rehydrate();
-    }
-
     this.store.addChangeListener(this.onChange);
+    this.requestTimesheets({page: 1});
   },
 
   componentWillUnmount () {

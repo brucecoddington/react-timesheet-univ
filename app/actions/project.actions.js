@@ -8,7 +8,6 @@ const ProjectActions = {
   UPDATE: 'UPDATE_PROJECT',
   DELETE: 'DELETE_PROJECT',
   RESTORE: 'RESTORE_PROJECT',
-  REHYDRATE: 'REHYDRATE_PROJECT',
 
   list (query) {
     dispatcher.handleViewAction({
@@ -49,12 +48,6 @@ const ProjectActions = {
     dispatcher.handleViewAction({
       actionType: ProjectActions.RESTORE,
       project: project
-    });
-  },
-
-  rehydrate () {
-    dispatcher.handleViewAction({
-      actionType: ProjectActions.REHYDRATE
     });
   }
 };

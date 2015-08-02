@@ -8,7 +8,6 @@ const EmployeeActions = {
   UPDATE: 'UPDATE_EMPLOYEE',
   DELETE: 'DELETE_EMPLOYEE',
   RESTORE: 'RESTORE_EMPLOYEE',
-  REHYDRATE: 'REHYDRATE_EMPLOYEE',
 
   list (query) {
     dispatcher.handleViewAction({
@@ -49,12 +48,6 @@ const EmployeeActions = {
     dispatcher.handleViewAction({
       actionType: EmployeeActions.RESTORE,
       employee: employee
-    });
-  },
-
-  rehydrate () {
-    dispatcher.handleViewAction({
-      actionType: EmployeeActions.REHYDRATE
     });
   }
 };

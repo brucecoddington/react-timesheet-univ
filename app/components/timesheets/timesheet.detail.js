@@ -16,7 +16,13 @@ const TimesheetDetail = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return Promise.all([TimesheetStore.get({action: {timesheet: params}}), TimeunitStore.list({action: {timesheet: params}})]);
+      return Promise.all([
+        TimesheetStore.get({action: {timesheet: params}})
+          .then(res => {return TimesheetStore.getState()}),
+
+        TimeunitStore.list({action: {timesheet: params}})
+          .then(res => {return TimeunitStore.getState()})
+      ]);
     }
   },
 
@@ -39,17 +45,13 @@ const TimesheetDetail = React.createClass({
     if (_.isEmpty(timesheet)) {
       TimesheetActions.get(timesheetId);
     }
-    else {
-      this.onChange();
-    }
   },
 
   getInitialState () {
-    return {
+    return _.defaults(this.store.getState(), {
       saveText: 'Update',
-      timesheet: {},
       errors: {}
-    };
+    });
   },
 
   onChange () {

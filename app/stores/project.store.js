@@ -1,10 +1,12 @@
+import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 import _ from 'lodash';
+import {Promise} from 'es6-promise';
 import Store from '../flux/flux.store';
 import actions from '../actions/project.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
-import rehydrate from '../util/rehydrate';
 import urls from '../util/urls';
+import rehydrate from '../util/rehydrate';
 
 class ProjectStore extends Store {
 
@@ -18,11 +20,9 @@ class ProjectStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
-    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
-    let state = rehydrate.setDefaults({
-      rehydratedProjects: false,
+    this.setState({
       project: {},
       projects: {
         data: [],
@@ -31,8 +31,6 @@ class ProjectStore extends Store {
         page: 1
       }
     });
-
-    this.setState(state);
   }
 
   url (projectId) {
@@ -44,10 +42,17 @@ class ProjectStore extends Store {
   // returns totalItems
   list (payload) {
 
-    return axios.get(this.url(), {params: payload.action.query})
+    return rehydrate.slurp('projects')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated)) {
+          return axios.get(this.url(), {params: payload.action.query});
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({projects: res.data});
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to retrieve projects.');
@@ -55,13 +60,21 @@ class ProjectStore extends Store {
   }
 
   get (payload) {
+    var projectId = payload.action.project._id;
 
-    return axios.get(this.url(payload.action.project._id))
+    return rehydrate.slurp('project')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated) || rehydrated.data._id !== projectId) {
+          return axios.get(this.url(projectId));
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({project: res.data});
-        return this.getState();
       })
-      .catch((data) => {
+      .catch(x => {
         SnackbarAction.error('There was an error getting the project');
       });
   }
@@ -73,7 +86,6 @@ class ProjectStore extends Store {
       .then(res => {
         this.setState({project: res.data});
         SnackbarAction.success(`Project : ${project.name}, updated.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error updating project.');
@@ -88,7 +100,6 @@ class ProjectStore extends Store {
       .then(res => {
         this.setState({project: res.data});
         SnackbarAction.success(`Project : ${res.data.name}, was deleted.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to delete project.');
@@ -99,17 +110,14 @@ class ProjectStore extends Store {
     let project = payload.action.project;
     project.deleted = false;
 
-    let prom = axios.put(this.url(project._id), project)
+    return axios.put(this.url(project._id), project)
       .then(res => {
         this.setState({project: res.data});
         SnackbarAction.success(`Project : ${res.data.name}, was restored.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to restore project.');
       });
-
-    return prom;
   }
 
   create (payload) {
@@ -118,15 +126,10 @@ class ProjectStore extends Store {
       .then(res => {
         this.setState({project: res.data});
         SnackbarAction.success(`Project : ${res.data.name}, created.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error creating project.');
       });
-  }
-
-  rehydrate (payload) {
-    this.setState({rehydratedProjects: true});
   }
 }
 

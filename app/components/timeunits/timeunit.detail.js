@@ -15,7 +15,8 @@ const TimeunitDetail = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return TimeunitStore.get({action: {timeunit: {_id: params.timeunit_id}, timesheet: {_id: params._id}}});
+      return TimeunitStore.get({action: {timeunit: {_id: params.timeunit_id}, timesheet: {_id: params._id}}})
+        .then(res => {return TimeunitStore.getState()});
     }
   },
 
@@ -25,11 +26,10 @@ const TimeunitDetail = React.createClass({
   timesheetStore: TimesheetStore,
 
   getInitialState () {
-    return {
+    return _.defaults(this.store.getState(), {
       saveText: 'Update',
-      timeunit: {},
       errors: {}
-    };
+    });
   },
 
   onChange () {
@@ -59,9 +59,6 @@ const TimeunitDetail = React.createClass({
     let timeunit = this.store.getState().timeunit;
     if (!timeunit._id) {
       TimeunitActions.get({_id: timesheetId}, timeunitId);
-    }
-    else {
-      this.onChange();
     }
   },
 

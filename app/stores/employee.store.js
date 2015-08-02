@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {Promise} from 'es6-promise';
 import Store from '../flux/flux.store';
 import actions from '../actions/employee.actions';
 import SnackbarAction from '../actions/snackbar.actions';
@@ -21,8 +22,7 @@ class EmployeeStore extends Store {
     events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
-    let state = rehydrate.setDefaults({
-      rehydratedEmployees: false,
+    this.setState({
       employee: {},
       employees: {
         data: [],
@@ -31,8 +31,6 @@ class EmployeeStore extends Store {
         page: 1
       }
     });
-
-    this.setState(state);
   }
 
   url (employeeId) {
@@ -41,10 +39,17 @@ class EmployeeStore extends Store {
 
   list (payload) {
 
-    return axios.get(this.url(), {params: payload.action.query})
+    return rehydrate.slurp('employees')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated)) {
+          return axios.get(this.url(), {params: payload.action.query});
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({employees: res.data});
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to retrieve employees.');
@@ -52,11 +57,19 @@ class EmployeeStore extends Store {
   }
 
   get (payload) {
+    let employeeId = payload.action.employee._id;
 
-    return axios.get(this.url(payload.action.employee._id))
+    return rehydrate.slurp('employee')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated) || rehydrated.data._id !== employeeId) {
+          return axios.get(this.url(payload.action.employee._id));
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({employee: res.data});
-        return this.getState();
       })
       .catch((data) => {
         SnackbarAction.error('There was an error getting the employee');
@@ -70,7 +83,6 @@ class EmployeeStore extends Store {
       .then(res => {
         this.setState({employee: res.data});
         SnackbarAction.success(`Employee : ${employee.username}, updated.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error updating employee.');
@@ -85,7 +97,6 @@ class EmployeeStore extends Store {
       .then(res => {
         this.setState({employee: res.data});
         SnackbarAction.success(`Employee : ${res.data.username}, was deleted.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to delete employee.');
@@ -100,7 +111,6 @@ class EmployeeStore extends Store {
       .then(res => {
         this.setState({employee: res.data});
         SnackbarAction.success(`Employee : ${res.data.username}, was restored.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to restore employee.');
@@ -113,7 +123,6 @@ class EmployeeStore extends Store {
       .then(res => {
         this.setState({employee: res.data});
         SnackbarAction.success(`Employee : ${res.data.username}, created.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error creating employee.');
@@ -121,7 +130,7 @@ class EmployeeStore extends Store {
   }
 
   rehydrate (payload) {
-    this.setState({rehydratedEmployees: true});
+    return Promise.resolve(this.setState({rehydratedEmployees: true}));
   }
 }
 

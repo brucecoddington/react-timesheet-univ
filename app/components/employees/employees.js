@@ -13,7 +13,8 @@ const Employees = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return EmployeeStore.list({action: {query: {page: 1}}});
+      return EmployeeStore.list({action: {query: {page: 1}}})
+        .then(res => {return EmployeeStore.getState()});
     }
   },
 
@@ -36,14 +37,8 @@ const Employees = React.createClass({
   },
 
   componentWillMount () {
-    if (!this.state.rehydratedEmployees) {
-      this.requestEmployees({page: 1});
-    }
-    else {
-      EmployeeActions.rehydrate();
-    }
-
     this.store.addChangeListener(this.onChange);
+    this.requestEmployees({page: 1});
   },
 
   componentWillUnmount () {

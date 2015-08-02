@@ -13,7 +13,8 @@ let ProjectDetail = React.createClass({
 
   statics: {
     fetch (params) {
-      return ProjectStore.get({action: {project: params}});
+      return ProjectStore.get({action: {project: params}})
+        .then(res => {return ProjectStore.getState()});
     }
   },
 
@@ -36,17 +37,13 @@ let ProjectDetail = React.createClass({
     if (_.isEmpty(project)) {
       ProjectActions.get(projectId);
     }
-    else {
-      this.onChange();
-    }
   },
 
   getInitialState () {
-    return {
+    return _.defaults(this.store.getState(), {
       saveText: 'Update',
-      project: {},
       errors: {}
-    };
+    });
   },
 
   onChange () {

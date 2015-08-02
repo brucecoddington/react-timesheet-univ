@@ -13,7 +13,8 @@ const EmployeeDetail = React.createClass({
 
   statics: {
     fetch (params) {
-      return EmployeeStore.get({action: {employee: params}});
+      return EmployeeStore.get({action: {employee: params}})
+        .then(res => {return EmployeeStore.getState()});
     }
   },
 
@@ -31,23 +32,18 @@ const EmployeeDetail = React.createClass({
     }
   },
 
-  get () {
+  get (employeeId) {
     let employee = this.store.getState().employee;
     if (_.isEmpty(employee)) {
-      let employeeId = this.props.params._id;
       EmployeeActions.get(employeeId);
-    }
-    else {
-      this.onChange();
     }
   },
 
   getInitialState () {
-    return {
+    return _.defaults(this.store.getState(), {
       saveText: 'Update',
-      employee: {},
       errors: {}
-    };
+    });
   },
 
   onChange () {
@@ -55,15 +51,12 @@ const EmployeeDetail = React.createClass({
   },
 
   componentWillMount () {
+    this.get(this.props.params._id);
     this.store.addChangeListener(this.onChange);
   },
 
   componentWillUnmount () {
     this.store.removeChangeListener(this.onChange);
-  },
-
-  componentDidMount () {
-    this.get();
   },
 
   render () {

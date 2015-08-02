@@ -20,7 +20,7 @@ const App = React.createClass({
 
     return (
       <div>
-        <NavBar />
+        <NavBar {...this.props}/>
         <div className="container">
           {this.props.children}
         </div>

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {Promise} from 'es6-promise';
 import Store from '../flux/flux.store';
 import actions from '../actions/timeunit.actions';
 import SnackbarAction from '../actions/snackbar.actions';
@@ -19,16 +20,12 @@ class TimeunitStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
-    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
-    let state = rehydrate.setDefaults({
-      rehydratedTimeunits: false,
+    this.setState({
       timeunit: {},
       timeunits: []
     });
-
-    this.setState(state);
   }
 
   url (timesheetId, timeunitId) {
@@ -40,10 +37,17 @@ class TimeunitStore extends Store {
   list (payload) {
     let timesheet = payload.action.timesheet;
 
-    return axios.get(this.url(timesheet._id))
+    return rehydrate.slurp('timeunits')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated)) {
+          return axios.get(this.url(timesheet._id));
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({timeunits: res.data});
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to retrieve logged hours.');
@@ -54,10 +58,17 @@ class TimeunitStore extends Store {
     let timesheet = payload.action.timesheet;
     let timeunit = payload.action.timeunit;
 
-    return axios.get(this.url(timesheet._id, timeunit._id))
+    return rehydrate.slurp('timeunit')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated) || rehydrated.data._id !== timeunit._id) {
+          return axios.get(this.url(timesheet._id, timeunit._id));
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({timeunit: res.data});
-        return this.getState();
       })
       .catch((data) => {
         SnackbarAction.error('There was an error getting the time.');
@@ -72,7 +83,6 @@ class TimeunitStore extends Store {
       .then(res => {
         this.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time has been updated.');
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error updating time.');
@@ -88,7 +98,6 @@ class TimeunitStore extends Store {
       .then(res => {
         this.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was deleted.');
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to delete time.');
@@ -104,7 +113,6 @@ class TimeunitStore extends Store {
       .then(res => {
         this.setState({timeunit: res.data});
         SnackbarAction.success('Your logged time was restored.');
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to restore time.');
@@ -120,15 +128,10 @@ class TimeunitStore extends Store {
       .then(res => {
         this.setState({timeunit: res.data});
         SnackbarAction.success('Your time has been logged.');
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to log your time.');
       });
-  }
-
-  rehydrate (payload) {
-    this.setState({rehydratedTimeunits: true});
   }
 }
 

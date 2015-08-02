@@ -1,9 +1,10 @@
 import _ from 'lodash';
+import {Promise} from 'es6-promise';
 import Store from '../flux/flux.store';
 import actions from '../actions/timesheet.actions';
 import SnackbarAction from '../actions/snackbar.actions';
-import axios from 'axios';
 import LoginStore from './login.store';
+import axios from 'axios';
 import rehydrate from '../util/rehydrate';
 import urls from '../util/urls';
 
@@ -19,11 +20,9 @@ class TimesheetStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
-    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
-    let state = rehydrate.setDefaults({
-      rehydratedTimesheets: false,
+    this.setState({
       timesheet: {},
       timesheets: {
         data: [],
@@ -32,8 +31,6 @@ class TimesheetStore extends Store {
         page: 1
       }
     });
-
-    this.setState(state);
   }
 
   url (timesheetId) {
@@ -43,10 +40,17 @@ class TimesheetStore extends Store {
 
   list (payload) {
 
-    return axios.get(this.url(), {params: payload.action.query})
+    return rehydrate.slurp('timesheets')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated)) {
+          return axios.get(this.url(), {params: payload.action.query});
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({timesheets: res.data});
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to retrieve timesheets.');
@@ -54,11 +58,19 @@ class TimesheetStore extends Store {
   }
 
   get (payload) {
+    let timesheetId = payload.action.timesheet._id;
 
-    return axios.get(this.url(payload.action.timesheet._id))
+    return rehydrate.slurp('timesheet')
+      .then(rehydrated => {
+        if (_.isNull(rehydrated) || rehydrated.data._id !== timesheetId) {
+          return axios.get(this.url(payload.action.timesheet._id));
+        }
+        else {
+          return rehydrated;
+        }
+      })
       .then(res => {
         this.setState({timesheet: res.data});
-        return this.getState();
       })
       .catch((data) => {
         SnackbarAction.error('There was an error getting the timesheet');
@@ -72,7 +84,6 @@ class TimesheetStore extends Store {
       .then(res => {
         this.setState({timesheet: res.data});
         SnackbarAction.success(`Timesheet : ${timesheet.name}, updated.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error updating timesheet.');
@@ -87,7 +98,6 @@ class TimesheetStore extends Store {
       .then(res => {
         this.setState({timesheet: res.data});
         SnackbarAction.success(`Timesheet : ${timesheet.name}, was deleted.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to delete timesheet.');
@@ -102,7 +112,6 @@ class TimesheetStore extends Store {
       .then(res => {
         this.setState({timesheet: res.data});
         SnackbarAction.success(`Timesheet : ${timesheet.name}, was restored.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('Error attempting to restore timesheet.');
@@ -115,15 +124,10 @@ class TimesheetStore extends Store {
       .then(res => {
         this.setState({timesheet: res.data});
         SnackbarAction.success(`Timesheet : ${timesheet.name}, created.`);
-        return this.getState();
       })
       .catch(x => {
         SnackbarAction.error('There was an error creating timesheet.');
       });
-  }
-
-  rehydrate (payload) {
-    this.setState({rehydratedTimesheets: true});
   }
 }
 

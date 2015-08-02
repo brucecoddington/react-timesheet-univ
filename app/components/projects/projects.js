@@ -13,7 +13,8 @@ const Projects = React.createClass({
 
   statics: {
     fetch (params, query) {
-      return ProjectStore.list({action: {query: {page: 1}}});
+      return ProjectStore.list({action: {query: {page: 1}}})
+        .then(res => {return ProjectStore.getState()});
     }
   },
 
@@ -36,14 +37,8 @@ const Projects = React.createClass({
   },
 
   componentWillMount () {
-    if (!this.state.rehydratedProjects) {
-      this.requestProjects({page: 1});
-    }
-    else {
-      ProjectActions.rehydrate();
-    }
-
     this.store.addChangeListener(this.onChange);
+    this.requestProjects({page: 1});
   },
 
   componentWillUnmount () {

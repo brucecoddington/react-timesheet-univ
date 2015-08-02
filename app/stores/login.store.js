@@ -28,14 +28,12 @@ class LoginStore extends Store {
   }
 
   initState () {
-    let state = rehydrate.setDefaults({
+    this.setState({
       user: {_id: 'all'},
       authenticated: false,
       credentials: {},
       pausedTransition: null
     });
-
-    this.setState(state);
   }
 
   getUserId () {

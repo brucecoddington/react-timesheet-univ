@@ -2,6 +2,10 @@ import {EventEmitter} from 'events';
 import _ from 'lodash';
 import assign from 'object-assign';
 import dispatcher from './flux.dispatcher';
+import rehydrate from '../util/rehydrate';
+
+// Grab the data written to window from the server rendering.
+rehydrate.init();
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
 

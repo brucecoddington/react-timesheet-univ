@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react/addons';
-import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 
 import classNames from 'classnames';
 import _ from 'lodash';
@@ -11,6 +10,10 @@ import LoginActions from '../../../actions/login.actions';
 const NavBar = React.createClass({
 
   mixins: [Navigation],
+
+  propTypes: {
+    location: PropTypes.object.isRequired
+  },
 
   getInitialState () {
     let loggedInUser = LoginStore.getState().user;
@@ -49,11 +52,7 @@ const NavBar = React.createClass({
   },
 
   render  () {
-    let segments = [];
-
-    if (ExecutionEnvironment.canUseDOM) {
-      segments = document.location.pathname.split('/');
-    }
+    let segments = this.props.location.pathname.split('/');
 
     let projectsClasses = classNames('item', {
       active: this.isActive(segments, 'projects')
