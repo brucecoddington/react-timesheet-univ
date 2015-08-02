@@ -1,6 +1,5 @@
 import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 import _ from 'lodash';
-import {Promise} from 'es6-promise';
 
 export default {
 
@@ -15,6 +14,15 @@ export default {
 
   modelExistsInAppState (model) {
     return !(_.isUndefined(this.appState[model]));
+  },
+
+  initState (model, defaultState) {
+    if (ExecutionEnvironment.canUseDOM && this.modelExistsInAppState(model)) {
+      return this.appState[model];
+    }
+    else {
+      return defaultState;
+    }
   },
 
   slurp (model) {

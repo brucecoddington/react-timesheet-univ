@@ -23,8 +23,8 @@ class TimeunitStore extends Store {
     this.register(events);
 
     this.setState({
-      timeunit: {},
-      timeunits: []
+      timeunit: rehydrate.initState('timeunit', {}),
+      timeunits: rehydrate.initState('timeunits', [])
     });
   }
 

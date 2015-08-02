@@ -23,13 +23,13 @@ class EmployeeStore extends Store {
     this.register(events);
 
     this.setState({
-      employee: {},
-      employees: {
+      employee: rehydrate.initState('employee', {}),
+      employees: rehydrate.initState('employees', {
         data: [],
         totalItems: 0,
         limit: 5,
         page: 1
-      }
+      })
     });
   }
 

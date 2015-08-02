@@ -23,13 +23,13 @@ class ProjectStore extends Store {
     this.register(events);
 
     this.setState({
-      project: {},
-      projects: {
+      project: rehydrate.initState('project', {}),
+      projects: rehydrate.initState('projects', {
         data: [],
         totalItems: 0,
         limit: 5,
         page: 1
-      }
+      })
     });
   }
 
@@ -37,9 +37,6 @@ class ProjectStore extends Store {
     return urls.apiResource('projects', projectId);
   }
 
-  // page = page number
-  // sort = property to sort on
-  // returns totalItems
   list (payload) {
 
     return rehydrate.slurp('projects')

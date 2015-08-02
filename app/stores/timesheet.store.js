@@ -23,13 +23,13 @@ class TimesheetStore extends Store {
     this.register(events);
 
     this.setState({
-      timesheet: {},
-      timesheets: {
+      timesheet: rehydrate.initState('timesheet', {}),
+      timesheets: rehydrate.initState('timesheets', {
         data: [],
         totalItems: 0,
         limit: 5,
         page: 1
-      }
+      })
     });
   }
 
