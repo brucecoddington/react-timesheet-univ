@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import db from './db';
-import Q from 'q';
 import bcrypt from 'bcrypt';
 
 ////////////  USERS //////////////////
