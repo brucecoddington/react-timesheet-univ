@@ -6,7 +6,7 @@ import actions from '../actions/project.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
 import urls from '../util/urls';
-import rehydrate from '../util/rehydrate';
+import rehydrator from '../util/rehydrator';
 
 class ProjectStore extends Store {
 
@@ -23,8 +23,8 @@ class ProjectStore extends Store {
     this.register(events);
 
     this.setState({
-      project: rehydrate.initState('project', {}),
-      projects: rehydrate.initState('projects', {
+      project: rehydrator.initState('project', {}),
+      projects: rehydrator.initState('projects', {
         data: [],
         totalItems: 0,
         limit: 5,
@@ -39,7 +39,7 @@ class ProjectStore extends Store {
 
   list (payload) {
 
-    return rehydrate.slurp('projects')
+    return rehydrator.slurp('projects')
       .then(rehydrated => {
         if (_.isNull(rehydrated)) {
           return axios.get(this.url(), {params: payload.action.query});
@@ -59,7 +59,7 @@ class ProjectStore extends Store {
   get (payload) {
     var projectId = payload.action.project._id;
 
-    return rehydrate.slurp('project')
+    return rehydrator.slurp('project')
       .then(rehydrated => {
         if (_.isNull(rehydrated) || rehydrated.data._id !== projectId) {
           return axios.get(this.url(projectId));

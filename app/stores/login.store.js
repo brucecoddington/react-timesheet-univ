@@ -6,7 +6,7 @@ import axios from 'axios';
 import Store from '../flux/flux.store';
 import actions from '../actions/login.actions';
 import SnackbarAction from '../actions/snackbar.actions';
-import rehydrate from '../util/rehydrate';
+import rehydrator from '../util/rehydrator';
 import urls from '../util/urls';
 
 class LoginStore extends Store {

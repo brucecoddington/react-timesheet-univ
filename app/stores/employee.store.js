@@ -4,7 +4,7 @@ import Store from '../flux/flux.store';
 import actions from '../actions/employee.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import axios from 'axios';
-import rehydrate from '../util/rehydrate';
+import rehydrator from '../util/rehydrator';
 import urls from '../util/urls';
 
 class EmployeeStore extends Store {
@@ -19,12 +19,11 @@ class EmployeeStore extends Store {
     events[actions.DELETE]  = this.remove;
     events[actions.RESTORE] = this.restore;
     events[actions.CREATE]  = this.create;
-    events[actions.REHYDRATE] = this.rehydrate;
     this.register(events);
 
     this.setState({
-      employee: rehydrate.initState('employee', {}),
-      employees: rehydrate.initState('employees', {
+      employee: rehydrator.initState('employee', {}),
+      employees: rehydrator.initState('employees', {
         data: [],
         totalItems: 0,
         limit: 5,
@@ -39,7 +38,7 @@ class EmployeeStore extends Store {
 
   list (payload) {
 
-    return rehydrate.slurp('employees')
+    return rehydrator.slurp('employees')
       .then(rehydrated => {
         if (_.isNull(rehydrated)) {
           return axios.get(this.url(), {params: payload.action.query});
@@ -59,7 +58,7 @@ class EmployeeStore extends Store {
   get (payload) {
     let employeeId = payload.action.employee._id;
 
-    return rehydrate.slurp('employee')
+    return rehydrator.slurp('employee')
       .then(rehydrated => {
         if (_.isNull(rehydrated) || rehydrated.data._id !== employeeId) {
           return axios.get(this.url(payload.action.employee._id));
@@ -127,10 +126,6 @@ class EmployeeStore extends Store {
       .catch(x => {
         SnackbarAction.error('There was an error creating employee.');
       });
-  }
-
-  rehydrate (payload) {
-    return Promise.resolve(this.setState({rehydratedEmployees: true}));
   }
 }
 

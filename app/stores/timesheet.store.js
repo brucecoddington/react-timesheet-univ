@@ -5,7 +5,7 @@ import actions from '../actions/timesheet.actions';
 import SnackbarAction from '../actions/snackbar.actions';
 import LoginStore from './login.store';
 import axios from 'axios';
-import rehydrate from '../util/rehydrate';
+import rehydrator from '../util/rehydrator';
 import urls from '../util/urls';
 
 class TimesheetStore extends Store {
@@ -23,8 +23,8 @@ class TimesheetStore extends Store {
     this.register(events);
 
     this.setState({
-      timesheet: rehydrate.initState('timesheet', {}),
-      timesheets: rehydrate.initState('timesheets', {
+      timesheet: rehydrator.initState('timesheet', {}),
+      timesheets: rehydrator.initState('timesheets', {
         data: [],
         totalItems: 0,
         limit: 5,
@@ -40,7 +40,7 @@ class TimesheetStore extends Store {
 
   list (payload) {
 
-    return rehydrate.slurp('timesheets')
+    return rehydrator.slurp('timesheets')
       .then(rehydrated => {
         if (_.isNull(rehydrated)) {
           return axios.get(this.url(), {params: payload.action.query});
@@ -60,7 +60,7 @@ class TimesheetStore extends Store {
   get (payload) {
     let timesheetId = payload.action.timesheet._id;
 
-    return rehydrate.slurp('timesheet')
+    return rehydrator.slurp('timesheet')
       .then(rehydrated => {
         if (_.isNull(rehydrated) || rehydrated.data._id !== timesheetId) {
           return axios.get(this.url(payload.action.timesheet._id));
