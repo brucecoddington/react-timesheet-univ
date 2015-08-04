@@ -130,5 +130,5 @@ gulp.task('uglify', ['webpack'], function () {
     .on('error', gutil.log.bind(gutil, 'Error during minification.'));
 });
 
-// gulp.task('semantic:build', require('./semantic/tasks/build'));
+gulp.task('semantic:build', require('./semantic/tasks/build'));
 // gulp.task('semantic:watch', require('./semantic/tasks/watch'));
