@@ -26,7 +26,7 @@ exports.register = (server, options, next) => {
     return renderApp(request, (error, html, data) => {
       if (!error) {
         // Respond with index.jade and provide the html and data variables
-        reply.view('./index', {html: html, data: data});
+        reply.view('./index', {html: html, data: data, process: process});
       }
       else if (error.redirect) {
         reply.redirect(error.redirect.to);

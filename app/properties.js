@@ -1,3 +1,5 @@
+import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
+
 export default {
 
   appName: "timesheet-api",
@@ -14,6 +16,13 @@ export default {
 
   server : {
     url: 'http://localhost',
-    port: 3000
+    port: (function () {
+      if (ExecutionEnvironment.canUseDOM) {
+        return window.PORT || 5000;
+      }
+      else {
+        return ~~process.env.PORT || 5000;
+      }
+    }())
   }
 };

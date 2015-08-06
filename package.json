@@ -4,9 +4,11 @@
   "main": "./app/server.js",
   "description": "Isomorpic Timesheet application for React training labs",
   "version": "0.0.1",
+  "engines": {
+    "iojs": "2.3.4"
+  },
   "scripts": {
     "start": "./node_modules/.bin/babel-node --stage 2 app/server.js",
-    "babel-node": "babel-node --stage 2",
     "run_dev": "NODE_ENV=development nodemon --exec npm run babel-node -- app/server.js",
     "run_prod": "NODE_ENV=production nodemon --exec npm run babel-node -- app/server.js",
     "debug": "node-debug app/server.js"

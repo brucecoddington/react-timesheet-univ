@@ -41561,13 +41561,20 @@
 
 /***/ },
 /* 245 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	var _reactLibExecutionEnvironment = __webpack_require__(64);
+
+	var _reactLibExecutionEnvironment2 = _interopRequireDefault(_reactLibExecutionEnvironment);
+
 	exports["default"] = {
 
 	  appName: "timesheet-api",
@@ -41584,10 +41591,17 @@
 
 	  server: {
 	    url: 'http://localhost',
-	    port: 3000
+	    port: (function () {
+	      if (_reactLibExecutionEnvironment2["default"].canUseDOM) {
+	        return window.PORT || 5000;
+	      } else {
+	        return ~ ~process.env.PORT || 5000;
+	      }
+	    })()
 	  }
 	};
 	module.exports = exports["default"];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 246 */
