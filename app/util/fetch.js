@@ -11,7 +11,7 @@ export default (routerState, currentUser, request) => {
     return component.fetch;
   })
   // execute the fetchers and put the promises in an array
-  .map((component) => {
+  .map(component => {
     return component.fetch(params, query, request);
   });
 
