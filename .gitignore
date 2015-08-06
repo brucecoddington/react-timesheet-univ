@@ -3,23 +3,13 @@
 
 node_modules/*
 
-client/test-reports/*
-
-client/docs/*
-
-client/assets/js/*
-
-client/cache.manifest
-
 .idea/*
 
 *.iml
 
 libpeerconnection.log
 
-dist
-
-api/data/db/*
+data/db/*
 
 semantic/dist/*
 
