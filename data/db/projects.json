@@ -1,4 +1,4 @@
-{"$$indexCreated":{"fieldName":"name","unique":true,"sparse":false}}
-{"name":"Project1","description":"This is your first project","_id":"sDPwVdnsiuwMSwZq"}
-{"name":"Project2","description":"This is your second project","_id":"f0ja9H3lp7dspnOT"}
 {"name":"Project3","description":"This is the third project","_id":"6rtHnEvHFXdps7r4"}
+{"name":"Project2","description":"This is your second project","_id":"f0ja9H3lp7dspnOT"}
+{"name":"Project1","description":"This is your first project","_id":"sDPwVdnsiuwMSwZq"}
+{"$$indexCreated":{"fieldName":"name","unique":true,"sparse":false}}
