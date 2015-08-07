@@ -18,7 +18,7 @@ html(class="no-js")
     - if (typeof data !== 'undefined')
       script.
         window.AppState = !{JSON.stringify(data)};
-        window.PORT = !{process.env.PORT};
+        window.PORT = !{process.env.PORT || 5000};
 
     case env
       when 'production'

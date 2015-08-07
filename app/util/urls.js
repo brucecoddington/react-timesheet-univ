@@ -3,6 +3,7 @@ import props from '../properties';
 export default {
 
   server () {
+    if (!props.server.url) return '';
     return `${props.server.url}:${props.server.port}`;
   },
 

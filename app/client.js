@@ -8,6 +8,6 @@ import LoginStore from './stores/login.store';
 progress();
 
 // Fire off the router and get the app rolling
-LoginStore.current().then(() => {
+// LoginStore.current().then(() => {
   React.render(<Router history={history} children={routes}/>, document.getElementById('app'));
-});
+// });

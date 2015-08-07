@@ -15,7 +15,14 @@ export default {
   },
 
   server : {
-    url: 'http://localhost',
+    url: (function () {
+      if (ExecutionEnvironment.canUseDOM) {
+        return false;
+      }
+      else {
+        return 'http://localhost';
+      }
+    }()),
     port: (function () {
       if (ExecutionEnvironment.canUseDOM) {
         return window.PORT || 5000;
