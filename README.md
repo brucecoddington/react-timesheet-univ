@@ -31,9 +31,7 @@
 ## Gulp Tasks ##
 ### These are the Gulp.js tasks for your dev process: ###
 
-* `gulp init` - Runs the Semantic UI build.
-
-* `gulp watch:dev` - Watches development files and runs builds when needed.
+* `gulp watch` - Watches development files and runs builds when needed.
 
 * `gulp serve:dev` - Starts the Hapi server and serves the files.
 
