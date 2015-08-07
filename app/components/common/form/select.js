@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react/addons';
 import classNames from 'classnames';
-// let ReactSelect from 'react-select');
+import ReactSelect from 'react-select';
 
 const Select = React.createClass({
 
@@ -27,6 +27,13 @@ const Select = React.createClass({
       <div className={wrapperClasses}>
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <div className={containerClasses}>
+
+        <ReactSelect name={this.props.name}
+          value={this.props.value}
+          placeholder={this.props.placeholder}
+          onChange={this.props.onChange}
+          error={this.props.error}
+          options={this.props.options} />
 
           <div className="input">{this.props.error}</div>
         </div>

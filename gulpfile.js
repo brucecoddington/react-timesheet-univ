@@ -10,8 +10,6 @@ var
   plumber =     require('gulp-plumber'),
   rename =      require('gulp-rename'),
   shell =       require('gulp-shell'),
-  sourcemaps =  require('gulp-sourcemaps'),
-  uglify =      require('gulp-uglify'),
   gutil =       require('gulp-util'),
   watch =       require('gulp-watch'),
   webpack =     require('gulp-webpack'),
@@ -21,8 +19,6 @@ var
 
 // main tasks
 gulp.task('core', ['webpack', 'concat:css', 'copy:assets']);
-gulp.task('dev',  ['core']);
-gulp.task('prod', ['core', 'uglify']);
 gulp.task('init', ['build:css']);
 
 // server tasks
@@ -43,17 +39,10 @@ gulp.task('serve:prod', function () {
 gulp.task('debug', shell.task([pkg.scripts.debug]));
 
 // setup the global watches
-gulp.task('watch:dev', function () {
+gulp.task('watch', function () {
   gulp.watch(['./assets/less/**/*.scss', './app/**/*.less'], ['concat:css']);
   gulp.watch(['./semantic/src/**/*'], ['build:css']);
-  gulp.start('dev');
-});
-
-gulp.task('watch:prod', function () {
-  gulp.watch(['./assets/less/**/*.less', './app/**/*.less'], ['concat:css']);
-  gulp.watch(['./dist/assets/js/app.js'], ['uglify']);
-  gulp.watch(['./semantic/src/**/*'], ['build:css']);
-  gulp.start('prod');
+  gulp.start('core');
 });
 
 gulp.task('test', function (done) {
@@ -119,16 +108,3 @@ gulp.task("webpack", function() {
     .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest('./dist/assets/js'));
 });
-
-gulp.task('uglify', ['webpack'], function () {
-  return gulp.src('./dist/assets/js/app.js')
-    .pipe(gulp.dest('./dist/assets/js'))
-    .pipe(uglify())
-    .pipe(rename({extname: '.min.js'}))
-    .pipe(gulp.dest('./dist/assets/js'))
-    .pipe(livereload())
-    .on('error', gutil.log.bind(gutil, 'Error during minification.'));
-});
-
-// gulp.task('semantic:build', require('./semantic/tasks/build'));
-// gulp.task('semantic:watch', require('./semantic/tasks/watch'));

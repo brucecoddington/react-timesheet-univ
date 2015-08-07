@@ -1,17 +1,7 @@
 
 .DS_Store
 
-client/dist/*
-
 node_modules/*
-
-client/test-reports/*
-
-client/docs/*
-
-client/assets/js/*
-
-client/cache.manifest
 
 .idea/*
 
@@ -19,9 +9,7 @@ client/cache.manifest
 
 libpeerconnection.log
 
-dist
-
-api/data/db/*
+data/db/*
 
 semantic/dist/*
 
