@@ -16,3 +16,4 @@ semantic/dist/*
 semantic/node_modules/*
 
 npm-debug.log
+data/db

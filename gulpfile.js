@@ -108,3 +108,16 @@ gulp.task("webpack", function() {
     .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest('./dist/assets/js'));
 });
+
+gulp.task('uglify', ['webpack'], function () {
+  return gulp.src('./dist/assets/js/app.js')
+    .pipe(gulp.dest('./dist/assets/js'))
+    .pipe(uglify())
+    .pipe(rename({extname: '.min.js'}))
+    .pipe(gulp.dest('./dist/assets/js'))
+    .pipe(livereload())
+    .on('error', gutil.log.bind(gutil, 'Error during minification.'));
+});
+
+gulp.task('semantic:build', require('./semantic/tasks/build'));
+// gulp.task('semantic:watch', require('./semantic/tasks/watch'));

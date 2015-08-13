@@ -1,5 +1,5 @@
 {
-  "exec": "babel-node --stage 2 -- ",
+  "exec": "node_modules/babel/bin/babel-node.js --stage 2 -- ",
   "ignore": [
     "node_modules/**",
     "gulpfile.js",
