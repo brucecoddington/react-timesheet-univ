@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "gulp init",
     "babel-node": "babel-node --stage 2",
-    "start": "./node_modules/.bin/babel-node --stage 2 app/server.js",
+    "start": "./node_modules/.bin/babel-node --stage 2 app/server.js"
   },
   "dependencies": {
     "acorn": "^2.1.0",
